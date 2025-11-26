@@ -1,0 +1,4 @@
+1. streamlit run app/app.py
+2. Fill soil form and Run Prediction
+3. Click Prepare Organic Fertilizer & Show Tutorials
+4. Init Community DB and view posts
