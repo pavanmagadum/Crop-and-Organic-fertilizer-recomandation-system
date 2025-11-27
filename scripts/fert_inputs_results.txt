@@ -1,0 +1,48 @@
+Fertilizer: Urea
+{'region': 'South', 'soil_type': 'Loamy', 'N': 362.34, 'P': 27.98, 'K': 206.51, 'pH': 6.72, 'temperature': 23.8, 'humidity': 40.9, 'rainfall': 568.2, 'crop': 'maize'}
+
+Fertilizer: DAP
+{'region': 'West', 'soil_type': 'Loamy', 'N': 464.86, 'P': 85.11, 'K': 137.55, 'pH': 7.08, 'temperature': 21.9, 'humidity': 72.2, 'rainfall': 773.7, 'crop': 'maize'}
+
+Fertilizer: MOP (Potash)
+{'region': 'East', 'soil_type': 'Silty', 'N': 232.99, 'P': 63.54, 'K': 243.62, 'pH': 6.74, 'temperature': 23.1, 'humidity': 88.9, 'rainfall': 695.5, 'crop': 'sugarcane'}
+
+Fertilizer: SSP (Single Super Phosphate)
+{'region': 'South', 'soil_type': 'Sandy', 'N': 522.27, 'P': 73.87, 'K': 160.93, 'pH': 7.03, 'temperature': 22.0, 'humidity': 46.3, 'rainfall': 483.3, 'crop': 'cotton'}
+
+Fertilizer: NPK 20-20-20
+{'region': 'Central', 'soil_type': 'Sandy', 'N': 346.12, 'P': 56.23, 'K': 303.94, 'pH': 7.17, 'temperature': 19.6, 'humidity': 62.0, 'rainfall': 308.9, 'crop': 'millets'}
+
+Fertilizer: Ammonium Sulphate
+{'region': 'East', 'soil_type': 'Sandy', 'N': 306.39, 'P': 46.81, 'K': 151.11, 'pH': 6.24, 'temperature': 23.4, 'humidity': 88.4, 'rainfall': 776.5, 'crop': 'maize'}
+
+Fertilizer: Calcium Nitrate
+{'region': 'West', 'soil_type': 'Loamy', 'N': 343.5, 'P': 37.69, 'K': 90.11, 'pH': 7.78, 'temperature': 19.7, 'humidity': 50.0, 'rainfall': 314.2, 'crop': 'barley'}
+
+Fertilizer: Magnesium Sulphate
+{'region': 'North', 'soil_type': 'Silty', 'N': 140.68, 'P': 58.52, 'K': 122.94, 'pH': 6.97, 'temperature': 19.9, 'humidity': 80.5, 'rainfall': 603.7, 'crop': 'sugarcane'}
+
+Fertilizer: Zinc Sulphate
+{'region': 'Central', 'soil_type': 'Sandy', 'N': 113.89, 'P': 80.22, 'K': 56.95, 'pH': 7.1, 'temperature': 22.1, 'humidity': 34.0, 'rainfall': 32.1, 'crop': 'barley'}
+
+Fertilizer: Potassium Nitrate (KNO3)
+{'region': 'Central', 'soil_type': 'Loamy', 'N': 193.59, 'P': 49.49, 'K': 217.16, 'pH': 6.06, 'temperature': 17.1, 'humidity': 62.6, 'rainfall': 721.0, 'crop': 'maize'}
+
+Fertilizer: Urea Ammonium Nitrate (UAN)
+{'region': 'East', 'soil_type': 'Clayey', 'N': 382.48, 'P': 68.63, 'K': 108.04, 'pH': 6.31, 'temperature': 26.0, 'humidity': 49.9, 'rainfall': 995.1, 'crop': 'rice'}
+
+Fertilizer: 14-35-14 (NPK)
+{'region': 'Central', 'soil_type': 'Loamy', 'N': 200.07, 'P': 61.43, 'K': 275.08, 'pH': 6.78, 'temperature': 14.9, 'humidity': 60.9, 'rainfall': 535.5, 'crop': 'wheat'}
+
+Fertilizer: 10-26-26 (NPK)
+{'region': 'West', 'soil_type': 'Sandy', 'N': 313.8, 'P': 60.22, 'K': 272.23, 'pH': 6.17, 'temperature': 14.6, 'humidity': 50.3, 'rainfall': 798.1, 'crop': 'rice'}
+
+Fertilizer: 17-17-17 (NPK)
+{'region': 'Central', 'soil_type': 'Loamy', 'N': 376.24, 'P': 5.85, 'K': 271.12, 'pH': 7.01, 'temperature': 19.5, 'humidity': 73.4, 'rainfall': 389.5, 'crop': 'maize'}
+
+Fertilizer: Magnesium Nitrate
+{'region': 'Central', 'soil_type': 'Clayey', 'N': 174.07, 'P': 62.76, 'K': 47.78, 'pH': 7.14, 'temperature': 17.2, 'humidity': 45.4, 'rainfall': 656.8, 'crop': 'millets'}
+
+Fertilizer: Calcium Sulphate (Gypsum)
+{'region': 'South', 'soil_type': 'Sandy', 'N': 189.54, 'P': 44.38, 'K': 147.01, 'pH': 7.08, 'temperature': 30.4, 'humidity': 38.4, 'rainfall': 916.1, 'crop': 'soybean'}
+
