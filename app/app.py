@@ -59,26 +59,308 @@ def set_query_params_safe(**kwargs):
         st.session_state[k] = v
 
 st.set_page_config(page_title='Climate Aware Crop & Organic Fertilizer', layout='wide')
-# Simple custom theme + CSS for cards, buttons and backgrounds
+# Enhanced theme + CSS with larger fonts and better color contrast
 st.markdown('''
 <style>
-    :root{--primary-green:#1f8f3f;--card-bg:#fbfbf6;--muted:#6b6b6b}
-    body{background:linear-gradient(180deg,#fbfff7,#ffffff);}
-    .main-title{font-size:28px;font-weight:700;margin-bottom:4px}
-    .subtitle{color:var(--muted);margin-top:0;margin-bottom:18px}
-    .app-card{background:var(--card-bg);border-radius:12px;padding:18px;margin-bottom:12px;box-shadow:0 6px 18px rgba(15,15,15,0.06);border:1px solid rgba(0,0,0,0.03)}
-    .result-card{border-left:6px solid var(--primary-green);padding:14px;border-radius:8px;background:#ffffff}
-    .section-title{font-size:16px;font-weight:600;color:var(--primary-green);margin-bottom:8px}
-    .small-muted{color:#666;font-size:13px}
-    .stButton>button{background:var(--primary-green)!important;border-radius:8px;color:white}
-    h2.stHeading{font-size:20px}
+    /* Light Mode Variables */
+    :root {
+        --primary-green: #1f8f3f;
+        --primary-green-dark: #156b2f;
+        --card-bg: #fbfbf6;
+        --card-border: rgba(31, 143, 63, 0.1);
+        --text-primary: #1a1a1a;
+        --text-secondary: #2d5f2d;
+        --text-muted: #4a7c4a;
+        --bg-overlay: rgba(255, 255, 255, 0.90);
+        --shadow-color: rgba(15, 15, 15, 0.08);
+        --button-text: #ffffff;
+    }
+    
+    /* Dark Mode Variables */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --primary-green: #4ade80;
+            --primary-green-dark: #22c55e;
+            --card-bg: #1e2a1e;
+            --card-border: rgba(74, 222, 128, 0.2);
+            --text-primary: #e8f5e9;
+            --text-secondary: #c8e6c9;
+            --text-muted: #a5d6a7;
+            --bg-overlay: rgba(30, 42, 30, 0.92);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --button-text: #1a1a1a;
+        }
+    }
+    
+    /* Global Styles - EVEN LARGER FONTS */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-primary);
+        font-size: 27px;
+    }
+    
+    .main-title {
+        font-size: 60px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: var(--text-primary);
+    }
+    
+    .subtitle {
+        color: var(--text-muted);
+        margin-top: 0;
+        margin-bottom: 24px;
+        font-size: 33px;
+        line-height: 1.6;
+    }
+    
+    .app-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 20px var(--shadow-color);
+        border: 1px solid var(--card-border);
+        transition: all 0.3s ease;
+    }
+    
+    .app-card:hover {
+        box-shadow: 0 6px 28px var(--shadow-color);
+        transform: translateY(-2px);
+    }
+    
+    .result-card {
+        border-left: 6px solid var(--primary-green);
+        padding: 20px;
+        border-radius: 8px;
+        background: var(--card-bg);
+        color: var(--text-primary);
+    }
+    
+    .section-title {
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--primary-green);
+        margin-bottom: 14px;
+        letter-spacing: 0.3px;
+    }
+    
+    .small-muted {
+        color: var(--text-muted);
+        font-size: 26px;
+        line-height: 1.6;
+    }
+    
+    /* Button Styles - EVEN LARGER */
+    .stButton>button {
+        background: var(--primary-green) !important;
+        border-radius: 8px;
+        color: var(--button-text) !important;
+        font-weight: 600;
+        padding: 0.75rem 2rem;
+        border: none;
+        transition: all 0.3s ease;
+        font-size: 29px;
+    }
+    
+    .stButton>button:hover {
+        background: var(--primary-green-dark) !important;
+        box-shadow: 0 4px 12px rgba(31, 143, 63, 0.3);
+        transform: translateY(-1px);
+    }
+    
+    /* Form Elements - EVEN LARGER FONTS */
+    .stTextInput>div>div>input,
+    .stNumberInput>div>div>input,
+    .stSelectbox>div>div>select {
+        background: var(--card-bg);
+        color: var(--text-primary);
+        border: 1px solid var(--card-border);
+        font-size: 27px;
+        padding: 0.6rem;
+    }
+    
+    /* Headings - EVEN LARGER */
+    h1 {
+        color: var(--text-primary) !important;
+        font-size: 63px !important;
+    }
+    
+    h2 {
+        color: var(--text-primary) !important;
+        font-size: 45px !important;
+        font-weight: 700 !important;
+    }
+    
+    h3 {
+        color: var(--primary-green) !important;
+        font-size: 39px !important;
+    }
+    
+    h4 {
+        color: var(--text-primary) !important;
+        font-size: 33px !important;
+    }
+    
+    /* Labels - EVEN LARGER & BETTER COLOR */
+    label {
+        color: var(--text-secondary) !important;
+        font-weight: 600 !important;
+        font-size: 27px !important;
+    }
+    
+    /* Paragraphs - EVEN LARGER */
+    p, li {
+        font-size: 27px;
+        line-height: 1.7;
+        color: var(--text-primary);
+    }
+    
+    /* Dark mode specific text adjustments */
+    @media (prefers-color-scheme: dark) {
+        .stMarkdown, .stText, p, span, div {
+            color: var(--text-primary);
+        }
+        
+        [data-testid="stMarkdownContainer"] p {
+            color: var(--text-secondary);
+        }
+    }
+    
+    /* Streamlit emotion cache containers - light transparent white background */
+    .st-emotion-cache-zuyloh {
+        background: rgba(255, 255, 255, 0.45) !important;
+        border: 1px solid rgba(31, 143, 63, 0.2) !important;
+    }
+    
+    .st-emotion-cache-zuyloh * {
+        color: #156b2f !important;
+    }
+    
+    .st-emotion-cache-zuyloh label,
+    .st-emotion-cache-zuyloh input,
+    .st-emotion-cache-zuyloh select,
+    .st-emotion-cache-zuyloh p,
+    .st-emotion-cache-zuyloh span,
+    .st-emotion-cache-zuyloh div {
+        color: #156b2f !important;
+        font-weight: 600 !important;
+    }
+    
+    .st-emotion-cache-18kf3ut {
+        background: transparent !important;
+    }
+    
+    .st-emotion-cache-18kf3ut * {
+        color: #ffffff !important;
+    }
+    
+    .st-emotion-cache-18kf3ut button {
+        color: #ffffff !important;
+    }
+    
+    /* Back button styling - same size and padding */
+    button[key="prep_back_pred"],
+    button[key="prep_back_home"] {
+        width: 100% !important;
+        padding: 0.75rem 1.5rem !important;
+        font-size: 18px !important;
+    }
+    
+    /* Quick Actions buttons on Home page - white text */
+    .stButton > button[key="home_pred"],
+    .stButton > button[key="home_prep"],
+    .stButton > button[key="home_comm"] {
+        color: #ffffff !important;
+    }
+
+    }
 </style>
 ''', unsafe_allow_html=True)
 st.title('🌾 Climate‑Aware Crop & Organic Fertilizer Recommendation System', anchor=False)
 st.markdown('<div class="subtitle">Quickly predict suitable crops and organic fertilizer equivalents using local soil and climate inputs.</div>', unsafe_allow_html=True)
 # Sidebar settings (removed unused API key inputs)
 # Navigation: replace generic Settings with clear page navigation
-page = st.sidebar.radio('Navigate', ['Home', 'Prediction', 'Preparation', 'Community'], index=1)
+# Enhanced sidebar with WHITE TEXT on GREEN background
+st.markdown('''
+<style>
+    /* Light Mode Sidebar - WHITE TEXT ON GREEN */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, rgba(31,143,63,0.92), rgba(21,107,47,0.92)),
+                    url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800&q=80') center/cover;
+    }
+    
+    [data-testid="stSidebar"] > div:first-child {
+        background: rgba(31,143,63,0.25);
+        border-radius: 12px;
+        padding: 1.2rem;
+    }
+    
+    /* WHITE TEXT for navigation labels - LARGER */
+    [data-testid="stSidebar"] .stRadio > label {
+        font-weight: 700;
+        color: #ffffff !important;
+        font-size: 22px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        letter-spacing: 0.5px;
+    }
+    
+    /* WHITE TEXT for radio options - LARGER */
+    [data-testid="stSidebar"] label {
+        color: #ffffff !important;
+        font-weight: 600;
+        font-size: 19px;
+    }
+    
+    /* WHITE TEXT for all sidebar content */
+    [data-testid="stSidebar"] * {
+        color: #ffffff !important;
+    }
+    
+    /* Radio button hover effect */
+    [data-testid="stSidebar"] .stRadio > div > label:hover {
+        background: rgba(255,255,255,0.15);
+        border-radius: 6px;
+        padding: 6px 10px;
+    }
+    
+    /* Dark Mode Sidebar - WHITE TEXT ON DARK GREEN */
+    @media (prefers-color-scheme: dark) {
+        [data-testid="stSidebar"] {
+            background: linear-gradient(180deg, rgba(20,80,40,0.92), rgba(15,60,30,0.92)),
+                        url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800&q=80') center/cover;
+        }
+        
+        [data-testid="stSidebar"] > div:first-child {
+            background: rgba(20,60,30,0.3);
+        }
+        
+        [data-testid="stSidebar"] .stRadio > label {
+            color: #a5d6a7 !important;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        }
+        
+        [data-testid="stSidebar"] label {
+            color: #c8e6c9 !important;
+        }
+    }
+</style>
+''', unsafe_allow_html=True)
+
+# Check if page is set via session_state (from button clicks), otherwise use sidebar
+if 'page' in st.session_state:
+    default_page = st.session_state['page']
+    try:
+        default_index = ['Home', 'Prediction', 'Preparation', 'Community'].index(default_page)
+    except ValueError:
+        default_index = 1
+else:
+    default_index = 1
+
+page = st.sidebar.radio('Navigate', ['Home', 'Prediction', 'Preparation', 'Community'], index=default_index)
+
+# Update session state with current page
+st.session_state['page'] = page
 
 # Keep OpenWeather API key input tucked under auth (optional)
 OPENWEATHER_KEY = None
@@ -89,12 +371,77 @@ if 'user' not in st.session_state:
 # Page rendering: Home, Prediction, Preparation, Community
 st.markdown('''
 <style>
-    .feature{display:inline-block;padding:10px 14px;margin:6px;border-radius:6px;background:#f1fff2;color:#0b6b2e}
-    .sidebar .stRadio>div{padding:6px}
+    /* Feature cards with GREEN background and WHITE text - LARGER */
+    .feature {
+        display: inline-block;
+        padding: 14px 22px;
+        margin: 10px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #1f8f3f, #156b2f);
+        color: #ffffff;
+        font-size: 19px;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(31,143,63,0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .feature:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(31,143,63,0.4);
+    }
+    
+    /* Card styling with better contrast - LARGER TEXT */
+    .card {
+        background: transparent;
+        padding: 24px;
+        border-radius: 12px;
+        margin: 18px 0;
+        box-shadow: none;
+    }
+    
+    .card h3 {
+        color: #1f8f3f;
+        font-size: 28px;
+        margin-bottom: 14px;
+    }
+    
+    .sidebar .stRadio>div {
+        padding: 8px;
+    }
 </style>
 ''', unsafe_allow_html=True)
 
 if page == 'Home':
+    # Agriculture-themed background for Home page - supports light and dark mode
+    st.markdown('''
+    <style>
+        /* Light Mode */
+        .stApp {
+            background: linear-gradient(135deg, rgba(230,255,230,0.7), rgba(200,240,200,0.7)),
+                        url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=80') center/cover fixed;
+        }
+        .main .block-container {
+            background: #ffffff !important;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(31,143,63,0.2);
+            border: 2px solid #1f8f3f;
+        }
+        
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            .stApp {
+                background: linear-gradient(135deg, rgba(20,50,20,0.75), rgba(15,40,15,0.75)),
+                            url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=80') center/cover fixed;
+            }
+            .main .block-container {
+                background: #ffffff !important;
+                box-shadow: 0 8px 32px rgba(31,143,63,0.3);
+                border: 2px solid #1f8f3f;
+            }
+        }
+    </style>
+    ''', unsafe_allow_html=True)
     st.header('Welcome to Climate-Aware Farming')
     st.markdown('''
     This demo helps farmers choose appropriate crops and simple organic fertilizer preparations based on local soil and climate inputs.
@@ -103,7 +450,22 @@ if page == 'Home':
     - Download step-by-step preparation PDF
     - Ask experts and get verified answers
     ''')
-    st.markdown('<div class="card"> <h3>Quick Actions</h3> <div class="feature">Prediction</div> <div class="feature">Preparation</div> <div class="feature">Community</div> </div>', unsafe_allow_html=True)
+    st.markdown('<div class="card"> <h3>Quick Actions</h3></div>', unsafe_allow_html=True)
+    # Quick action buttons with functionality
+    cols = st.columns(3)
+    with cols[0]:
+        if st.button('🌾 Prediction', key='home_pred', use_container_width=True):
+            st.session_state['page'] = 'Prediction'
+            st.rerun()
+    with cols[1]:
+        if st.button('📋 Preparation', key='home_prep', use_container_width=True):
+            st.session_state['page'] = 'Preparation'
+            st.rerun()
+    with cols[2]:
+        if st.button('👥 Community', key='home_comm', use_container_width=True):
+            st.session_state['page'] = 'Community'
+            st.rerun()
+    
     st.markdown('### Demo Checklist')
     st.markdown('''
     - Activate venv and run the app
@@ -112,12 +474,47 @@ if page == 'Home':
     ''')
 
 elif page == 'Prediction':
+    # Agriculture-themed background for Prediction page - supports light and dark mode
+    st.markdown('''
+    <style>
+        /* Light Mode */
+        .stApp {
+            background: linear-gradient(135deg, rgba(220,255,220,0.55), rgba(180,235,180,0.55)),
+                        url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=80') center/cover fixed;
+        }
+        .main .block-container {
+            background: #ffffff !important;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(31,143,63,0.2);
+            border: 2px solid #1f8f3f;
+        }
+        
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            .stApp {
+                background: linear-gradient(135deg, rgba(25,55,25,0.6), rgba(18,45,18,0.6)),
+                            url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=80') center/cover fixed;
+            }
+            .main .block-container {
+                background: #ffffff !important;
+                box-shadow: 0 8px 32px rgba(31,143,63,0.3);
+                border: 2px solid #1f8f3f;
+            }
+        }
+    </style>
+    ''', unsafe_allow_html=True)
+    
+    # Back button
+    if st.button('← Back to Home', key='pred_back'):
+        st.session_state['page'] = 'Home'
+        st.rerun()
+    
     # Two-column layout: left for inputs (grouped), right for a Result card
     left, right = st.columns([2, 1], gap='large')
 
     # LEFT: Inputs grouped into cards
     with left:
-        st.markdown('<div class="app-card">', unsafe_allow_html=True)
         st.subheader('Crop & Fertilizer Recommendation')
         st.markdown('<div class="small-muted">Fill the form and run prediction to see results on the right.</div>', unsafe_allow_html=True)
         with st.form('input_form'):
@@ -155,7 +552,6 @@ elif page == 'Prediction':
 
             st.markdown('<div style="height:8px"></div>', unsafe_allow_html=True)
             submitted = st.form_submit_button('Run Prediction')
-        st.markdown('</div>', unsafe_allow_html=True)
 
         # Keep prediction logic intact; only change UI presentation
         if submitted:
@@ -218,7 +614,6 @@ elif page == 'Prediction':
 
     # RIGHT: Result card
     with right:
-        st.markdown('<div class="app-card">', unsafe_allow_html=True)
         st.markdown('<div class="result-card">', unsafe_allow_html=True)
         st.markdown('<h4 style="margin-top:0">Result</h4>', unsafe_allow_html=True)
         if 'last_result' in st.session_state:
@@ -249,15 +644,57 @@ elif page == 'Prediction':
             # Small action buttons
             st.markdown('<div style="margin-top:8px">', unsafe_allow_html=True)
             if st.button('Open Preparation'):
-                # navigate to Preparation page by setting query params in a Streamlit-version-safe way
-                set_query_params_safe(page='Preparation')
+                # navigate to Preparation page
+                st.session_state['page'] = 'Preparation'
+                st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
         else:
             st.markdown('<div class="small-muted">Run prediction to see recommended crop and fertilizer here.</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
 
 elif page == 'Preparation':
+    # Agriculture-themed background for Preparation page - supports light and dark mode
+    st.markdown('''
+    <style>
+        /* Light Mode */
+        .stApp {
+            background: linear-gradient(135deg, rgba(215,250,215,0.7), rgba(190,240,190,0.7)),
+                        url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
+        }
+        .main .block-container {
+            background: #ffffff !important;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(31,143,63,0.2);
+            border: 2px solid #1f8f3f;
+        }
+        
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            .stApp {
+                background: linear-gradient(135deg, rgba(22,52,22,0.72), rgba(16,42,16,0.72)),
+                            url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
+            }
+            .main .block-container {
+                background: #ffffff !important;
+                box-shadow: 0 8px 32px rgba(31,143,63,0.3);
+                border: 2px solid #1f8f3f;
+            }
+        }
+    </style>
+    ''', unsafe_allow_html=True)
+    
+    # Back buttons
+    cols = st.columns([1, 1, 4])
+    with cols[0]:
+        if st.button('← Back', key='prep_back_pred'):
+            st.session_state['page'] = 'Prediction'
+            st.rerun()
+    with cols[1]:
+        if st.button('🏠 Home', key='prep_back_home'):
+            st.session_state['page'] = 'Home'
+            st.rerun()
+    
     st.subheader('Preparation Steps & Tutorials')
     if 'last_result' not in st.session_state:
         st.info('No saved prediction. Go to Prediction and run a prediction first.')
@@ -339,6 +776,42 @@ elif page == 'Preparation':
                             st.write(v.get('link'))
 
 elif page == 'Community':
+    # Agriculture-themed background for Community page - supports light and dark mode
+    st.markdown('''
+    <style>
+        /* Light Mode */
+        .stApp {
+            background: linear-gradient(135deg, rgba(225,250,225,0.7), rgba(195,240,195,0.7)),
+                        url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
+        }
+        .main .block-container {
+            background: #ffffff !important;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(31,143,63,0.2);
+            border: 2px solid #1f8f3f;
+        }
+        
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            .stApp {
+                background: linear-gradient(135deg, rgba(24,54,24,0.73), rgba(17,44,17,0.73)),
+                            url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
+            }
+            .main .block-container {
+                background: #ffffff !important;
+                box-shadow: 0 8px 32px rgba(31,143,63,0.3);
+                border: 2px solid #1f8f3f;
+            }
+        }
+    </style>
+    ''', unsafe_allow_html=True)
+    
+    # Back button
+    if st.button('← Back to Home', key='comm_back'):
+        st.session_state['page'] = 'Home'
+        st.rerun()
+    
     st.subheader('Community & Experts')
     st.markdown('Initialize DB if first run and view posts.')
     # Authentication UI moved here so it is visible only on Community page
