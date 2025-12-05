@@ -31,5 +31,5 @@ desktop.ini
 
 # Optional: ignore editor swap files
 *~
-# ignore model artifacts
-*.joblib
+# Model artifacts are tracked with Git LFS (not ignored)
+# *.joblib
