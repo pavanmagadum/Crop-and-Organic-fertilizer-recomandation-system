@@ -261,6 +261,29 @@ st.markdown('''
     
     /* Mobile responsive fixes for light theme */
     @media (max-width: 768px) {
+        /* Reduce heading sizes for mobile */
+        h1 {
+            font-size: 32px !important;
+            line-height: 1.2 !important;
+        }
+        
+        h2 {
+            font-size: 28px !important;
+            line-height: 1.3 !important;
+        }
+        
+        h3 {
+            font-size: 24px !important;
+        }
+        
+        h4 {
+            font-size: 20px !important;
+        }
+        
+        body {
+            font-size: 16px !important;
+        }
+        
         /* Make input containers solid white on mobile in light theme */
         .st-emotion-cache-zuyloh {
             background: #ffffff !important;
@@ -588,6 +611,29 @@ elif page == 'Prediction':
         
         /* Mobile responsive - solid backgrounds for inputs in light theme */
         @media (max-width: 768px) {
+            /* Reduce heading sizes for mobile */
+            h1 {
+                font-size: 32px !important;
+                line-height: 1.2 !important;
+            }
+            
+            h2 {
+                font-size: 28px !important;
+                line-height: 1.3 !important;
+            }
+            
+            h3 {
+                font-size: 24px !important;
+            }
+            
+            h4 {
+                font-size: 20px !important;
+            }
+            
+            body {
+                font-size: 16px !important;
+            }
+            
             .main .block-container {
                 padding: 1rem !important;
             }
