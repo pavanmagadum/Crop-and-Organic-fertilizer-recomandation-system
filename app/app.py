@@ -269,19 +269,19 @@ st.markdown('''
             border-radius: 8px !important;
         }
         
-        /* Ensure all inputs have solid white background */
+        /* Ensure all inputs have solid white background with green text */
         .stTextInput>div>div>input,
         .stNumberInput>div>div>input,
         .stSelectbox>div>div>select {
             background: #ffffff !important;
-            color: #1a1a1a !important;
+            color: #156b2f !important;
             border: 2px solid #1f8f3f !important;
             font-weight: 600 !important;
         }
         
-        /* Dark text for labels on mobile */
+        /* Green text for labels on mobile */
         label {
-            color: #1a1a1a !important;
+            color: #156b2f !important;
         }
         
         /* Section titles visible on mobile */
@@ -530,7 +530,7 @@ elif page == 'Prediction':
             border: 2px solid #1f8f3f;
         }
         
-        /* Force dark text on white background */
+        /* Force green text on white background */
         .main .block-container h1,
         .main .block-container h2,
         .main .block-container h3,
@@ -541,7 +541,7 @@ elif page == 'Prediction':
         .main .block-container label,
         .main .block-container [data-testid="stMarkdownContainer"],
         .main .block-container [data-testid="stMarkdownContainer"] * {
-            color: #1a1a1a !important;
+            color: #156b2f !important;
         }
         
         .main .block-container .section-title {
@@ -555,7 +555,7 @@ elif page == 'Prediction':
         .main .block-container input,
         .main .block-container select,
         .main .block-container textarea {
-            color: #1a1a1a !important;
+            color: #156b2f !important;
             background: #ffffff !important;
         }
         
@@ -574,20 +574,20 @@ elif page == 'Prediction':
                 border-radius: 8px !important;
             }
             
-            /* All inputs solid white with green border */
+            /* All inputs solid white with green border and green text */
             .stTextInput>div>div>input,
             .stNumberInput>div>div>input,
             .stSelectbox>div>div>select,
             input, select, textarea {
                 background: #ffffff !important;
-                color: #1a1a1a !important;
+                color: #156b2f !important;
                 border: 2px solid #1f8f3f !important;
                 font-weight: 600 !important;
             }
             
-            /* Labels dark and bold */
+            /* Labels green and bold */
             label {
-                color: #1a1a1a !important;
+                color: #156b2f !important;
                 font-weight: 700 !important;
             }
             
@@ -620,7 +620,7 @@ elif page == 'Prediction':
             .main .block-container label,
             .main .block-container [data-testid="stMarkdownContainer"],
             .main .block-container [data-testid="stMarkdownContainer"] * {
-                color: #1a1a1a !important;
+                color: #156b2f !important;
             }
         }
     </style>
