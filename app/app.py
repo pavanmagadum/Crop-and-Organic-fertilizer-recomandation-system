@@ -490,6 +490,35 @@ elif page == 'Prediction':
             border: 2px solid #1f8f3f;
         }
         
+        /* Force dark text on white background */
+        .main .block-container h1,
+        .main .block-container h2,
+        .main .block-container h3,
+        .main .block-container h4,
+        .main .block-container p,
+        .main .block-container span,
+        .main .block-container div:not(.stButton),
+        .main .block-container label,
+        .main .block-container [data-testid="stMarkdownContainer"],
+        .main .block-container [data-testid="stMarkdownContainer"] * {
+            color: #1a1a1a !important;
+        }
+        
+        .main .block-container .section-title {
+            color: #1f8f3f !important;
+        }
+        
+        .main .block-container .small-muted {
+            color: #4a5568 !important;
+        }
+        
+        .main .block-container input,
+        .main .block-container select,
+        .main .block-container textarea {
+            color: #1a1a1a !important;
+            background: #ffffff !important;
+        }
+        
         /* Dark Mode */
         @media (prefers-color-scheme: dark) {
             .stApp {
@@ -500,6 +529,19 @@ elif page == 'Prediction':
                 background: #ffffff !important;
                 box-shadow: 0 8px 32px rgba(31,143,63,0.3);
                 border: 2px solid #1f8f3f;
+            }
+            
+            .main .block-container h1,
+            .main .block-container h2,
+            .main .block-container h3,
+            .main .block-container h4,
+            .main .block-container p,
+            .main .block-container span,
+            .main .block-container div:not(.stButton),
+            .main .block-container label,
+            .main .block-container [data-testid="stMarkdownContainer"],
+            .main .block-container [data-testid="stMarkdownContainer"] * {
+                color: #1a1a1a !important;
             }
         }
     </style>
