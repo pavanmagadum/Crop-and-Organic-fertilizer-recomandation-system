@@ -68,28 +68,13 @@ st.markdown('''
         --primary-green-dark: #156b2f;
         --card-bg: #fbfbf6;
         --card-border: rgba(31, 143, 63, 0.1);
-        --text-primary: #1a1a1a;
+        --text-primary: #156b2f;
         --text-secondary: #2d5f2d;
         --text-muted: #4a7c4a;
-        --bg-overlay: rgba(255, 255, 255, 0.90);
+        --bg-overlay: rgba(255, 255, 255, 0.75);
         --shadow-color: rgba(15, 15, 15, 0.08);
         --button-text: #ffffff;
-    }
-    
-    /* Dark Mode Variables */
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --primary-green: #4ade80;
-            --primary-green-dark: #22c55e;
-            --card-bg: #1e2a1e;
-            --card-border: rgba(74, 222, 128, 0.2);
-            --text-primary: #e8f5e9;
-            --text-secondary: #c8e6c9;
-            --text-muted: #a5d6a7;
-            --bg-overlay: rgba(30, 42, 30, 0.92);
-            --shadow-color: rgba(0, 0, 0, 0.3);
-            --button-text: #1a1a1a;
-        }
+        --card-bg: rgba(255, 255, 255, 0.85);
     }
     
     /* Global Styles - EVEN LARGER FONTS */
@@ -216,16 +201,7 @@ st.markdown('''
         color: var(--text-primary);
     }
     
-    /* Dark mode specific text adjustments */
-    @media (prefers-color-scheme: dark) {
-        .stMarkdown, .stText, p, span, div {
-            color: var(--text-primary);
-        }
-        
-        [data-testid="stMarkdownContainer"] p {
-            color: var(--text-secondary);
-        }
-    }
+
     
     /* Streamlit emotion cache containers - light transparent white background */
     .st-emotion-cache-zuyloh {
@@ -324,26 +300,7 @@ st.markdown('''
         padding: 6px 10px;
     }
     
-    /* Dark Mode Sidebar - WHITE TEXT ON DARK GREEN */
-    @media (prefers-color-scheme: dark) {
-        [data-testid="stSidebar"] {
-            background: linear-gradient(180deg, rgba(20,80,40,0.92), rgba(15,60,30,0.92)),
-                        url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800&q=80') center/cover;
-        }
-        
-        [data-testid="stSidebar"] > div:first-child {
-            background: rgba(20,60,30,0.3);
-        }
-        
-        [data-testid="stSidebar"] .stRadio > label {
-            color: #a5d6a7 !important;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-        }
-        
-        [data-testid="stSidebar"] label {
-            color: #c8e6c9 !important;
-        }
-    }
+
 </style>
 ''', unsafe_allow_html=True)
 
@@ -421,24 +378,28 @@ if page == 'Home':
                         url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=80') center/cover fixed;
         }
         .main .block-container {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.85) !important;
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 8px 32px rgba(31,143,63,0.2);
             border: 2px solid #1f8f3f;
         }
-        
-        /* Dark Mode */
-        @media (prefers-color-scheme: dark) {
-            .stApp {
-                background: linear-gradient(135deg, rgba(20,50,20,0.75), rgba(15,40,15,0.75)),
-                            url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=80') center/cover fixed;
-            }
-            .main .block-container {
-                background: #ffffff !important;
-                box-shadow: 0 8px 32px rgba(31,143,63,0.3);
-                border: 2px solid #1f8f3f;
-            }
+        /* Enhanced Professional Text Styling */
+        .main .block-container h1,
+        .main .block-container h2,
+        .main .block-container h3,
+        .main .block-container h4 {
+            color: #1f8f3f !important;
+            font-weight: 700 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .main .block-container p,
+        .main .block-container span,
+        .main .block-container div:not(.stButton),
+        .main .block-container label,
+        .main .block-container li {
+            color: #156b2f !important;
+            font-weight: 600 !important;
         }
     </style>
     ''', unsafe_allow_html=True)
@@ -474,33 +435,49 @@ if page == 'Home':
     ''')
 
 elif page == 'Prediction':
-    # Agriculture-themed background for Prediction page - supports light and dark mode
+    # Agriculture-themed background for Prediction page
     st.markdown('''
     <style>
-        /* Light Mode */
         .stApp {
             background: linear-gradient(135deg, rgba(220,255,220,0.55), rgba(180,235,180,0.55)),
                         url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=80') center/cover fixed;
         }
         .main .block-container {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.85) !important;
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 8px 32px rgba(31,143,63,0.2);
             border: 2px solid #1f8f3f;
         }
-        
-        /* Dark Mode */
-        @media (prefers-color-scheme: dark) {
-            .stApp {
-                background: linear-gradient(135deg, rgba(25,55,25,0.6), rgba(18,45,18,0.6)),
-                            url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=80') center/cover fixed;
-            }
-            .main .block-container {
-                background: #ffffff !important;
-                box-shadow: 0 8px 32px rgba(31,143,63,0.3);
-                border: 2px solid #1f8f3f;
-            }
+        /* Enhanced Professional Text Styling */
+        .main .block-container h1,
+        .main .block-container h2,
+        .main .block-container h3,
+        .main .block-container h4 {
+            color: #1f8f3f !important;
+            font-weight: 700 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .main .block-container p,
+        .main .block-container span,
+        .main .block-container div:not(.stButton),
+        .main .block-container label,
+        .main .block-container li {
+            color: #156b2f !important;
+            font-weight: 600 !important;
+        }
+        .main .block-container .section-title {
+            color: #1f8f3f !important;
+            font-weight: 800 !important;
+            text-shadow: 0 2px 4px rgba(31,143,63,0.2);
+        }
+        .main .block-container input,
+        .main .block-container select,
+        .main .block-container textarea {
+            color: #156b2f !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            font-weight: 600 !important;
+            border: 2px solid #1f8f3f !important;
         }
     </style>
     ''', unsafe_allow_html=True)
@@ -662,24 +639,28 @@ elif page == 'Preparation':
                         url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
         }
         .main .block-container {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.85) !important;
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 8px 32px rgba(31,143,63,0.2);
             border: 2px solid #1f8f3f;
         }
-        
-        /* Dark Mode */
-        @media (prefers-color-scheme: dark) {
-            .stApp {
-                background: linear-gradient(135deg, rgba(22,52,22,0.72), rgba(16,42,16,0.72)),
-                            url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
-            }
-            .main .block-container {
-                background: #ffffff !important;
-                box-shadow: 0 8px 32px rgba(31,143,63,0.3);
-                border: 2px solid #1f8f3f;
-            }
+        /* Enhanced Professional Text Styling */
+        .main .block-container h1,
+        .main .block-container h2,
+        .main .block-container h3,
+        .main .block-container h4 {
+            color: #1f8f3f !important;
+            font-weight: 700 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .main .block-container p,
+        .main .block-container span,
+        .main .block-container div:not(.stButton),
+        .main .block-container label,
+        .main .block-container li {
+            color: #156b2f !important;
+            font-weight: 600 !important;
         }
     </style>
     ''', unsafe_allow_html=True)
@@ -785,24 +766,36 @@ elif page == 'Community':
                         url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
         }
         .main .block-container {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.85) !important;
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 8px 32px rgba(31,143,63,0.2);
             border: 2px solid #1f8f3f;
         }
-        
-        /* Dark Mode */
-        @media (prefers-color-scheme: dark) {
-            .stApp {
-                background: linear-gradient(135deg, rgba(24,54,24,0.73), rgba(17,44,17,0.73)),
-                            url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
-            }
-            .main .block-container {
-                background: #ffffff !important;
-                box-shadow: 0 8px 32px rgba(31,143,63,0.3);
-                border: 2px solid #1f8f3f;
-            }
+        /* Enhanced Professional Text Styling */
+        .main .block-container h1,
+        .main .block-container h2,
+        .main .block-container h3,
+        .main .block-container h4 {
+            color: #1f8f3f !important;
+            font-weight: 700 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .main .block-container p,
+        .main .block-container span,
+        .main .block-container div:not(.stButton),
+        .main .block-container label,
+        .main .block-container li {
+            color: #156b2f !important;
+            font-weight: 600 !important;
+        }
+        .main .block-container input,
+        .main .block-container select,
+        .main .block-container textarea {
+            color: #156b2f !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            font-weight: 600 !important;
+            border: 2px solid #1f8f3f !important;
         }
     </style>
     ''', unsafe_allow_html=True)
