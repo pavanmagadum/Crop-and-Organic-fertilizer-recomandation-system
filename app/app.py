@@ -66,12 +66,12 @@ st.markdown('''
     :root {
         --primary-green: #1f8f3f;
         --primary-green-dark: #156b2f;
-        --card-bg: #ffffff;
+        --card-bg: rgba(255, 255, 255, 0.85);
         --card-border: rgba(31, 143, 63, 0.2);
         --text-primary: #156b2f;
         --text-secondary: #2d5f2d;
         --text-muted: #4a7c4a;
-        --bg-overlay: rgba(255, 255, 255, 0.95);
+        --bg-overlay: rgba(255, 255, 255, 0.75);
         --shadow-color: rgba(15, 15, 15, 0.1);
         --button-text: #ffffff;
     }
@@ -477,7 +477,7 @@ if page == 'Home':
                         url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=80') center/cover fixed;
         }
         .main .block-container {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.85) !important;
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 8px 32px rgba(31,143,63,0.2);
@@ -526,7 +526,7 @@ elif page == 'Prediction':
                         url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=80') center/cover fixed;
         }
         .main .block-container {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.85) !important;
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 8px 32px rgba(31,143,63,0.2);
@@ -807,7 +807,7 @@ elif page == 'Preparation':
                         url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
         }
         .main .block-container {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.85) !important;
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 8px 32px rgba(31,143,63,0.2);
@@ -917,7 +917,7 @@ elif page == 'Community':
                         url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
         }
         .main .block-container {
-            background: #ffffff !important;
+            background: rgba(255, 255, 255, 0.85) !important;
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 8px 32px rgba(31,143,63,0.2);
