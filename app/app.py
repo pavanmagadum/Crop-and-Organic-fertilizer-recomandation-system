@@ -228,11 +228,11 @@ st.markdown('''
     }
     
     .st-emotion-cache-18kf3ut * {
-        color: #ffffff !important;
+        color: #156b2f !important;
     }
     
     .st-emotion-cache-18kf3ut button {
-        color: #ffffff !important;
+        color: #156b2f !important;
     }
     
     /* Back button styling - same size and padding */
@@ -243,11 +243,11 @@ st.markdown('''
         font-size: 18px !important;
     }
     
-    /* Quick Actions buttons on Home page - white text */
+    /* Quick Actions buttons on Home page - green text */
     .stButton > button[key="home_pred"],
     .stButton > button[key="home_prep"],
     .stButton > button[key="home_comm"] {
-        color: #ffffff !important;
+        color: #156b2f !important;
     }
 
     }
@@ -478,6 +478,23 @@ elif page == 'Prediction':
             background: rgba(255, 255, 255, 0.95) !important;
             font-weight: 600 !important;
             border: 2px solid #1f8f3f !important;
+        }
+        /* Buttons - Keep white text on solid green background for visibility */
+        .main .block-container .stButton > button {
+            background: #1f8f3f !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            border: none !important;
+        }
+        .main .block-container .stButton > button:hover {
+            background: #156b2f !important;
+            color: #ffffff !important;
+        }
+        /* Form submit button - white text on green */
+        .main .block-container button[type="submit"] {
+            background: #1f8f3f !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
         }
     </style>
     ''', unsafe_allow_html=True)
