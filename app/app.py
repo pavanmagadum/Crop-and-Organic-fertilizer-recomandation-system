@@ -761,7 +761,6 @@ elif page == 'Prediction':
             with cols[1]:
                 soil = st.selectbox('Soil Type', ['Loamy','Sandy','Clayey','Silty'])
 
-            st.markdown('<hr/>', unsafe_allow_html=True)
             # Soil Nutrients
             st.markdown('<div class="section-title">Soil Nutrients (NPK)</div>', unsafe_allow_html=True)
             ncols = st.columns(3)
@@ -772,7 +771,6 @@ elif page == 'Prediction':
             with ncols[2]:
                 K = st.number_input('Potassium (K)', min_value=0.0, value=150.0)
 
-            st.markdown('<hr/>', unsafe_allow_html=True)
             # Climate Conditions
             st.markdown('<div class="section-title">Climate Conditions</div>', unsafe_allow_html=True)
             ccols = st.columns(4)
