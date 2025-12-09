@@ -62,19 +62,18 @@ st.set_page_config(page_title='Climate Aware Crop & Organic Fertilizer', layout=
 # Enhanced theme + CSS with larger fonts and better color contrast
 st.markdown('''
 <style>
-    /* Light Mode Variables */
+    /* Professional Green Theme - Consistent for all modes */
     :root {
         --primary-green: #1f8f3f;
         --primary-green-dark: #156b2f;
-        --card-bg: #fbfbf6;
-        --card-border: rgba(31, 143, 63, 0.1);
+        --card-bg: rgba(255, 255, 255, 0.85);
+        --card-border: rgba(31, 143, 63, 0.2);
         --text-primary: #156b2f;
         --text-secondary: #2d5f2d;
         --text-muted: #4a7c4a;
         --bg-overlay: rgba(255, 255, 255, 0.75);
-        --shadow-color: rgba(15, 15, 15, 0.08);
+        --shadow-color: rgba(15, 15, 15, 0.1);
         --button-text: #ffffff;
-        --card-bg: rgba(255, 255, 255, 0.85);
     }
     
     /* Global Styles - EVEN LARGER FONTS */
@@ -115,11 +114,25 @@ st.markdown('''
     }
     
     .result-card {
-        border-left: 6px solid var(--primary-green);
         padding: 20px;
         border-radius: 8px;
-        background: var(--card-bg);
-        color: var(--text-primary);
+        background: transparent;
+        color: #156b2f;
+    }
+    
+    .result-card * {
+        color: #156b2f !important;
+    }
+    
+    .result-card h1,
+    .result-card h2,
+    .result-card h3,
+    .result-card h4,
+    .result-card p,
+    .result-card span,
+    .result-card div,
+    .result-card li {
+        color: #156b2f !important;
     }
     
     .section-title {
@@ -201,8 +214,6 @@ st.markdown('''
         color: var(--text-primary);
     }
     
-
-    
     /* Streamlit emotion cache containers - light transparent white background */
     .st-emotion-cache-zuyloh {
         background: rgba(255, 255, 255, 0.45) !important;
@@ -233,6 +244,96 @@ st.markdown('''
     
     .st-emotion-cache-18kf3ut button {
         color: #156b2f !important;
+    }
+    
+    /* Mobile responsive fixes for light theme */
+    @media (max-width: 768px) {
+        /* Reduce heading sizes for mobile */
+        h1 {
+            font-size: 32px !important;
+            line-height: 1.2 !important;
+        }
+        
+        h2 {
+            font-size: 28px !important;
+            line-height: 1.3 !important;
+        }
+        
+        h3 {
+            font-size: 24px !important;
+        }
+        
+        h4 {
+            font-size: 20px !important;
+        }
+        
+        body {
+            font-size: 16px !important;
+        }
+        
+        /* Make input containers solid white on mobile in light theme */
+        .st-emotion-cache-zuyloh {
+            background: #ffffff !important;
+            border: 2px solid #1f8f3f !important;
+            padding: 1rem !important;
+            border-radius: 8px !important;
+        }
+        
+        /* Force all inputs to have solid white background with dark green text */
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea,
+        .stTextInput input,
+        .stNumberInput input,
+        .stSelectbox select,
+        .stTextInput>div>div>input,
+        .stNumberInput>div>div>input,
+        .stSelectbox>div>div>select,
+        [data-baseweb="select"] > div,
+        [data-baseweb="input"] > div > input {
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            color: #156b2f !important;
+            border: 2px solid #1f8f3f !important;
+            font-weight: 700 !important;
+            -webkit-text-fill-color: #156b2f !important;
+        }
+        
+        /* Force dropdown/select text to be visible */
+        [data-baseweb="select"] [role="button"],
+        [data-baseweb="select"] > div > div {
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            color: #156b2f !important;
+            -webkit-text-fill-color: #156b2f !important;
+        }
+        
+        /* Green text for ALL labels on mobile */
+        label,
+        .stTextInput label,
+        .stNumberInput label,
+        .stSelectbox label,
+        [data-testid="stWidgetLabel"],
+        [data-testid="stWidgetLabel"] p {
+            color: #156b2f !important;
+            font-weight: 700 !important;
+            -webkit-text-fill-color: #156b2f !important;
+        }
+        
+        /* Section titles visible on mobile */
+        .section-title {
+            color: #1f8f3f !important;
+            font-weight: 700 !important;
+        }
+        
+        /* Form containers */
+        [data-testid="stForm"] {
+            background: #ffffff !important;
+            border: 2px solid #1f8f3f !important;
+            padding: 1.5rem !important;
+            border-radius: 12px !important;
+        }
     }
     
     /* Back button styling - same size and padding */
@@ -299,8 +400,6 @@ st.markdown('''
         border-radius: 6px;
         padding: 6px 10px;
     }
-    
-
 </style>
 ''', unsafe_allow_html=True)
 
@@ -310,9 +409,9 @@ if 'page' in st.session_state:
     try:
         default_index = ['Home', 'Prediction', 'Preparation', 'Community'].index(default_page)
     except ValueError:
-        default_index = 1
+        default_index = 0
 else:
-    default_index = 1
+    default_index = 0
 
 page = st.sidebar.radio('Navigate', ['Home', 'Prediction', 'Preparation', 'Community'], index=default_index)
 
@@ -384,23 +483,6 @@ if page == 'Home':
             box-shadow: 0 8px 32px rgba(31,143,63,0.2);
             border: 2px solid #1f8f3f;
         }
-        /* Enhanced Professional Text Styling */
-        .main .block-container h1,
-        .main .block-container h2,
-        .main .block-container h3,
-        .main .block-container h4 {
-            color: #1f8f3f !important;
-            font-weight: 700 !important;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        }
-        .main .block-container p,
-        .main .block-container span,
-        .main .block-container div:not(.stButton),
-        .main .block-container label,
-        .main .block-container li {
-            color: #156b2f !important;
-            font-weight: 600 !important;
-        }
     </style>
     ''', unsafe_allow_html=True)
     st.header('Welcome to Climate-Aware Farming')
@@ -449,98 +531,122 @@ elif page == 'Prediction':
             box-shadow: 0 8px 32px rgba(31,143,63,0.2);
             border: 2px solid #1f8f3f;
         }
-        /* Enhanced Professional Text Styling */
+        
+        /* Force green text on white background */
         .main .block-container h1,
         .main .block-container h2,
         .main .block-container h3,
-        .main .block-container h4 {
-            color: #1f8f3f !important;
-            font-weight: 700 !important;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        }
+        .main .block-container h4,
         .main .block-container p,
         .main .block-container span,
         .main .block-container div:not(.stButton),
         .main .block-container label,
-        .main .block-container li {
-            color: #156b2f !important;
-            font-weight: 600 !important;
-        }
-        /* Streamlit default elements - force green text */
-        .main [data-testid="stMarkdownContainer"] {
+        .main .block-container [data-testid="stMarkdownContainer"],
+        .main .block-container [data-testid="stMarkdownContainer"] * {
             color: #156b2f !important;
         }
-        .main [data-testid="stMarkdownContainer"] * {
-            color: #156b2f !important;
-        }
-        .main .stMarkdown {
-            color: #156b2f !important;
-        }
-        .main .stMarkdown * {
-            color: #156b2f !important;
-        }
-        /* Result card and all content inside - FORCE GREEN */
-        .result-card,
-        .result-card *,
-        .result-card h1,
-        .result-card h2,
-        .result-card h3,
-        .result-card h4,
-        .result-card p,
-        .result-card div,
-        .result-card span,
-        .result-card li,
-        .result-card strong,
-        .result-card b {
-            color: #156b2f !important;
-        }
-        /* Override any Streamlit column styling */
-        [data-testid="column"] {
-            color: #156b2f !important;
-        }
-        [data-testid="column"] * {
-            color: #156b2f !important;
-        }
-        [data-testid="column"] h1,
-        [data-testid="column"] h2,
-        [data-testid="column"] h3,
-        [data-testid="column"] h4 {
+        
+        .main .block-container .section-title {
             color: #1f8f3f !important;
         }
-        /* Section titles and small-muted class */
-        .main .section-title {
-            color: #1f8f3f !important;
-            font-weight: 800 !important;
-            text-shadow: 0 2px 4px rgba(31,143,63,0.2);
+        
+        .main .block-container .small-muted {
+            color: #4a5568 !important;
         }
-        .main .small-muted {
-            color: #156b2f !important;
-            font-weight: 600 !important;
-        }
+        
         .main .block-container input,
         .main .block-container select,
         .main .block-container textarea {
             color: #156b2f !important;
-            background: rgba(255, 255, 255, 0.95) !important;
-            font-weight: 600 !important;
-            border: 2px solid #1f8f3f !important;
+            background: #ffffff !important;
         }
-        /* Buttons - Keep white text on solid green background for visibility */
-        .main .block-container .stButton > button {
-            background: #1f8f3f !important;
-            color: #ffffff !important;
-            font-weight: 700 !important;
-            border: none !important;
-        }
-        .main .block-container .stButton > button:hover {
-            background: #156b2f !important;
-            color: #ffffff !important;
-        }
-        /* Form submit button - white text on green */
-        .main .block-container button[type="submit"] {
-            background: #1f8f3f !important;
-            color: #ffffff !important;
-            font-weight: 700 !important;
+        
+        /* Mobile responsive - solid backgrounds for inputs in light theme */
+        @media (max-width: 768px) {
+            /* Reduce heading sizes for mobile */
+            h1 {
+                font-size: 32px !important;
+                line-height: 1.2 !important;
+            }
+            
+            h2 {
+                font-size: 28px !important;
+                line-height: 1.3 !important;
+            }
+            
+            h3 {
+                font-size: 24px !important;
+            }
+            
+            h4 {
+                font-size: 20px !important;
+            }
+            
+            body {
+                font-size: 16px !important;
+            }
+            
+            .main .block-container {
+                padding: 1rem !important;
+            }
+            
+            /* Solid white background for input containers on mobile */
+            [data-testid="stForm"],
+            .st-emotion-cache-zuyloh {
+                background: #ffffff !important;
+                border: 2px solid #1f8f3f !important;
+                padding: 1rem !important;
+                border-radius: 8px !important;
+            }
+            
+            /* Force ALL inputs to have white background and dark green text */
+            input[type="text"],
+            input[type="number"],
+            select,
+            textarea,
+            .stTextInput input,
+            .stNumberInput input,
+            .stSelectbox select,
+            .stTextInput>div>div>input,
+            .stNumberInput>div>div>input,
+            .stSelectbox>div>div>select,
+            input, select, textarea,
+            [data-baseweb="select"] > div,
+            [data-baseweb="input"] > div > input {
+                background: #ffffff !important;
+                background-color: #ffffff !important;
+                color: #156b2f !important;
+                border: 2px solid #1f8f3f !important;
+                font-weight: 700 !important;
+                -webkit-text-fill-color: #156b2f !important;
+            }
+            
+            /* Force dropdown/select text to be visible */
+            [data-baseweb="select"] [role="button"],
+            [data-baseweb="select"] > div > div {
+                background: #ffffff !important;
+                background-color: #ffffff !important;
+                color: #156b2f !important;
+                -webkit-text-fill-color: #156b2f !important;
+            }
+            
+            /* Labels green and bold */
+            label,
+            .stTextInput label,
+            .stNumberInput label,
+            .stSelectbox label,
+            [data-testid="stWidgetLabel"],
+            [data-testid="stWidgetLabel"] p {
+                color: #156b2f !important;
+                font-weight: 700 !important;
+                -webkit-text-fill-color: #156b2f !important;
+            }
+            
+            /* Section titles green and bold */
+            .section-title {
+                color: #1f8f3f !important;
+                font-weight: 700 !important;
+            }
         }
     </style>
     ''', unsafe_allow_html=True)
@@ -566,7 +672,6 @@ elif page == 'Prediction':
             with cols[1]:
                 soil = st.selectbox('Soil Type', ['Loamy','Sandy','Clayey','Silty'])
 
-            st.markdown('<hr/>', unsafe_allow_html=True)
             # Soil Nutrients
             st.markdown('<div class="section-title">Soil Nutrients (NPK)</div>', unsafe_allow_html=True)
             ncols = st.columns(3)
@@ -577,7 +682,6 @@ elif page == 'Prediction':
             with ncols[2]:
                 K = st.number_input('Potassium (K)', min_value=0.0, value=150.0)
 
-            st.markdown('<hr/>', unsafe_allow_html=True)
             # Climate Conditions
             st.markdown('<div class="section-title">Climate Conditions</div>', unsafe_allow_html=True)
             ccols = st.columns(4)
@@ -595,18 +699,18 @@ elif page == 'Prediction':
 
         # Keep prediction logic intact; only change UI presentation
         if submitted:
-            st.info('Running predictions...')
-            try:
-                crop_bundle = joblib.load('crop_model.joblib'); artifacts = joblib.load('artifacts.joblib')
-            except Exception as e:
-                st.error('Model files missing.'); st.stop()
-            enc = artifacts['encoders']; scaler = artifacts['scaler']; crop_model = crop_bundle['model']
-            df = pd.DataFrame([{'region':region,'soil_type':soil,'N':N,'P':P,'K':K,'pH':pH,'temperature':temp,'humidity':humidity,'rainfall':rainfall}])
-            for c,le in enc.items():
-                df[c] = le.transform(df[c].astype(str))
-            X = df[['region','soil_type','N','P','K','pH','temperature','humidity','rainfall']].values
-            Xs = scaler.transform(X)
-            crop_pred = crop_model.predict(Xs)[0]
+            with st.spinner('Running predictions...'):
+                try:
+                    crop_bundle = joblib.load('crop_model.joblib'); artifacts = joblib.load('artifacts.joblib')
+                except Exception as e:
+                    st.error('Model files missing.'); st.stop()
+                enc = artifacts['encoders']; scaler = artifacts['scaler']; crop_model = crop_bundle['model']
+                df = pd.DataFrame([{'region':region,'soil_type':soil,'N':N,'P':P,'K':K,'pH':pH,'temperature':temp,'humidity':humidity,'rainfall':rainfall}])
+                for c,le in enc.items():
+                    df[c] = le.transform(df[c].astype(str))
+                X = df[['region','soil_type','N','P','K','pH','temperature','humidity','rainfall']].values
+                Xs = scaler.transform(X)
+                crop_pred = crop_model.predict(Xs)[0]
 
             nf = None
             used_fert_model = False
@@ -650,7 +754,7 @@ elif page == 'Prediction':
                     'input': {'region': region, 'soil': soil, 'N': N, 'P': P, 'K': K, 'pH': pH, 'temperature': temp, 'humidity': humidity, 'rainfall': rainfall}
                     , 'used_fert_model': used_fert_model
                 }
-                st.success('Prediction saved. See results.')
+                st.toast('✅ Prediction complete! Check results on the right.', icon='✅')
 
     # RIGHT: Result card
     with right:
@@ -708,23 +812,6 @@ elif page == 'Preparation':
             box-shadow: 0 8px 32px rgba(31,143,63,0.2);
             border: 2px solid #1f8f3f;
         }
-        /* Enhanced Professional Text Styling */
-        .main .block-container h1,
-        .main .block-container h2,
-        .main .block-container h3,
-        .main .block-container h4 {
-            color: #1f8f3f !important;
-            font-weight: 700 !important;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        }
-        .main .block-container p,
-        .main .block-container span,
-        .main .block-container div:not(.stButton),
-        .main .block-container label,
-        .main .block-container li {
-            color: #156b2f !important;
-            font-weight: 600 !important;
-        }
     </style>
     ''', unsafe_allow_html=True)
     
@@ -765,7 +852,7 @@ elif page == 'Preparation':
                 st.download_button('Download Preparation (TXT)', prep_text, file_name=f"preparation_{conv.get('organic','fert')}.txt")
         else:
             st.write('No preparation steps available.')
-        if st.button('Show Tutorials'):
+        if st.button('Video Recommendations'):
             base_queries = build_search_queries(conv.get('organic'))
             # Preferred languages: Kannada first, then Hindi, then English
             languages = ['Kannada', 'Hindi', 'English']
@@ -806,7 +893,7 @@ elif page == 'Preparation':
             if total_found == 0:
                 st.info('No tutorial videos found for this organic fertilizer in Kannada/Hindi/English.')
             else:
-                st.markdown('### Tutorial Videos (preferred: Kannada → Hindi → English)')
+                st.markdown('### Video Recommendations (preferred: Kannada → Hindi → English)')
                 for lang in languages:
                     vids = results_by_lang.get(lang, [])
                     if not vids:
@@ -835,31 +922,6 @@ elif page == 'Community':
             box-shadow: 0 8px 32px rgba(31,143,63,0.2);
             border: 2px solid #1f8f3f;
         }
-        /* Enhanced Professional Text Styling */
-        .main .block-container h1,
-        .main .block-container h2,
-        .main .block-container h3,
-        .main .block-container h4 {
-            color: #1f8f3f !important;
-            font-weight: 700 !important;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        }
-        .main .block-container p,
-        .main .block-container span,
-        .main .block-container div:not(.stButton),
-        .main .block-container label,
-        .main .block-container li {
-            color: #156b2f !important;
-            font-weight: 600 !important;
-        }
-        .main .block-container input,
-        .main .block-container select,
-        .main .block-container textarea {
-            color: #156b2f !important;
-            background: rgba(255, 255, 255, 0.95) !important;
-            font-weight: 600 !important;
-            border: 2px solid #1f8f3f !important;
-        }
     </style>
     ''', unsafe_allow_html=True)
     
@@ -868,143 +930,254 @@ elif page == 'Community':
         st.session_state['page'] = 'Home'
         st.rerun()
     
-    st.subheader('Community & Experts')
-    st.markdown('Initialize DB if first run and view posts.')
-    # Authentication UI moved here so it is visible only on Community page
-    st.markdown('---')
-    auth_mode = st.selectbox('Mode', ['Guest','Login','Register'], key='community_auth_mode')
-    if auth_mode == 'Login':
-        username = st.text_input('Username', key='community_login_user')
-        password = st.text_input('Password', type='password', key='community_login_pw')
-        if st.button('Login', key='community_login_btn'):
-            u = cdb.authenticate(username, password)
-            if u:
-                st.session_state['user'] = u
-                st.success(f"Logged in as {u['username']} ({u['role']})")
-            else:
-                st.error('Login failed')
-    elif auth_mode == 'Register':
-        r_user = st.text_input('New username', key='community_reg_user')
-        r_pw = st.text_input('New password', type='password', key='community_reg_pw')
-        r_role = st.selectbox('Role', ['farmer','expert'], key='community_reg_role')
-        if st.button('Register', key='community_reg_btn'):
-            ok = cdb.create_user(r_user, r_pw, role=r_role)
-            if ok:
-                st.success('Registered. You can now login.')
-            else:
-                st.error('Registration failed (username may be taken).')
-    else:
-        if st.button('Logout', key='community_logout_btn'):
-            st.session_state['user'] = None
-            st.info('Logged out')
-
-    if st.button('Init Community DB'):
-        cdb.init_db(); st.success('Community DB initialized.')
+    # Initialize show_register state if not exists
+    if 'show_register' not in st.session_state:
+        st.session_state['show_register'] = False
+    
     user = st.session_state.get('user')
-    if user:
-        st.markdown(f"**Signed in:** {user.get('username')} ({user.get('role')})")
+    
+    # If user is not logged in, show login/register form
+    if not user:
+        # Center the login/register box
+        col1, col2, col3 = st.columns([1, 2, 1])
+        
+        with col2:
+            st.markdown('<br>', unsafe_allow_html=True)
+            st.markdown('## 🌾 Community & Experts')
+            st.markdown('Connect with farming experts and fellow farmers')
+            st.markdown('<br>', unsafe_allow_html=True)
+            
+            # Show Register Form
+            if st.session_state.get('show_register'):
+                st.markdown('### 📝 Create New Account')
+                st.markdown('<br>', unsafe_allow_html=True)
+                with st.form(key='register_form'):
+                    r_user = st.text_input('Username', placeholder='Enter your username')
+                    st.markdown('<br>', unsafe_allow_html=True)
+                    r_pw = st.text_input('Password', type='password', placeholder='Enter password')
+                    st.markdown('<br>', unsafe_allow_html=True)
+                    r_pw_confirm = st.text_input('Confirm Password', type='password', placeholder='Re-enter password')
+                    st.markdown('<br>', unsafe_allow_html=True)
+                    r_role = st.selectbox('I am a', ['farmer', 'expert'])
+                    st.markdown('<br>', unsafe_allow_html=True)
+                    
+                    register_btn = st.form_submit_button('Register', use_container_width=True)
+                    
+                    if register_btn:
+                        if not r_user or not r_pw:
+                            st.error('Please fill all fields')
+                        elif r_pw != r_pw_confirm:
+                            st.error('Passwords do not match')
+                        else:
+                            ok = cdb.create_user(r_user, r_pw, role=r_role)
+                            if ok:
+                                # Auto-login after registration
+                                u = cdb.authenticate(r_user, r_pw)
+                                if u:
+                                    st.session_state['user'] = u
+                                    st.session_state['show_register'] = False
+                                    st.success(f'Welcome {u["username"]}! Registration successful.')
+                                    st.rerun()
+                            else:
+                                st.error('Registration failed (username may already exist)')
+                
+                st.markdown('<br>', unsafe_allow_html=True)
+                if st.button('← Back to Login', use_container_width=True):
+                    st.session_state['show_register'] = False
+                    st.rerun()
+            
+            # Show Login Form (default)
+            else:
+                st.markdown('### 🔐 Login to Your Account')
+                st.markdown('<br>', unsafe_allow_html=True)
+                with st.form(key='login_form'):
+                    username = st.text_input('Username', placeholder='Enter your username')
+                    st.markdown('<br>', unsafe_allow_html=True)
+                    password = st.text_input('Password', type='password', placeholder='Enter your password')
+                    st.markdown('<br>', unsafe_allow_html=True)
+                    
+                    login_btn = st.form_submit_button('Login', use_container_width=True)
+                    
+                    if login_btn:
+                        if not username or not password:
+                            st.error('Please enter username and password')
+                        else:
+                            u = cdb.authenticate(username, password)
+                            if u:
+                                st.session_state['user'] = u
+                                st.success(f'Welcome back, {u["username"]}!')
+                                st.rerun()
+                            else:
+                                st.error('Invalid username or password')
+                
+                # Register link below login form
+                st.markdown('<br>', unsafe_allow_html=True)
+                if st.button('📝 Create New Account', use_container_width=True):
+                    st.session_state['show_register'] = True
+                    st.rerun()
+            
+            # DB Init button (for first time setup)
+            st.markdown('<br><br>', unsafe_allow_html=True)
+            with st.expander('⚙️ Database Setup (First Time Only)'):
+                if st.button('Initialize Community Database'):
+                    cdb.init_db()
+                    st.success('Database initialized successfully!')
+    
+    # If user is logged in, show dashboard
+    # If user is logged in, show dashboard
+    else:
+        # User header with logout
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            st.subheader(f'Welcome, {user.get("username")}!')
+            st.markdown(f'*Role: {user.get("role").title()}*')
+        with col2:
+            if st.button('Logout', key='logout_btn', use_container_width=True):
+                st.session_state['user'] = None
+                st.session_state['show_register'] = False
+                st.info('Logged out successfully')
+                st.rerun()
+        
+        st.markdown('---')
+        
+        # Farmer Dashboard
         if user.get('role') == 'farmer':
-            st.markdown('### Farmer Menu')
-            if st.button('View My Prediction History'):
+            st.markdown('### 📊 Farmer Dashboard')
+            
+            # Upcoming Tutorials & Live Sessions
+            st.markdown('#### 🎓 Upcoming Tutorials & Live Sessions')
+            sessions = cdb.list_sessions()
+            if sessions:
+                for s in sessions:
+                    sid, stitle, slink, swhen, sexpert = s
+                    with st.container():
+                        st.markdown(f"**{stitle}**")
+                        st.markdown(f"📅 Scheduled: {swhen} | 👨‍🏫 By: {sexpert}")
+                        st.markdown(f"🔗 Link: {slink}")
+                        cols = st.columns([1, 1, 4])
+                        with cols[0]:
+                            if st.button('Join Session', key=f'join_{sid}', use_container_width=True):
+                                st.markdown(f"[Open session link]({slink})")
+                        with cols[1]:
+                            if st.button('Bookmark', key=f'bm_{sid}', use_container_width=True):
+                                cdb.add_bookmark(user.get('username'), stitle, slink)
+                                st.success('Bookmarked!')
+                        st.markdown('---')
+            else:
+                st.info('No upcoming sessions scheduled.')
+            
+            st.markdown('---')
+            
+            # Farmer Menu Options
+            tab1, tab2 = st.tabs(['📜 My History', '🔖 My Bookmarks'])
+            
+            with tab1:
+                st.markdown('#### Prediction History')
                 rows = cdb.get_history(user.get('username'))
                 if rows:
                     for r in rows:
                         st.markdown(f"**{r[3]}**")
                         st.write('Input:', r[1])
                         st.write('Result:', r[2])
+                        st.markdown('---')
                 else:
-                    st.info('No history found.')
-            if st.button('View My Bookmarks'):
+                    st.info('No prediction history yet.')
+            
+            with tab2:
+                st.markdown('#### My Bookmarks')
                 bms = cdb.get_bookmarks(user.get('username'))
                 if bms:
                     for b in bms:
                         st.markdown(f"- [{b[1]}]({b[2]})")
                 else:
                     st.info('No bookmarks yet.')
+        
+        # Expert Dashboard
         elif user.get('role') == 'expert':
-            st.markdown('### Expert Menu')
-            if st.button('View Questions'):
+            st.markdown('### 👨‍🏫 Expert Dashboard')
+            
+            tab1, tab2, tab3 = st.tabs(['❓ Questions', '📅 Schedule Session', '📤 Upload Data'])
+            
+            with tab1:
+                st.markdown('#### Community Questions')
                 qs = cdb.list_questions()
                 if qs:
                     for q in qs:
-                        st.markdown(f"**{q[1]}** by {q[3]} ({q[5]})")
-                        st.write(q[2])
-                        if q[4]:
-                            st.markdown(f"Attachment: {q[4]}")
-                        ans = cdb.get_answers(q[0])
-                        if ans:
-                            st.markdown('Answers:')
-                            for a in ans:
-                                aid = a[0]
-                                content = a[1]
-                                expert_name = a[2]
-                                created = a[3]
-                                verified = a[4]
-                                st.markdown(f"- {content} (by {expert_name}) [{'verified' if verified else 'unverified'}]")
-                                if user.get('role') == 'expert':
-                                    if st.button(f'Verify Answer {aid}', key=f'verify_{aid}'):
-                                        cdb.verify_answer(aid)
-                                        st.success('Answer verified.')
-                        with st.form(key=f'ans_{q[0]}'):
-                            ans_txt = st.text_area('Your answer')
-                            submit_ans = st.form_submit_button('Submit Answer')
-                            if submit_ans and ans_txt:
-                                cdb.create_answer(q[0], ans_txt, user.get('username'))
-                                st.success('Answer submitted.')
-            if st.button('Upload fertilizer_mapping (CSV)'):
-                uploaded = st.file_uploader('Upload CSV', type=['csv'])
-                if uploaded:
-                    content = uploaded.getvalue()
-                    with open('data/fertilizer_mapping.csv','wb') as f:
-                        f.write(content)
-                    st.success('fertilizer_mapping.csv updated')
-
-            # Experts can conduct (schedule) live tutorials/sessions for farmers
-            st.markdown('---')
-            st.markdown('### Conduct Tutorial / Schedule Session')
-            if user.get('role') == 'expert':
+                        with st.container():
+                            st.markdown(f"**{q[1]}**")
+                            st.markdown(f"*Asked by {q[3]} on {q[5]}*")
+                            st.write(q[2])
+                            if q[4]:
+                                st.markdown(f"📎 Attachment: {q[4]}")
+                            
+                            # Show existing answers
+                            ans = cdb.get_answers(q[0])
+                            if ans:
+                                st.markdown('**Answers:**')
+                                for a in ans:
+                                    aid, content, expert_name, created, verified = a[0], a[1], a[2], a[3], a[4]
+                                    status = '✅ Verified' if verified else '⏳ Pending'
+                                    st.markdown(f"- {content} *(by {expert_name})* [{status}]")
+                                    if not verified:
+                                        if st.button(f'Verify', key=f'verify_{aid}'):
+                                            cdb.verify_answer(aid)
+                                            st.success('Answer verified!')
+                                            st.rerun()
+                            
+                            # Answer form
+                            with st.form(key=f'ans_{q[0]}'):
+                                ans_txt = st.text_area('Your answer', key=f'txt_{q[0]}')
+                                if st.form_submit_button('Submit Answer'):
+                                    if ans_txt:
+                                        cdb.create_answer(q[0], ans_txt, user.get('username'))
+                                        st.success('Answer submitted!')
+                                        st.rerun()
+                            
+                            st.markdown('---')
+                else:
+                    st.info('No questions yet.')
+            
+            with tab2:
+                st.markdown('#### Conduct Tutorial / Schedule Session')
                 with st.form(key='create_session_form'):
                     s_title = st.text_input('Session title')
                     s_link = st.text_input('Session link (Zoom/YouTube/Meet)')
-                    s_when = st.text_input('Scheduled time (ISO or human-readable)', value='YYYY-MM-DD HH:MM')
-                    submit_sess = st.form_submit_button('Create Session')
-                    if submit_sess and s_title and s_link:
-                        if hasattr(cdb, 'create_session'):
-                            cdb.create_session(s_title, s_link, s_when, user.get('username'))
-                            st.success('Session scheduled and visible to farmers.')
+                    s_when = st.text_input('Scheduled time', value='YYYY-MM-DD HH:MM', placeholder='e.g., 2025-12-15 14:00')
+                    
+                    if st.form_submit_button('Create Session', use_container_width=True):
+                        if s_title and s_link:
+                            if hasattr(cdb, 'create_session'):
+                                cdb.create_session(s_title, s_link, s_when, user.get('username'))
+                                st.success('Session scheduled successfully!')
+                                st.rerun()
+                            else:
+                                st.error('Session feature not available. Please initialize the database.')
                         else:
-                            st.error('Session feature not available (db module missing create_session). Please re-run the app or contact the developer.')
-
-    # Show upcoming sessions to FARMERS only (experts do not see the public listing here)
-    if user and user.get('role') == 'farmer':
+                            st.error('Please fill in all fields.')
+            
+            with tab3:
+                st.markdown('#### Upload Fertilizer Mapping')
+                uploaded = st.file_uploader('Upload CSV file', type=['csv'], key='upload_fert_csv')
+                if uploaded:
+                    if st.button('Save File'):
+                        content = uploaded.getvalue()
+                        with open('data/fertilizer_mapping.csv', 'wb') as f:
+                            f.write(content)
+                        st.success('fertilizer_mapping.csv updated successfully!')
+        
+        # Show community posts (visible to all logged-in users)
         st.markdown('---')
-        st.markdown('### Upcoming Tutorials & Live Sessions')
-        sessions = cdb.list_sessions()
-        if sessions:
-            for s in sessions:
-                sid, stitle, slink, swhen, sexpert = s
-                st.markdown(f"**{stitle}** — scheduled: {swhen} (by {sexpert})")
-                st.markdown(f"Link: {slink}")
-                cols = st.columns([1,1,4])
-                with cols[0]:
-                    if st.button('Join Session', key=f'join_{sid}'):
-                        # open link in new tab using markdown
-                        st.markdown(f"[Open session link]({slink})")
-                with cols[1]:
-                    if st.button('Bookmark Session', key=f'bm_{sid}'):
-                        cdb.add_bookmark(user.get('username'), stitle, slink)
-                        st.success('Bookmarked for later')
-                with cols[2]:
-                    st.write('')
+        st.markdown('### 📰 Recent Community Posts')
+        posts = cdb.list_posts()
+        if posts:
+            for p in posts:
+                with st.container():
+                    st.markdown(f"**{p[1]}**")
+                    st.markdown(f"*By {p[3]} on {p[4]}*")
+                    st.write(p[2])
+                    st.markdown('---')
         else:
-            st.info('No upcoming sessions scheduled.')
-    posts = cdb.list_posts()
-    if posts:
-        st.markdown('### Recent Posts')
-        for p in posts:
-            st.markdown(f'**{p[1]}** by {p[3]} ({p[4]})'); st.write(p[2])
-    else:
-        st.info('No posts found. Experts can add posts using community.create_post or via DB scripts.')
+            st.info('No posts found.')
 
 st.markdown('---')
 st.subheader('F2C Marketplace (Coming Soon)')
