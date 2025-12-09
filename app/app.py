@@ -1052,80 +1052,90 @@ elif page == 'Community':
     
     # If user is not logged in, show login/register form
     if not user:
-        st.subheader('Community & Experts')
-        st.markdown('Connect with farming experts and fellow farmers')
-        st.markdown('---')
+        # Center the login/register box
+        col1, col2, col3 = st.columns([1, 2, 1])
         
-        # Show Register Form
-        if st.session_state.get('show_register'):
-            st.markdown('### Create New Account')
-            with st.form(key='register_form'):
-                r_user = st.text_input('Username')
-                r_pw = st.text_input('Password', type='password')
-                r_pw_confirm = st.text_input('Confirm Password', type='password')
-                r_role = st.selectbox('I am a', ['farmer', 'expert'])
-                
-                col1, col2 = st.columns(2)
-                with col1:
+        with col2:
+            st.markdown('<br>', unsafe_allow_html=True)
+            st.markdown('## 🌾 Community & Experts')
+            st.markdown('Connect with farming experts and fellow farmers')
+            st.markdown('<br>', unsafe_allow_html=True)
+            
+            # Show Register Form
+            if st.session_state.get('show_register'):
+                st.markdown('### 📝 Create New Account')
+                st.markdown('<br>', unsafe_allow_html=True)
+                with st.form(key='register_form'):
+                    r_user = st.text_input('Username', placeholder='Enter your username')
+                    st.markdown('<br>', unsafe_allow_html=True)
+                    r_pw = st.text_input('Password', type='password', placeholder='Enter password')
+                    st.markdown('<br>', unsafe_allow_html=True)
+                    r_pw_confirm = st.text_input('Confirm Password', type='password', placeholder='Re-enter password')
+                    st.markdown('<br>', unsafe_allow_html=True)
+                    r_role = st.selectbox('I am a', ['farmer', 'expert'])
+                    st.markdown('<br>', unsafe_allow_html=True)
+                    
                     register_btn = st.form_submit_button('Register', use_container_width=True)
-                with col2:
-                    if st.form_submit_button('Back to Login', use_container_width=True):
-                        st.session_state['show_register'] = False
-                        st.rerun()
+                    
+                    if register_btn:
+                        if not r_user or not r_pw:
+                            st.error('Please fill all fields')
+                        elif r_pw != r_pw_confirm:
+                            st.error('Passwords do not match')
+                        else:
+                            ok = cdb.create_user(r_user, r_pw, role=r_role)
+                            if ok:
+                                # Auto-login after registration
+                                u = cdb.authenticate(r_user, r_pw)
+                                if u:
+                                    st.session_state['user'] = u
+                                    st.session_state['show_register'] = False
+                                    st.success(f'Welcome {u["username"]}! Registration successful.')
+                                    st.rerun()
+                            else:
+                                st.error('Registration failed (username may already exist)')
                 
-                if register_btn:
-                    if not r_user or not r_pw:
-                        st.error('Please fill all fields')
-                    elif r_pw != r_pw_confirm:
-                        st.error('Passwords do not match')
-                    else:
-                        ok = cdb.create_user(r_user, r_pw, role=r_role)
-                        if ok:
-                            # Auto-login after registration
-                            u = cdb.authenticate(r_user, r_pw)
+                st.markdown('<br>', unsafe_allow_html=True)
+                if st.button('← Back to Login', use_container_width=True):
+                    st.session_state['show_register'] = False
+                    st.rerun()
+            
+            # Show Login Form (default)
+            else:
+                st.markdown('### 🔐 Login to Your Account')
+                st.markdown('<br>', unsafe_allow_html=True)
+                with st.form(key='login_form'):
+                    username = st.text_input('Username', placeholder='Enter your username')
+                    st.markdown('<br>', unsafe_allow_html=True)
+                    password = st.text_input('Password', type='password', placeholder='Enter your password')
+                    st.markdown('<br>', unsafe_allow_html=True)
+                    
+                    login_btn = st.form_submit_button('Login', use_container_width=True)
+                    
+                    if login_btn:
+                        if not username or not password:
+                            st.error('Please enter username and password')
+                        else:
+                            u = cdb.authenticate(username, password)
                             if u:
                                 st.session_state['user'] = u
-                                st.session_state['show_register'] = False
-                                st.success(f'Welcome {u["username"]}! Registration successful.')
+                                st.success(f'Welcome back, {u["username"]}!')
                                 st.rerun()
-                        else:
-                            st.error('Registration failed (username may already exist)')
-        
-        # Show Login Form (default)
-        else:
-            st.markdown('### Login to Your Account')
-            with st.form(key='login_form'):
-                username = st.text_input('Username')
-                password = st.text_input('Password', type='password')
+                            else:
+                                st.error('Invalid username or password')
                 
-                login_btn = st.form_submit_button('Login', use_container_width=True)
-                
-                if login_btn:
-                    if not username or not password:
-                        st.error('Please enter username and password')
-                    else:
-                        u = cdb.authenticate(username, password)
-                        if u:
-                            st.session_state['user'] = u
-                            st.success(f'Welcome back, {u["username"]}!')
-                            st.rerun()
-                        else:
-                            st.error('Invalid username or password')
-            
-            # Register link below login form
-            st.markdown('---')
-            col1, col2, col3 = st.columns([1, 2, 1])
-            with col2:
-                if st.button('Create New Account', key='show_register_btn', use_container_width=True):
+                # Register link below login form
+                st.markdown('<br>', unsafe_allow_html=True)
+                if st.button('📝 Create New Account', use_container_width=True):
                     st.session_state['show_register'] = True
                     st.rerun()
-        
-        # DB Init button (for first time setup)
-        st.markdown('---')
-        with st.expander('⚙️ Database Setup (First Time Only)'):
-            if st.button('Initialize Community Database'):
-                cdb.init_db()
-                st.success('Database initialized successfully!')
+            
+            # DB Init button (for first time setup)
+            st.markdown('<br><br>', unsafe_allow_html=True)
+            with st.expander('⚙️ Database Setup (First Time Only)'):
+                if st.button('Initialize Community Database'):
+                    cdb.init_db()
+                    st.success('Database initialized successfully!')
     
     # If user is logged in, show dashboard
     # If user is logged in, show dashboard
