@@ -1,6 +1,18 @@
 import streamlit as st, joblib, pandas as pd, os, json
 import sys
 from pathlib import Path
+
+# Hide Streamlit menu with GitHub link
+st.set_page_config(
+    page_title="Climate-Aware Farming",
+    page_icon="🌾",
+    menu_items={
+        'Get Help': None,
+        'Report a bug': None,
+        'About': "Climate-Aware Crop & Organic Fertilizer Recommendation System"
+    }
+)
+
 # add project root (two levels up if app is in app/) so `src` imports resolve
 proj_root = Path(__file__).resolve().parents[1]
 if str(proj_root) not in sys.path:
