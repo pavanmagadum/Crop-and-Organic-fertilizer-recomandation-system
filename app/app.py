@@ -717,13 +717,19 @@ elif page == 'Preparation':
                             st.write(v.get('link'))
 
 elif page == 'Community':
+    # Back buttons - same style as Preparation page
+    cols = st.columns([1, 1, 4])
+    with cols[0]:
+        if st.button('← Back', key='comm_back_prep'):
+            st.session_state['page'] = 'Preparation'
+            st.rerun()
+    with cols[1]:
+        if st.button('🏠 Home', key='comm_back_home'):
+            st.session_state['page'] = 'Home'
+            st.rerun()
+    
     st.header('👥 Expert Community', anchor=False)
     st.markdown('<p style="font-size:16px; color: var(--text-medium);">Connect with agricultural experts and get verified answers</p>', unsafe_allow_html=True)
-    
-    # Back button
-    if st.button('← Back to Home', key='comm_back'):
-        st.session_state['page'] = 'Home'
-        st.rerun()
     
     # Initialize show_register state if not exists
     if 'show_register' not in st.session_state:
