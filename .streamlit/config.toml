@@ -10,4 +10,3 @@ headless = true
 
 [ui]
 hideTopBar = true
-hideSidebarNav = false
