@@ -579,24 +579,6 @@ elif page == 'Prediction':
         st.markdown('</div>', unsafe_allow_html=True)
 
 elif page == 'Preparation':
-    # Agriculture-themed background for Preparation page - supports light and dark mode
-    st.markdown('''
-    <style>
-        /* Light Mode */
-        .stApp {
-            background: linear-gradient(135deg, rgba(215,250,215,0.7), rgba(190,240,190,0.7)),
-                        url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
-        }
-        .main .block-container {
-            background: rgba(255, 255, 255, 0.85) !important;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(31,143,63,0.2);
-            border: 2px solid #1f8f3f;
-        }
-    </style>
-    ''', unsafe_allow_html=True)
-    
     # Back buttons
     cols = st.columns([1, 1, 4])
     with cols[0]:
@@ -608,7 +590,8 @@ elif page == 'Preparation':
             st.session_state['page'] = 'Home'
             st.rerun()
     
-    st.subheader('Preparation Steps & Tutorials')
+    st.header('📋 Organic Fertilizer Preparation Guide', anchor=False)
+    st.markdown('<p style="font-size:16px; color: var(--text-medium);">Step-by-step instructions and video tutorials</p>', unsafe_allow_html=True)
     if 'last_result' not in st.session_state:
         st.info('No saved prediction. Go to Prediction and run a prediction first.')
     else:
@@ -689,23 +672,8 @@ elif page == 'Preparation':
                             st.write(v.get('link'))
 
 elif page == 'Community':
-    # Agriculture-themed background for Community page - supports light and dark mode
-    st.markdown('''
-    <style>
-        /* Light Mode */
-        .stApp {
-            background: linear-gradient(135deg, rgba(225,250,225,0.7), rgba(195,240,195,0.7)),
-                        url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
-        }
-        .main .block-container {
-            background: rgba(255, 255, 255, 0.85) !important;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(31,143,63,0.2);
-            border: 2px solid #1f8f3f;
-        }
-    </style>
-    ''', unsafe_allow_html=True)
+    st.header('👥 Expert Community', anchor=False)
+    st.markdown('<p style="font-size:16px; color: var(--text-medium);">Connect with agricultural experts and get verified answers</p>', unsafe_allow_html=True)
     
     # Back button
     if st.button('← Back to Home', key='comm_back'):
@@ -718,9 +686,8 @@ elif page == 'Community':
     
     user = st.session_state.get('user')
     
-    # If user is not logged in, show login/register form
+    # If user is not logged in, show modern login/register form
     if not user:
-        # Center the login/register box
         col1, col2, col3 = st.columns([1, 2, 1])
         
         with col2:
