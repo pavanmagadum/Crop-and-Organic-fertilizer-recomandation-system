@@ -72,362 +72,246 @@ def set_query_params_safe(**kwargs):
     for k, v in kwargs.items():
         st.session_state[k] = v
 
-# Enhanced theme + CSS with larger fonts and better color contrast
+# MODERN PROFESSIONAL AGRICULTURAL THEME - Inspired by top agriculture websites
 st.markdown('''
 <style>
-    /* Hide ALL Streamlit branding and GitHub links */
+    /* Hide ALL Streamlit branding */
     #MainMenu {visibility: hidden !important;}
     footer {visibility: hidden !important;}
     header {visibility: hidden !important;}
+    [data-testid="stToolbar"] {display: none !important;}
+    .viewerBadge_container__1QSob {display: none !important;}
     
-    [data-testid="stToolbar"] {
-        display: none !important;
-    }
-    
-    .viewerBadge_container__1QSob {
-        display: none !important;
-    }
-    
-    /* Professional Green Theme - Consistent for all modes */
+    /* Modern Agricultural Color Palette */
     :root {
-        --primary-green: #1f8f3f;
-        --primary-green-dark: #156b2f;
-        --card-bg: rgba(255, 255, 255, 0.85);
-        --card-border: rgba(31, 143, 63, 0.2);
-        --text-primary: #156b2f;
-        --text-secondary: #2d5f2d;
-        --text-muted: #4a7c4a;
-        --bg-overlay: rgba(255, 255, 255, 0.75);
-        --shadow-color: rgba(15, 15, 15, 0.1);
-        --button-text: #ffffff;
+        --forest-green: #2D5016;
+        --olive-green: #6B8E23;
+        --sage-green: #8FBC8F;
+        --earth-brown: #8B4513;
+        --warm-cream: #FFF8E7;
+        --soft-white: #FAFAFA;
+        --text-dark: #2C3E2D;
+        --text-medium: #4A5F4B;
+        --shadow-soft: rgba(45, 80, 22, 0.12);
+        --shadow-hover: rgba(45, 80, 22, 0.25);
     }
     
-    /* Global Styles - EVEN LARGER FONTS */
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: var(--text-primary);
-        font-size: 27px;
+    /* Modern Background */
+    .stApp {
+        background: linear-gradient(135deg, #f5f7f0 0%, #e8f0e3 100%);
     }
     
-    .main-title {
-        font-size: 60px;
-        font-weight: 700;
-        margin-bottom: 8px;
-        color: var(--text-primary);
+    /* Main Container - Clean Modern Card */
+    .main .block-container {
+        background: white;
+        border-radius: 20px;
+        padding: 3rem 2.5rem;
+        box-shadow: 0 8px 32px var(--shadow-soft);
+        max-width: 1200px;
+        margin: 2rem auto;
+        border-top: 4px solid var(--forest-green);
     }
     
-    .subtitle {
-        color: var(--text-muted);
-        margin-top: 0;
-        margin-bottom: 24px;
-        font-size: 33px;
-        line-height: 1.6;
-    }
-    
-    .app-card {
-        background: var(--card-bg);
-        border-radius: 12px;
-        padding: 24px;
-        margin-bottom: 18px;
-        box-shadow: 0 4px 20px var(--shadow-color);
-        border: 1px solid var(--card-border);
-        transition: all 0.3s ease;
-    }
-    
-    .app-card:hover {
-        box-shadow: 0 6px 28px var(--shadow-color);
-        transform: translateY(-2px);
-    }
-    
-    .result-card {
-        padding: 20px;
-        border-radius: 8px;
-        background: transparent;
-        color: #156b2f;
-    }
-    
-    .result-card * {
-        color: #156b2f !important;
-    }
-    
-    .result-card h1,
-    .result-card h2,
-    .result-card h3,
-    .result-card h4,
-    .result-card p,
-    .result-card span,
-    .result-card div,
-    .result-card li {
-        color: #156b2f !important;
-    }
-    
-    .section-title {
-        font-size: 36px;
-        font-weight: 700;
-        color: var(--primary-green);
-        margin-bottom: 14px;
-        letter-spacing: 0.3px;
-    }
-    
-    .small-muted {
-        color: var(--text-muted);
-        font-size: 26px;
-        line-height: 1.6;
-    }
-    
-    /* Button Styles - EVEN LARGER */
-    .stButton>button {
-        background: var(--primary-green) !important;
-        border-radius: 8px;
-        color: var(--button-text) !important;
-        font-weight: 600;
-        padding: 0.75rem 2rem;
-        border: none;
-        transition: all 0.3s ease;
-        font-size: 29px;
-    }
-    
-    .stButton>button:hover {
-        background: var(--primary-green-dark) !important;
-        box-shadow: 0 4px 12px rgba(31, 143, 63, 0.3);
-        transform: translateY(-1px);
-    }
-    
-    /* Form Elements - EVEN LARGER FONTS */
-    .stTextInput>div>div>input,
-    .stNumberInput>div>div>input,
-    .stSelectbox>div>div>select {
-        background: var(--card-bg);
-        color: var(--text-primary);
-        border: 1px solid var(--card-border);
-        font-size: 27px;
-        padding: 0.6rem;
-    }
-    
-    /* Headings - EVEN LARGER */
+    /* CONSISTENT FONT SIZING - Professional hierarchy */
     h1 {
-        color: var(--text-primary) !important;
-        font-size: 63px !important;
+        font-size: 38px !important;
+        font-weight: 700 !important;
+        color: var(--forest-green) !important;
+        margin-bottom: 16px !important;
+        letter-spacing: -0.5px;
     }
     
     h2 {
-        color: var(--text-primary) !important;
-        font-size: 45px !important;
-        font-weight: 700 !important;
+        font-size: 28px !important;
+        font-weight: 600 !important;
+        color: var(--forest-green) !important;
+        margin-bottom: 14px !important;
     }
     
     h3 {
-        color: var(--primary-green) !important;
-        font-size: 39px !important;
+        font-size: 22px !important;
+        font-weight: 600 !important;
+        color: var(--olive-green) !important;
+        margin-bottom: 12px !important;
     }
     
     h4 {
-        color: var(--text-primary) !important;
-        font-size: 33px !important;
-    }
-    
-    /* Labels - EVEN LARGER & BETTER COLOR */
-    label {
-        color: var(--text-secondary) !important;
+        font-size: 18px !important;
         font-weight: 600 !important;
-        font-size: 27px !important;
+        color: var(--olive-green) !important;
+        margin-bottom: 10px !important;
     }
     
-    /* Paragraphs - EVEN LARGER */
-    p, li {
-        font-size: 27px;
+    /* Body text - CONSISTENT 16px everywhere */
+    p, span, div, li, label, .stMarkdown {
+        font-size: 16px !important;
+        color: var(--text-dark);
         line-height: 1.7;
-        color: var(--text-primary);
     }
     
-    /* Streamlit emotion cache containers - light transparent white background */
-    .st-emotion-cache-zuyloh {
-        background: rgba(255, 255, 255, 0.45) !important;
-        border: 1px solid rgba(31, 143, 63, 0.2) !important;
+    /* Modern Input Fields - FIXED SIZE 16px */
+    input, select, textarea,
+    .stTextInput input,
+    .stNumberInput input,
+    .stSelectbox select,
+    [data-baseweb="input"] input {
+        font-size: 16px !important;
+        padding: 12px 14px !important;
+        border: 2px solid var(--sage-green) !important;
+        border-radius: 10px !important;
+        background: var(--warm-cream) !important;
+        color: var(--text-dark) !important;
+        transition: all 0.3s ease !important;
     }
     
-    .st-emotion-cache-zuyloh * {
-        color: #156b2f !important;
+    input:focus, select:focus, textarea:focus {
+        border-color: var(--olive-green) !important;
+        outline: none !important;
+        box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.15) !important;
     }
     
-    .st-emotion-cache-zuyloh label,
-    .st-emotion-cache-zuyloh input,
-    .st-emotion-cache-zuyloh select,
-    .st-emotion-cache-zuyloh p,
-    .st-emotion-cache-zuyloh span,
-    .st-emotion-cache-zuyloh div {
-        color: #156b2f !important;
+    /* Labels - CONSISTENT 16px */
+    label, .stMarkdown label {
+        font-size: 16px !important;
         font-weight: 600 !important;
+        color: var(--text-dark) !important;
+        margin-bottom: 8px !important;
     }
     
-    .st-emotion-cache-18kf3ut {
-        background: transparent !important;
+    /* Modern Buttons */
+    .stButton > button {
+        background: linear-gradient(135deg, var(--forest-green) 0%, var(--olive-green) 100%) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 12px !important;
+        padding: 14px 32px !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        box-shadow: 0 4px 16px var(--shadow-soft) !important;
+        letter-spacing: 0.3px;
     }
     
-    .st-emotion-cache-18kf3ut * {
-        color: #156b2f !important;
+    .stButton > button:hover {
+        transform: translateY(-3px) !important;
+        box-shadow: 0 8px 24px var(--shadow-hover) !important;
     }
     
-    .st-emotion-cache-18kf3ut button {
-        color: #156b2f !important;
+    /* Sidebar - Modern Dark Green */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, var(--forest-green) 0%, #1a3a0f 100%);
+        padding: 1.5rem 1rem;
     }
     
-    /* Mobile responsive fixes for light theme */
-    @media (max-width: 768px) {
-        /* Reduce heading sizes for mobile */
-        h1 {
-            font-size: 32px !important;
-            line-height: 1.2 !important;
-        }
-        
-        h2 {
-            font-size: 28px !important;
-            line-height: 1.3 !important;
-        }
-        
-        h3 {
-            font-size: 24px !important;
-        }
-        
-        h4 {
-            font-size: 20px !important;
-        }
-        
-        body {
-            font-size: 16px !important;
-        }
-        
-        /* Make input containers solid white on mobile in light theme */
-        .st-emotion-cache-zuyloh {
-            background: #ffffff !important;
-            border: 2px solid #1f8f3f !important;
-            padding: 1rem !important;
-            border-radius: 8px !important;
-        }
-        
-        /* Force all inputs to have solid white background with dark green text */
-        input[type="text"],
-        input[type="number"],
-        select,
-        textarea,
-        .stTextInput input,
-        .stNumberInput input,
-        .stSelectbox select,
-        .stTextInput>div>div>input,
-        .stNumberInput>div>div>input,
-        .stSelectbox>div>div>select,
-        [data-baseweb="select"] > div,
-        [data-baseweb="input"] > div > input {
-            background: #ffffff !important;
-            background-color: #ffffff !important;
-            color: #156b2f !important;
-            border: 2px solid #1f8f3f !important;
-            font-weight: 700 !important;
-            -webkit-text-fill-color: #156b2f !important;
-        }
-        
-        /* Force dropdown/select text to be visible */
-        [data-baseweb="select"] [role="button"],
-        [data-baseweb="select"] > div > div {
-            background: #ffffff !important;
-            background-color: #ffffff !important;
-            color: #156b2f !important;
-            -webkit-text-fill-color: #156b2f !important;
-        }
-        
-        /* Green text for ALL labels on mobile */
-        label,
-        .stTextInput label,
-        .stNumberInput label,
-        .stSelectbox label,
-        [data-testid="stWidgetLabel"],
-        [data-testid="stWidgetLabel"] p {
-            color: #156b2f !important;
-            font-weight: 700 !important;
-            -webkit-text-fill-color: #156b2f !important;
-        }
-        
-        /* Section titles visible on mobile */
-        .section-title {
-            color: #1f8f3f !important;
-            font-weight: 700 !important;
-        }
-        
-        /* Form containers */
-        [data-testid="stForm"] {
-            background: #ffffff !important;
-            border: 2px solid #1f8f3f !important;
-            padding: 1.5rem !important;
-            border-radius: 12px !important;
-        }
+    [data-testid="stSidebar"] * {
+        color: white !important;
     }
     
-    /* Back button styling - same size and padding */
-    button[key="prep_back_pred"],
-    button[key="prep_back_home"] {
-        width: 100% !important;
-        padding: 0.75rem 1.5rem !important;
+    [data-testid="stSidebar"] .stRadio > label {
+        font-size: 18px !important;
+        font-weight: 600 !important;
+        margin-bottom: 12px !important;
+    }
+    
+    [data-testid="stSidebar"] label {
+        font-size: 16px !important;
+        padding: 12px !important;
+        border-radius: 10px !important;
+        transition: background 0.3s ease !important;
+    }
+    
+    [data-testid="stSidebar"] label:hover {
+        background: rgba(255, 255, 255, 0.15) !important;
+    }
+    
+    /* Result Card - Modern Design */
+    .result-card {
+        background: linear-gradient(135deg, var(--warm-cream) 0%, white 100%);
+        border-left: 5px solid var(--olive-green);
+        border-radius: 15px;
+        padding: 24px;
+        box-shadow: 0 6px 20px var(--shadow-soft);
+        margin: 20px 0;
+    }
+    
+    .result-card * {
+        color: var(--text-dark) !important;
+        font-size: 16px !important;
+    }
+    
+    .result-card h2 {
+        color: var(--forest-green) !important;
+        font-size: 28px !important;
+        margin-bottom: 12px !important;
+    }
+    
+    .result-card h4 {
+        color: var(--olive-green) !important;
         font-size: 18px !important;
     }
     
-    /* Quick Actions buttons on Home page - green text */
-    .stButton > button[key="home_pred"],
-    .stButton > button[key="home_prep"],
-    .stButton > button[key="home_comm"] {
-        color: #156b2f !important;
+    /* Feature Cards */
+    .app-card {
+        background: white;
+        border-radius: 16px;
+        padding: 28px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 20px var(--shadow-soft);
+        border: 1px solid rgba(139, 69, 19, 0.08);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    
+    .app-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 40px var(--shadow-hover);
+    }
+    
+    /* Section Dividers */
+    hr {
+        border: none;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--sage-green), transparent);
+        margin: 32px 0;
+    }
+    
+    /* Info Boxes */
+    .stAlert {
+        border-radius: 12px !important;
+        border-left: 4px solid var(--olive-green) !important;
+        background: var(--warm-cream) !important;
+        padding: 16px !important;
+    }
+    
+    /* Toast Notifications */
+    .stToast {
+        background: white !important;
+        border-left: 4px solid var(--olive-green) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 20px var(--shadow-soft) !important;
+    }
+    
+    /* Column spacing */
+    [data-testid="column"] {
+        padding: 12px;
+    }
+    
+    /* Metric cards */
+    [data-testid="stMetricValue"] {
+        font-size: 32px !important;
+        color: var(--forest-green) !important;
+        font-weight: 700 !important;
+    }
+    
+    [data-testid="stMetricLabel"] {
+        font-size: 16px !important;
+        color: var(--text-medium) !important;
+    }
+</style>
+''', unsafe_allow_html=True)
 
-    }
-</style>
-''', unsafe_allow_html=True)
+# Initialize session state if not already done
 st.title('🌾 Climate‑Aware Crop & Organic Fertilizer Recommendation System', anchor=False)
-st.markdown('<div class="subtitle">Quickly predict suitable crops and organic fertilizer equivalents using local soil and climate inputs.</div>', unsafe_allow_html=True)
-# Sidebar settings (removed unused API key inputs)
-# Navigation: replace generic Settings with clear page navigation
-# Enhanced sidebar with WHITE TEXT on GREEN background
-st.markdown('''
-<style>
-    /* Light Mode Sidebar - WHITE TEXT ON GREEN */
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, rgba(31,143,63,0.92), rgba(21,107,47,0.92)),
-                    url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800&q=80') center/cover;
-    }
-    
-    [data-testid="stSidebar"] > div:first-child {
-        background: rgba(31,143,63,0.25);
-        border-radius: 12px;
-        padding: 1.2rem;
-    }
-    
-    /* WHITE TEXT for navigation labels - LARGER */
-    [data-testid="stSidebar"] .stRadio > label {
-        font-weight: 700;
-        color: #ffffff !important;
-        font-size: 22px;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        letter-spacing: 0.5px;
-    }
-    
-    /* WHITE TEXT for radio options - LARGER */
-    [data-testid="stSidebar"] label {
-        color: #ffffff !important;
-        font-weight: 600;
-        font-size: 19px;
-    }
-    
-    /* WHITE TEXT for all sidebar content */
-    [data-testid="stSidebar"] * {
-        color: #ffffff !important;
-    }
-    
-    /* Radio button hover effect */
-    [data-testid="stSidebar"] .stRadio > div > label:hover {
-        background: rgba(255,255,255,0.15);
-        border-radius: 6px;
-        padding: 6px 10px;
-    }
-</style>
-''', unsafe_allow_html=True)
+st.markdown('<p style="font-size:18px; color: var(--text-medium); margin-bottom:24px;">Sustainable agriculture powered by climate-aware technology</p>', unsafe_allow_html=True)
 
 # Check if page is set via session_state (from button clicks), otherwise use sidebar
 if 'page' in st.session_state:
@@ -450,248 +334,105 @@ OPENWEATHER_KEY = None
 # initialize user in session state (auth UI rendered on Community page)
 if 'user' not in st.session_state:
     st.session_state['user'] = None
-# Page rendering: Home, Prediction, Preparation, Community
-st.markdown('''
-<style>
-    /* Feature cards with GREEN background and WHITE text - LARGER */
-    .feature {
-        display: inline-block;
-        padding: 14px 22px;
-        margin: 10px;
-        border-radius: 8px;
-        background: linear-gradient(135deg, #1f8f3f, #156b2f);
-        color: #ffffff;
-        font-size: 19px;
-        font-weight: 600;
-        box-shadow: 0 4px 12px rgba(31,143,63,0.3);
-        transition: all 0.3s ease;
-    }
-    
-    .feature:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(31,143,63,0.4);
-    }
-    
-    /* Card styling with better contrast - LARGER TEXT */
-    .card {
-        background: transparent;
-        padding: 24px;
-        border-radius: 12px;
-        margin: 18px 0;
-        box-shadow: none;
-    }
-    
-    .card h3 {
-        color: #1f8f3f;
-        font-size: 28px;
-        margin-bottom: 14px;
-    }
-    
-    .sidebar .stRadio>div {
-        padding: 8px;
-    }
-</style>
-''', unsafe_allow_html=True)
 
+# Page rendering: Home, Prediction, Preparation, Community
 if page == 'Home':
-    # Agriculture-themed background for Home page - supports light and dark mode
+    st.header('🏡 Welcome to Climate-Aware Farming', anchor=False)
     st.markdown('''
-    <style>
-        /* Light Mode */
-        .stApp {
-            background: linear-gradient(135deg, rgba(230,255,230,0.7), rgba(200,240,200,0.7)),
-                        url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=80') center/cover fixed;
-        }
-        .main .block-container {
-            background: rgba(255, 255, 255, 0.85) !important;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(31,143,63,0.2);
-            border: 2px solid #1f8f3f;
-        }
-    </style>
+    <div style="background: linear-gradient(135deg, var(--warm-cream), white); 
+                padding: 24px; border-radius: 15px; border-left: 5px solid var(--forest-green);
+                box-shadow: 0 4px 20px var(--shadow-soft); margin: 20px 0;">
+        <p style="font-size: 16px; line-height: 1.8; color: var(--text-dark); margin: 0;">
+            <strong>Empower your farming</strong> with data-driven crop recommendations and sustainable 
+            fertilizer solutions. Our platform combines soil analysis, climate data, and organic farming 
+            practices to help you make informed decisions.
+        </p>
+    </div>
     ''', unsafe_allow_html=True)
-    st.header('Welcome to Climate-Aware Farming')
-    st.markdown('''
-    This demo helps farmers choose appropriate crops and simple organic fertilizer preparations based on local soil and climate inputs.
-    - Predict crop suitability
-    - Convert common fertilizers to organic alternatives
-    - Download step-by-step preparation PDF
-    - Ask experts and get verified answers
-    ''')
-    st.markdown('<div class="card"> <h3>Quick Actions</h3></div>', unsafe_allow_html=True)
-    # Quick action buttons with functionality
+    
+    st.markdown("### ✨ Key Features")
+    
+    # Feature cards
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown('''
+        <div class="app-card">
+            <h4 style="color: var(--forest-green); margin-bottom: 12px;">🌾 Smart Crop Prediction</h4>
+            <p style="font-size: 16px; color: var(--text-dark);">
+                Get personalized crop recommendations based on your soil's NPK levels, pH, 
+                rainfall, and temperature data.
+            </p>
+        </div>
+        ''', unsafe_allow_html=True)
+        
+    with col2:
+        st.markdown('''
+        <div class="app-card">
+            <h4 style="color: var(--forest-green); margin-bottom: 12px;">🍃 Organic Fertilizer</h4>
+            <p style="font-size: 16px; color: var(--text-dark);">
+                Convert conventional fertilizers to organic alternatives with step-by-step 
+                preparation guides and video tutorials.
+            </p>
+        </div>
+        ''', unsafe_allow_html=True)
+    
+    col3, col4 = st.columns(2)
+    with col3:
+        st.markdown('''
+        <div class="app-card">
+            <h4 style="color: var(--forest-green); margin-bottom: 12px;">📋 Preparation Guides</h4>
+            <p style="font-size: 16px; color: var(--text-dark);">
+                Download detailed PDF guides with recipes, ingredients, and instructions 
+                for making organic fertilizers at home.
+            </p>
+        </div>
+        ''', unsafe_allow_html=True)
+        
+    with col4:
+        st.markdown('''
+        <div class="app-card">
+            <h4 style="color: var(--forest-green); margin-bottom: 12px;">👥 Expert Community</h4>
+            <p style="font-size: 16px; color: var(--text-dark);">
+                Connect with agricultural experts, ask questions, and get verified answers 
+                from experienced professionals.
+            </p>
+        </div>
+        ''', unsafe_allow_html=True)
+    
+    st.markdown("---")
+    st.markdown("### 🚀 Quick Actions")
+    
+    # Quick action buttons
     cols = st.columns(3)
     with cols[0]:
-        if st.button('🌾 Prediction', key='home_pred', use_container_width=True):
+        if st.button('🌾 Start Prediction', key='home_pred', use_container_width=True):
             st.session_state['page'] = 'Prediction'
             st.rerun()
     with cols[1]:
-        if st.button('📋 Preparation', key='home_prep', use_container_width=True):
+        if st.button('📋 View Preparations', key='home_prep', use_container_width=True):
             st.session_state['page'] = 'Preparation'
             st.rerun()
     with cols[2]:
-        if st.button('👥 Community', key='home_comm', use_container_width=True):
+        if st.button('👥 Join Community', key='home_comm', use_container_width=True):
             st.session_state['page'] = 'Community'
             st.rerun()
-    
-    st.markdown('### Demo Checklist')
-    st.markdown('''
-    - Activate venv and run the app
-    - Login as `farmer1` / `secret123` and `expert1` / `secret123`
-    - Try Prediction → Prepare → Ask Expert flows
-    ''')
 
 elif page == 'Prediction':
-    # Agriculture-themed background for Prediction page
-    st.markdown('''
-    <style>
-        .stApp {
-            background: linear-gradient(135deg, rgba(220,255,220,0.55), rgba(180,235,180,0.55)),
-                        url('https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&q=80') center/cover fixed;
-        }
-        .main .block-container {
-            background: rgba(255, 255, 255, 0.85) !important;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(31,143,63,0.2);
-            border: 2px solid #1f8f3f;
-        }
-        
-        /* Force green text on white background */
-        .main .block-container h1,
-        .main .block-container h2,
-        .main .block-container h3,
-        .main .block-container h4,
-        .main .block-container p,
-        .main .block-container span,
-        .main .block-container div:not(.stButton),
-        .main .block-container label,
-        .main .block-container [data-testid="stMarkdownContainer"],
-        .main .block-container [data-testid="stMarkdownContainer"] * {
-            color: #156b2f !important;
-        }
-        
-        .main .block-container .section-title {
-            color: #1f8f3f !important;
-        }
-        
-        .main .block-container .small-muted {
-            color: #4a5568 !important;
-        }
-        
-        .main .block-container input,
-        .main .block-container select,
-        .main .block-container textarea {
-            color: #156b2f !important;
-            background: #ffffff !important;
-        }
-        
-        /* Mobile responsive - solid backgrounds for inputs in light theme */
-        @media (max-width: 768px) {
-            /* Reduce heading sizes for mobile */
-            h1 {
-                font-size: 32px !important;
-                line-height: 1.2 !important;
-            }
-            
-            h2 {
-                font-size: 28px !important;
-                line-height: 1.3 !important;
-            }
-            
-            h3 {
-                font-size: 24px !important;
-            }
-            
-            h4 {
-                font-size: 20px !important;
-            }
-            
-            body {
-                font-size: 16px !important;
-            }
-            
-            .main .block-container {
-                padding: 1rem !important;
-            }
-            
-            /* Solid white background for input containers on mobile */
-            [data-testid="stForm"],
-            .st-emotion-cache-zuyloh {
-                background: #ffffff !important;
-                border: 2px solid #1f8f3f !important;
-                padding: 1rem !important;
-                border-radius: 8px !important;
-            }
-            
-            /* Force ALL inputs to have white background and dark green text */
-            input[type="text"],
-            input[type="number"],
-            select,
-            textarea,
-            .stTextInput input,
-            .stNumberInput input,
-            .stSelectbox select,
-            .stTextInput>div>div>input,
-            .stNumberInput>div>div>input,
-            .stSelectbox>div>div>select,
-            input, select, textarea,
-            [data-baseweb="select"] > div,
-            [data-baseweb="input"] > div > input {
-                background: #ffffff !important;
-                background-color: #ffffff !important;
-                color: #156b2f !important;
-                border: 2px solid #1f8f3f !important;
-                font-weight: 700 !important;
-                -webkit-text-fill-color: #156b2f !important;
-            }
-            
-            /* Force dropdown/select text to be visible */
-            [data-baseweb="select"] [role="button"],
-            [data-baseweb="select"] > div > div {
-                background: #ffffff !important;
-                background-color: #ffffff !important;
-                color: #156b2f !important;
-                -webkit-text-fill-color: #156b2f !important;
-            }
-            
-            /* Labels green and bold */
-            label,
-            .stTextInput label,
-            .stNumberInput label,
-            .stSelectbox label,
-            [data-testid="stWidgetLabel"],
-            [data-testid="stWidgetLabel"] p {
-                color: #156b2f !important;
-                font-weight: 700 !important;
-                -webkit-text-fill-color: #156b2f !important;
-            }
-            
-            /* Section titles green and bold */
-            .section-title {
-                color: #1f8f3f !important;
-                font-weight: 700 !important;
-            }
-        }
-    </style>
-    ''', unsafe_allow_html=True)
-    
     # Back button
     if st.button('← Back to Home', key='pred_back'):
         st.session_state['page'] = 'Home'
         st.rerun()
     
-    # Two-column layout: left for inputs (grouped), right for a Result card
+    st.header('🌾 Crop & Fertilizer Prediction', anchor=False)
+    st.markdown('<p style="font-size:16px; color: var(--text-medium);">Get personalized recommendations based on your soil and climate conditions</p>', unsafe_allow_html=True)
+    
+    # Two-column layout: left for inputs, right for results
     left, right = st.columns([2, 1], gap='large')
 
-    # LEFT: Inputs grouped into cards
     with left:
-        st.subheader('Crop & Fertilizer Recommendation')
-        st.markdown('<div class="small-muted">Fill the form and run prediction to see results on the right.</div>', unsafe_allow_html=True)
         with st.form('input_form'):
             # Location & Soil
-            st.markdown('<div class="section-title">Location & Soil</div>', unsafe_allow_html=True)
+            st.markdown('### 📍 Location & Soil')
             cols = st.columns(2)
             with cols[0]:
                 region = st.selectbox('Region', ['North','South','East','West','Central'])
@@ -699,7 +440,7 @@ elif page == 'Prediction':
                 soil = st.selectbox('Soil Type', ['Loamy','Sandy','Clayey','Silty'])
 
             # Soil Nutrients
-            st.markdown('<div class="section-title">Soil Nutrients (NPK)</div>', unsafe_allow_html=True)
+            st.markdown('### 🧪 Soil Nutrients (NPK)')
             ncols = st.columns(3)
             with ncols[0]:
                 N = st.number_input('Nitrogen (N)', min_value=0.0, value=100.0)
@@ -709,7 +450,7 @@ elif page == 'Prediction':
                 K = st.number_input('Potassium (K)', min_value=0.0, value=150.0)
 
             # Climate Conditions
-            st.markdown('<div class="section-title">Climate Conditions</div>', unsafe_allow_html=True)
+            st.markdown('### 🌤️ Climate Conditions')
             ccols = st.columns(4)
             with ccols[0]:
                 pH = st.number_input('Soil pH', min_value=3.0, max_value=9.0, value=6.5, format='%.2f')
@@ -718,22 +459,34 @@ elif page == 'Prediction':
             with ccols[2]:
                 humidity = st.number_input('Humidity (%)', value=70.0)
             with ccols[3]:
-                rainfall = st.number_input('Rainfall (mm annual)', value=800.0)
+                rainfall = st.number_input('Rainfall (mm/year)', value=800.0)
 
-            st.markdown('<div style="height:8px"></div>', unsafe_allow_html=True)
-            submitted = st.form_submit_button('Run Prediction')
+            st.markdown('<div style="margin-top:20px"></div>', unsafe_allow_html=True)
+            submitted = st.form_submit_button('🔍 Run Prediction', use_container_width=True)
 
-        # Keep prediction logic intact; only change UI presentation
+        # Prediction logic (backend unchanged)
         if submitted:
-            with st.spinner('Running predictions...'):
+            with st.spinner('Analyzing your data...'):
                 try:
-                    crop_bundle = joblib.load('crop_model.joblib'); artifacts = joblib.load('artifacts.joblib')
+                    crop_bundle = joblib.load('crop_model.joblib')
+                    artifacts = joblib.load('artifacts.joblib')
                 except Exception as e:
-                    st.error('Model files missing.'); st.stop()
-                enc = artifacts['encoders']; scaler = artifacts['scaler']; crop_model = crop_bundle['model']
-                df = pd.DataFrame([{'region':region,'soil_type':soil,'N':N,'P':P,'K':K,'pH':pH,'temperature':temp,'humidity':humidity,'rainfall':rainfall}])
-                for c,le in enc.items():
+                    st.error('⚠️ Model files missing. Please check your installation.')
+                    st.stop()
+                    
+                enc = artifacts['encoders']
+                scaler = artifacts['scaler']
+                crop_model = crop_bundle['model']
+                
+                df = pd.DataFrame([{
+                    'region': region, 'soil_type': soil,
+                    'N': N, 'P': P, 'K': K, 'pH': pH,
+                    'temperature': temp, 'humidity': humidity, 'rainfall': rainfall
+                }])
+                
+                for c, le in enc.items():
                     df[c] = le.transform(df[c].astype(str))
+                    
                 X = df[['region','soil_type','N','P','K','pH','temperature','humidity','rainfall']].values
                 Xs = scaler.transform(X)
                 crop_pred = crop_model.predict(Xs)[0]
@@ -742,84 +495,87 @@ elif page == 'Prediction':
             used_fert_model = False
             try:
                 fert_bundle = joblib.load('fert_model.joblib')
-                fert_model = fert_bundle['model']; fert_le = fert_bundle['le']; cols = fert_bundle['columns']
-                row = df.copy(); row = pd.get_dummies(row, columns=['region','soil_type'], drop_first=True)
+                fert_model = fert_bundle['model']
+                fert_le = fert_bundle['le']
+                cols = fert_bundle['columns']
+                
+                row = df.copy()
+                row = pd.get_dummies(row, columns=['region','soil_type'], drop_first=True)
                 for c in cols:
-                    if c not in row.columns: row[c]=0
+                    if c not in row.columns:
+                        row[c] = 0
+                        
                 Xf = row[cols].values
                 try:
                     nf = fert_le.inverse_transform([fert_model.predict(Xf)[0]])[0]
                     used_fert_model = True
-                    # If the trained fertilizer model only knows a very small set of classes,
-                    # it's probably undertrained; prefer the heuristic to provide richer suggestions.
+                    
                     try:
                         num_classes = len(getattr(fert_le, 'classes_', []))
                     except Exception:
                         num_classes = 0
                     if num_classes <= 2:
-                        # model appears limited; use heuristic instead
                         nf = predict_fertilizer_simple(N, P, K, pH, crop_pred)
                         used_fert_model = False
-                        st.warning(f'Fertilizer model appears limited (only {num_classes} classes). Using heuristic suggestion instead.')
                 except Exception:
-                    # model prediction failed; fall back to heuristic
                     nf = predict_fertilizer_simple(N, P, K, pH, crop_pred)
                     used_fert_model = False
             except Exception:
-                # fallback heuristic predictor if model file missing
                 nf = predict_fertilizer_simple(N, P, K, pH, crop_pred)
                 used_fert_model = False
 
             if nf:
                 conv = convert_non_to_org(nf)
-                # persist last result so actions survive reruns
                 st.session_state['last_result'] = {
                     'crop_pred': crop_pred,
                     'nf': nf,
                     'conv': conv,
-                    'input': {'region': region, 'soil': soil, 'N': N, 'P': P, 'K': K, 'pH': pH, 'temperature': temp, 'humidity': humidity, 'rainfall': rainfall}
-                    , 'used_fert_model': used_fert_model
+                    'input': {
+                        'region': region, 'soil': soil,
+                        'N': N, 'P': P, 'K': K, 'pH': pH,
+                        'temperature': temp, 'humidity': humidity, 'rainfall': rainfall
+                    },
+                    'used_fert_model': used_fert_model
                 }
                 st.toast('✅ Prediction completed successfully!', icon='🌾')
 
     # RIGHT: Result card
     with right:
         st.markdown('<div class="result-card">', unsafe_allow_html=True)
-        st.markdown('<h4 style="margin-top:0;color:#1f8f3f !important;font-weight:700">Result</h4>', unsafe_allow_html=True)
+        st.markdown('#### 📊 Results', unsafe_allow_html=True)
+        
         if 'last_result' in st.session_state:
             lr = st.session_state['last_result']
-            # Big crop title
-            st.markdown(f"<h2 style='margin:6px 0 4px 0;color:#1f8f3f !important;font-weight:700'>{lr.get('crop_pred')}</h2>", unsafe_allow_html=True)
-            st.markdown(f"<div style='font-weight:600;color:#156b2f !important;margin-bottom:8px'>Suggested fertilizer: {lr.get('nf')}</div>", unsafe_allow_html=True)
-            # show source of recommendation
-            src = 'Model' if lr.get('used_fert_model') else 'Heuristic'
-            st.markdown(f"**Source:** {src}")
+            
+            st.markdown(f"### {lr.get('crop_pred')}")
+            st.markdown(f"**Suggested fertilizer:** {lr.get('nf')}")
+            
+            src = 'Model Prediction' if lr.get('used_fert_model') else 'Heuristic Analysis'
+            st.markdown(f"*Source: {src}*")
+            
             conv = lr.get('conv', {})
             org = conv.get('organic') or ''
-            st.markdown(f"**Organic equivalent:** {org}")
-            # Why this recommendation (use small bullets from existing output variables)
-            st.markdown('**Why this recommendation?**')
-            reasons = []
+            if org:
+                st.markdown(f"**Organic alternative:** {org}")
+            
+            st.markdown('---')
+            st.markdown('**Analysis Summary:**')
             inp = lr.get('input', {})
-            reasons.append(f"Soil type: {inp.get('soil')}")
-            reasons.append(f"pH: {inp.get('pH')}")
-            reasons.append(f"N-P-K: {inp.get('N')}-{inp.get('P')}-{inp.get('K')}")
-            reasons.append(f"Temperature/Humidity: {inp.get('temperature')}°C / {inp.get('humidity')}%")
-            for r in reasons:
-                st.markdown(f"- {r}")
+            st.markdown(f"- **Soil:** {inp.get('soil')}")
+            st.markdown(f"- **pH Level:** {inp.get('pH')}")
+            st.markdown(f"- **NPK:** {inp.get('N')}-{inp.get('P')}-{inp.get('K')}")
+            st.markdown(f"- **Climate:** {inp.get('temperature')}°C, {inp.get('humidity')}% humidity")
+            
             notes = conv.get('notes')
             if notes:
-                st.markdown('**Notes:**')
-                st.markdown(notes)
-            # Small action buttons
-            st.markdown('<div style="margin-top:8px">', unsafe_allow_html=True)
-            if st.button('Open Preparation'):
-                # navigate to Preparation page
+                st.info(notes)
+                
+            if st.button('📋 View Preparation Guide', use_container_width=True):
                 st.session_state['page'] = 'Preparation'
                 st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
         else:
-            st.markdown('<div class="small-muted">Run prediction to see recommended crop and fertilizer here.</div>', unsafe_allow_html=True)
+            st.info('👈 Fill the form and run prediction to see your personalized recommendations here!')
+            
         st.markdown('</div>', unsafe_allow_html=True)
 
 elif page == 'Preparation':
