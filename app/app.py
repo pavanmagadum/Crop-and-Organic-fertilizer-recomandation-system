@@ -767,6 +767,45 @@ elif page == 'Prediction':
             st.markdown('<div style="height: 25px"></div>', unsafe_allow_html=True)
             submitted = st.form_submit_button('🚀 Get Recommendations', use_container_width=True, type='primary')
         st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Analysis Summary Card - Below Input Form
+        if 'last_result' in st.session_state:
+            st.markdown('<div style="height: 20px"></div>', unsafe_allow_html=True)
+            lr = st.session_state['last_result']
+            inp = lr.get('input', {})
+            st.markdown(f'''
+            <div class="analysis-card">
+                <div class="result-header">📊 Analysis Summary</div>
+                <div class="analysis-item">
+                    <span class="analysis-label">Region:</span>
+                    <span class="analysis-value">{inp.get('region')}</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">Soil Type:</span>
+                    <span class="analysis-value">{inp.get('soil')}</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">pH Level:</span>
+                    <span class="analysis-value">{inp.get('pH')}</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">NPK Ratio:</span>
+                    <span class="analysis-value">{inp.get('N')}-{inp.get('P')}-{inp.get('K')}</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">Temperature:</span>
+                    <span class="analysis-value">{inp.get('temperature')}°C</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">Humidity:</span>
+                    <span class="analysis-value">{inp.get('humidity')}%</span>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">Rainfall:</span>
+                    <span class="analysis-value">{inp.get('rainfall')} mm</span>
+                </div>
+            </div>
+            ''', unsafe_allow_html=True)
 
         # Prediction logic (backend unchanged)
         if submitted:
@@ -973,34 +1012,6 @@ elif page == 'Prediction':
                             <span style="color: var(--text-dark); font-size: 16px; margin-left: 8px;">{step}</span>
                         </div>
                         ''', unsafe_allow_html=True)
-                
-                # Analysis Summary Card
-                inp = lr.get('input', {})
-                st.markdown(f'''
-                <div class="analysis-card" style="margin-top: 24px;">
-                    <div class="result-header">📊 Analysis Summary</div>
-                    <div class="analysis-item">
-                        <span class="analysis-label">Soil Type:</span>
-                        <span class="analysis-value">{inp.get('soil')}</span>
-                    </div>
-                    <div class="analysis-item">
-                        <span class="analysis-label">pH Level:</span>
-                        <span class="analysis-value">{inp.get('pH')}</span>
-                    </div>
-                    <div class="analysis-item">
-                        <span class="analysis-label">NPK Ratio:</span>
-                        <span class="analysis-value">{inp.get('N')}-{inp.get('P')}-{inp.get('K')}</span>
-                    </div>
-                    <div class="analysis-item">
-                        <span class="analysis-label">Temperature:</span>
-                        <span class="analysis-value">{inp.get('temperature')}°C</span>
-                    </div>
-                    <div class="analysis-item">
-                        <span class="analysis-label">Humidity:</span>
-                        <span class="analysis-value">{inp.get('humidity')}%</span>
-                    </div>
-                </div>
-                ''', unsafe_allow_html=True)
                 
                 if st.button('📋 View Full Preparation Guide', use_container_width=True, key='prep_guide'):
                     st.session_state['page'] = 'Preparation'
