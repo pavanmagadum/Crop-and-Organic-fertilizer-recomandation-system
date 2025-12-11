@@ -25,9 +25,30 @@ import streamlit.components.v1 as components
 from src.weather_api import fetch_weather
 from community import db as cdb
 from src.pdf_utils import generate_preparation_pdf
-import sys
-from pathlib import Path
-# add project root (two levels up if app is in app/)
+
+# Crop duration data (in days)
+CROP_DURATION = {
+    'rice': 120, 'maize': 90, 'chickpea': 100, 'kidneybeans': 95,
+    'pigeonpeas': 150, 'mothbeans': 85, 'mungbean': 75, 'blackgram': 80,
+    'lentil': 110, 'pomegranate': 365, 'banana': 365, 'mango': 365,
+    'grapes': 180, 'watermelon': 90, 'muskmelon': 85, 'apple': 365,
+    'orange': 365, 'papaya': 270, 'coconut': 365, 'cotton': 150,
+    'jute': 120, 'coffee': 365
+}
+
+def get_crop_duration_display(crop_name):
+    """Get formatted duration display for a crop"""
+    days = CROP_DURATION.get(crop_name.lower(), None)
+    if not days:
+        return "Duration data not available"
+    
+    months = round(days / 30)
+    if days >= 365:
+        return f"{days} days (Perennial/~12 months)"
+    elif months > 0:
+        return f"{days} days (~{months} months)"
+    else:
+        return f"{days} days"
 proj_root = Path(__file__).resolve().parents[1]
 if str(proj_root) not in sys.path:
     sys.path.insert(0, str(proj_root))
@@ -170,6 +191,48 @@ st.markdown('''
         box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.15) !important;
     }
     
+    /* Professional Selectbox Styling */
+    [data-baseweb="select"] {
+        font-size: 16px !important;
+    }
+    
+    [data-baseweb="select"] > div {
+        background: var(--warm-cream) !important;
+        border: 2px solid var(--sage-green) !important;
+        border-radius: 10px !important;
+        font-size: 16px !important;
+        min-height: 48px !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    [data-baseweb="select"]:hover > div,
+    [data-baseweb="select"]:focus-within > div {
+        border-color: var(--olive-green) !important;
+        box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.15) !important;
+    }
+    
+    [data-baseweb="popover"] {
+        font-size: 16px !important;
+    }
+    
+    [data-baseweb="popover"] ul {
+        background: white !important;
+        border: 2px solid var(--sage-green) !important;
+        border-radius: 10px !important;
+        box-shadow: 0 8px 24px var(--shadow-soft) !important;
+    }
+    
+    [data-baseweb="popover"] li {
+        font-size: 16px !important;
+        padding: 12px 16px !important;
+        color: var(--text-dark) !important;
+    }
+    
+    [data-baseweb="popover"] li:hover {
+        background: var(--warm-cream) !important;
+        color: var(--forest-green) !important;
+    }
+    
     /* Labels - CONSISTENT 16px */
     label, .stMarkdown label {
         font-size: 16px !important;
@@ -263,6 +326,16 @@ st.markdown('''
         text-align: center;
         padding: 12px 0;
         text-transform: capitalize;
+    }
+    
+    .crop-duration {
+        font-size: 16px !important;
+        color: var(--text-dark) !important;
+        text-align: center;
+        padding: 8px 16px;
+        background: var(--warm-cream);
+        border-radius: 8px;
+        margin-top: 12px;
     }
     
     /* Component List */
@@ -755,11 +828,31 @@ elif page == 'Prediction':
         if 'last_result' in st.session_state:
             lr = st.session_state['last_result']
             
-            # Crop Prediction Card
+            # Crop Prediction Card with Duration
+            crop_name = lr.get('crop_pred', '')
+            duration_display = get_crop_duration_display(crop_name)
+            
             st.markdown(f'''
             <div class="prediction-result-card">
                 <div class="result-header">🌾 Recommended Crop</div>
-                <div class="crop-name">{lr.get('crop_pred')}</div>
+                <div class="crop-name">{crop_name}</div>
+                <div class="crop-duration">
+                    <span style="color: var(--olive-green); font-weight: 600;">⏱ Growth Duration:</span> {duration_display}
+                </div>
+            </div>
+            ''', unsafe_allow_html=True)
+            
+            # Non-organic Fertilizer Recommendation (First)
+            nf = lr.get('nf', 'N/A')
+            st.markdown(f'''
+            <div class="fertilizer-card" style="margin-top: 20px;">
+                <div class="result-header">🧪 Non-Organic Fertilizer Recommendation</div>
+                <div style="padding: 16px; background: #f8f9fa; border-radius: 10px; margin-top: 12px;">
+                    <div style="font-size: 20px; font-weight: 600; color: var(--forest-green);">{nf}</div>
+                    <div style="margin-top: 8px; color: var(--text-medium); font-size: 15px;">
+                        Standard chemical fertilizer based on your soil NPK levels
+                    </div>
+                </div>
             </div>
             ''', unsafe_allow_html=True)
             
@@ -767,69 +860,104 @@ elif page == 'Prediction':
             org = conv.get('organic') or ''
             
             if org:
-                # Organic Fertilizer Mix Card with Pie Chart
-                st.markdown('<div class="fertilizer-card">', unsafe_allow_html=True)
-                st.markdown('<div class="result-header">📈 Organic Fertilizer Mix</div>', unsafe_allow_html=True)
+                # Organic Alternative Card with Pie Chart Comparison
+                st.markdown('''
+                <div class="fertilizer-card" style="margin-top: 24px;">
+                    <div class="result-header">🌿 Organic Fertilizer Alternative</div>
+                    <div style="padding: 16px; background: #f0f8f0; border-radius: 10px; margin-top: 12px; border-left: 4px solid var(--olive-green);">
+                        <div style="font-size: 20px; font-weight: 600; color: var(--forest-green);">''' + org + '''</div>
+                        <div style="margin-top: 8px; color: var(--text-medium); font-size: 15px;">
+                            Sustainable organic equivalent for better soil health
+                        </div>
+                    </div>
+                </div>
+                ''', unsafe_allow_html=True)
                 
-                # Create pie chart for fertilizer composition
+                # Comparison Pie Charts
+                st.markdown('<div style="margin-top: 24px;">', unsafe_allow_html=True)
+                st.markdown('<h3 style="text-align: center; color: var(--forest-green); margin-bottom: 20px;">Fertilizer Composition Comparison</h3>', unsafe_allow_html=True)
+                
                 import plotly.graph_objects as go
+                from plotly.subplots import make_subplots
                 
-                # Fertilizer composition (you can customize these ratios)
-                components = {
-                    'Compost': 25,
-                    'Fish Emulsion': 30,
+                # Define compositions for both fertilizer types
+                non_organic_comp = {
+                    'Urea': 40,
+                    'DAP': 30,
+                    'Potash': 20,
+                    'Ammonium': 10
+                }
+                
+                organic_comp = {
+                    'Compost': 30,
+                    'Fish Emulsion': 25,
                     'Neem Cake': 25,
                     'Vermicompost': 20
                 }
                 
-                colors = ['#0080FF', '#00CBA9', '#FFC107', '#FF6B6B']
+                # Create side-by-side pie charts
+                fig = make_subplots(
+                    rows=1, cols=2,
+                    specs=[[{'type':'pie'}, {'type':'pie'}]],
+                    subplot_titles=('Non-Organic Fertilizer', 'Organic Fertilizer Alternative')
+                )
                 
-                fig = go.Figure(data=[go.Pie(
-                    labels=list(components.keys()),
-                    values=list(components.values()),
-                    hole=0.4,
-                    marker=dict(colors=colors, line=dict(color='white', width=2)),
+                # Non-organic pie chart
+                fig.add_trace(go.Pie(
+                    labels=list(non_organic_comp.keys()),
+                    values=list(non_organic_comp.values()),
+                    marker=dict(colors=['#FF6B6B', '#FFA07A', '#FFD700', '#FF8C00']),
                     textinfo='label+percent',
-                    textfont=dict(size=14, color='white', family='Arial'),
-                    hovertemplate='<b>%{label}</b><br>%{percent}<extra></extra>'
-                )])
+                    textfont=dict(size=12, color='white'),
+                    hovertemplate='<b>%{label}</b><br>%{percent}<extra></extra>',
+                    name='Non-Organic'
+                ), row=1, col=1)
+                
+                # Organic pie chart
+                fig.add_trace(go.Pie(
+                    labels=list(organic_comp.keys()),
+                    values=list(organic_comp.values()),
+                    marker=dict(colors=['#2D5016', '#6B8E23', '#8FBC8F', '#90EE90']),
+                    textinfo='label+percent',
+                    textfont=dict(size=12, color='white'),
+                    hovertemplate='<b>%{label}</b><br>%{percent}<extra></extra>',
+                    name='Organic'
+                ), row=1, col=2)
                 
                 fig.update_layout(
-                    showlegend=True,
-                    legend=dict(
-                        orientation="v",
-                        yanchor="middle",
-                        y=0.5,
-                        xanchor="left",
-                        x=1.05,
-                        font=dict(size=13, color='#2C3E2D')
-                    ),
-                    margin=dict(l=10, r=10, t=10, b=10),
-                    height=280,
+                    showlegend=False,
+                    margin=dict(l=20, r=20, t=60, b=20),
+                    height=350,
                     paper_bgcolor='rgba(0,0,0,0)',
                     plot_bgcolor='rgba(0,0,0,0)',
+                    font=dict(size=14, color='#2C3E2D', family='Arial')
                 )
                 
                 st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+                st.markdown('</div>', unsafe_allow_html=True)
                 
-                # Component breakdown
-                st.markdown('<div class="component-list">', unsafe_allow_html=True)
-                for component, percentage in components.items():
-                    color = colors[list(components.keys()).index(component)]
+                # Preparation Steps Card
+                prep = conv.get('preparation_steps') or []
+                if isinstance(prep, list) and prep:
                     st.markdown(f'''
-                    <div class="component-item">
-                        <span class="component-dot" style="background-color: {color};"></span>
-                        <span class="component-name">{component}</span>
-                        <span class="component-percentage">{percentage}%</span>
+                    <div class="fertilizer-card" style="margin-top: 24px;">
+                        <div class="result-header">📋 Preparation Steps for {org}</div>
                     </div>
                     ''', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
+                    
+                    for i, step in enumerate(prep, start=1):
+                        st.markdown(f'''
+                        <div style="padding: 12px; background: white; border-left: 4px solid var(--olive-green); 
+                                    margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                            <span style="font-weight: 700; color: var(--forest-green); font-size: 16px;">Step {i}:</span>
+                            <span style="color: var(--text-dark); font-size: 16px; margin-left: 8px;">{step}</span>
+                        </div>
+                        ''', unsafe_allow_html=True)
                 
                 # Analysis Summary Card
                 inp = lr.get('input', {})
                 st.markdown(f'''
-                <div class="analysis-card">
+                <div class="analysis-card" style="margin-top: 24px;">
                     <div class="result-header">📊 Analysis Summary</div>
                     <div class="analysis-item">
                         <span class="analysis-label">Soil Type:</span>
@@ -854,7 +982,7 @@ elif page == 'Prediction':
                 </div>
                 ''', unsafe_allow_html=True)
                 
-                if st.button('📋 View Preparation Guide', use_container_width=True, key='prep_guide'):
+                if st.button('📋 View Full Preparation Guide', use_container_width=True, key='prep_guide'):
                     st.session_state['page'] = 'Preparation'
                     st.rerun()
         else:
