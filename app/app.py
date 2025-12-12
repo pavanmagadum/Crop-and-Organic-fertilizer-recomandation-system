@@ -136,11 +136,9 @@ st.markdown('''
         --shadow-hover: rgba(45, 80, 22, 0.25);
     }
     
-    /* Professional Background with Subtle Agricultural Pattern */
+    /* Professional Background with Subtle Pattern */
     .stApp {
-        background: linear-gradient(135deg, rgba(245, 247, 240, 0.75) 0%, rgba(232, 240, 227, 0.75) 100%),
-                    url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
-        background-blend-mode: overlay;
+        background: linear-gradient(135deg, #f5f7f0 0%, #e8f0e3 100%);
     }
     
     .stApp::before {
@@ -158,13 +156,13 @@ st.markdown('''
         z-index: 0;
     }
     
-    /* Main Container - Elevated Glass Effect */
+    /* Main Container - Clean Modern Card */
     .main .block-container {
-        background: rgba(255, 255, 255, 0.96);
-        backdrop-filter: blur(8px);
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(4px);
         border-radius: 20px;
         padding: 3rem 2.5rem;
-        box-shadow: 0 12px 40px rgba(45, 80, 22, 0.15);
+        box-shadow: 0 8px 32px rgba(45, 80, 22, 0.12);
         max-width: 1200px;
         margin: 2rem auto;
         border-top: 4px solid var(--forest-green);
