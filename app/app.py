@@ -138,7 +138,7 @@ st.markdown('''
     
     /* Professional Background with Subtle Agricultural Pattern */
     .stApp {
-        background: linear-gradient(135deg, rgba(245, 247, 240, 0.95) 0%, rgba(232, 240, 227, 0.95) 100%),
+        background: linear-gradient(135deg, rgba(245, 247, 240, 0.75) 0%, rgba(232, 240, 227, 0.75) 100%),
                     url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80') center/cover fixed;
         background-blend-mode: overlay;
     }
@@ -151,8 +151,8 @@ st.markdown('''
         width: 100%;
         height: 100%;
         background: 
-            linear-gradient(45deg, transparent 48%, rgba(139, 142, 35, 0.02) 50%, transparent 52%),
-            linear-gradient(-45deg, transparent 48%, rgba(107, 142, 35, 0.02) 50%, transparent 52%);
+            linear-gradient(45deg, transparent 48%, rgba(139, 142, 35, 0.01) 50%, transparent 52%),
+            linear-gradient(-45deg, transparent 48%, rgba(107, 142, 35, 0.01) 50%, transparent 52%);
         background-size: 60px 60px;
         pointer-events: none;
         z-index: 0;
@@ -160,8 +160,8 @@ st.markdown('''
     
     /* Main Container - Elevated Glass Effect */
     .main .block-container {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(8px);
         border-radius: 20px;
         padding: 3rem 2.5rem;
         box-shadow: 0 12px 40px rgba(45, 80, 22, 0.15);
