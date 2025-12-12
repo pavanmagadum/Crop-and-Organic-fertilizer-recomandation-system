@@ -292,23 +292,29 @@ st.markdown('''
         margin-bottom: 8px !important;
     }
     
-    /* Modern Buttons */
+    /* Professional Consistent Buttons */
     .stButton > button {
         background: linear-gradient(135deg, var(--forest-green) 0%, var(--olive-green) 100%) !important;
         color: white !important;
         border: none !important;
-        border-radius: 12px !important;
-        padding: 14px 32px !important;
+        border-radius: 10px !important;
+        padding: 12px 24px !important;
         font-size: 16px !important;
         font-weight: 600 !important;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        box-shadow: 0 4px 16px var(--shadow-soft) !important;
+        box-shadow: 0 3px 12px var(--shadow-soft) !important;
         letter-spacing: 0.3px;
+        min-height: 48px !important;
+        width: 100%;
     }
     
     .stButton > button:hover {
-        transform: translateY(-3px) !important;
-        box-shadow: 0 8px 24px var(--shadow-hover) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px var(--shadow-hover) !important;
+    }
+    
+    .stButton > button:active {
+        transform: translateY(0px) !important;
     }
     
     /* Primary Form Submit Button - Gradient like reference image */
@@ -746,11 +752,14 @@ if page == 'Home':
             st.rerun()
 
 elif page == 'Prediction':
-    # Back button
-    if st.button('← Back to Home', key='pred_back'):
-        st.session_state['page'] = 'Home'
-        st.rerun()
+    # Professional navigation buttons
+    nav_cols = st.columns([1, 5])
+    with nav_cols[0]:
+        if st.button('← Back', key='pred_back', use_container_width=True):
+            st.session_state['page'] = 'Home'
+            st.rerun()
     
+    st.markdown('<div style="height: 10px"></div>', unsafe_allow_html=True)
     st.header('🌾 Crop & Fertilizer Prediction', anchor=False)
     st.markdown('<p style="font-size:16px; color: var(--text-medium); margin-bottom:20px;">Get personalized recommendations based on your soil and climate conditions</p>', unsafe_allow_html=True)
     
@@ -1058,17 +1067,18 @@ elif page == 'Prediction':
             ''', unsafe_allow_html=True)
 
 elif page == 'Preparation':
-    # Back buttons
-    cols = st.columns([1, 1, 4])
-    with cols[0]:
-        if st.button('← Back', key='prep_back_pred'):
+    # Professional navigation buttons
+    nav_cols = st.columns([1, 1, 4])
+    with nav_cols[0]:
+        if st.button('← Back', key='prep_back_pred', use_container_width=True):
             st.session_state['page'] = 'Prediction'
             st.rerun()
-    with cols[1]:
-        if st.button('🏠 Home', key='prep_back_home'):
+    with nav_cols[1]:
+        if st.button('🏠 Home', key='prep_back_home', use_container_width=True):
             st.session_state['page'] = 'Home'
             st.rerun()
     
+    st.markdown('<div style="height: 10px"></div>', unsafe_allow_html=True)
     st.header('📋 Organic Fertilizer Preparation Guide', anchor=False)
     st.markdown('<p style="font-size:16px; color: var(--text-medium);">Step-by-step instructions and video tutorials</p>', unsafe_allow_html=True)
     if 'last_result' not in st.session_state:
@@ -1151,16 +1161,18 @@ elif page == 'Preparation':
                             st.write(v.get('link'))
 
 elif page == 'Community':
-    # Back buttons - same style as Preparation page
-    cols = st.columns([1, 1, 4])
-    with cols[0]:
-        if st.button('← Back', key='comm_back_prep'):
+    # Professional navigation buttons
+    nav_cols = st.columns([1, 1, 4])
+    with nav_cols[0]:
+        if st.button('← Back', key='comm_back_prep', use_container_width=True):
             st.session_state['page'] = 'Preparation'
             st.rerun()
-    with cols[1]:
-        if st.button('🏠 Home', key='comm_back_home'):
+    with nav_cols[1]:
+        if st.button('🏠 Home', key='comm_back_home', use_container_width=True):
             st.session_state['page'] = 'Home'
             st.rerun()
+    
+    st.markdown('<div style="height: 10px"></div>', unsafe_allow_html=True)
     
     st.header('👥 Expert Community', anchor=False)
     st.markdown('<p style="font-size:16px; color: var(--text-medium);">Connect with agricultural experts and get verified answers</p>', unsafe_allow_html=True)
