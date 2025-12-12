@@ -1236,11 +1236,14 @@ elif page == 'Prediction':
         
         ncols = st.columns(3, gap='small')
         with ncols[0]:
-            N = st.number_input('Nitrogen', min_value=0.0, max_value=300.0, value=100.0, step=5.0)
+            st.markdown('<div style="font-size:13px; font-weight:700; color:#4B5563; margin-bottom:-25px; padding-left:2px;">Nitrogen (N)</div>', unsafe_allow_html=True)
+            N = st.number_input('Nitrogen', min_value=0.0, max_value=300.0, value=100.0, step=5.0, label_visibility="collapsed")
         with ncols[1]:
-            P = st.number_input('Phosphorus', min_value=0.0, max_value=300.0, value=50.0, step=5.0)
+            st.markdown('<div style="font-size:13px; font-weight:700; color:#4B5563; margin-bottom:-25px; padding-left:2px;">Phosphorus (P)</div>', unsafe_allow_html=True)
+            P = st.number_input('Phosphorus', min_value=0.0, max_value=300.0, value=50.0, step=5.0, label_visibility="collapsed")
         with ncols[2]:
-            K = st.number_input('Potassium', min_value=0.0, max_value=300.0, value=150.0, step=5.0)
+            st.markdown('<div style="font-size:13px; font-weight:700; color:#4B5563; margin-bottom:-25px; padding-left:2px;">Potassium (K)</div>', unsafe_allow_html=True)
+            K = st.number_input('Potassium', min_value=0.0, max_value=300.0, value=150.0, step=5.0, label_visibility="collapsed")
         st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown('<div style="height: 15px"></div>', unsafe_allow_html=True)
@@ -1255,15 +1258,19 @@ elif page == 'Prediction':
         
         ccols1 = st.columns(2, gap='medium')
         with ccols1[0]:
-            pH = st.number_input('Soil pH Level', min_value=3.0, max_value=9.0, value=6.5, step=0.1, format='%.1f')
+            st.markdown('<div style="font-size:13px; font-weight:700; color:#4B5563; margin-bottom:-25px; padding-left:2px;">Soil pH Level</div>', unsafe_allow_html=True)
+            pH = st.number_input('Soil pH Level', min_value=3.0, max_value=9.0, value=6.5, step=0.1, format='%.1f', label_visibility="collapsed")
         with ccols1[1]:
-            temp = st.number_input('Temperature (°C)', min_value=-10.0, max_value=50.0, value=25.0, step=0.5)
+            st.markdown('<div style="font-size:13px; font-weight:700; color:#4B5563; margin-bottom:-25px; padding-left:2px;">Temperature (°C)</div>', unsafe_allow_html=True)
+            temp = st.number_input('Temperature (°C)', min_value=-10.0, max_value=50.0, value=25.0, step=0.5, label_visibility="collapsed")
         
         ccols2 = st.columns(2, gap='medium')
         with ccols2[0]:
-            humidity = st.number_input('Humidity (%)', min_value=0.0, max_value=100.0, value=70.0, step=1.0)
+            st.markdown('<div style="font-size:13px; font-weight:700; color:#4B5563; margin-bottom:-25px; padding-left:2px;">Humidity (%)</div>', unsafe_allow_html=True)
+            humidity = st.number_input('Humidity (%)', min_value=0.0, max_value=100.0, value=70.0, step=1.0, label_visibility="collapsed")
         with ccols2[1]:
-            rainfall = st.number_input('Rainfall (mm)', min_value=0.0, max_value=3000.0, value=200.0, step=10.0)
+            st.markdown('<div style="font-size:13px; font-weight:700; color:#4B5563; margin-bottom:-25px; padding-left:2px;">Rainfall (mm)</div>', unsafe_allow_html=True)
+            rainfall = st.number_input('Rainfall (mm)', min_value=0.0, max_value=3000.0, value=200.0, step=10.0, label_visibility="collapsed")
         st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown('<div style="height: 25px"></div>', unsafe_allow_html=True)

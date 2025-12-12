@@ -395,6 +395,7 @@ textarea:focus {
 /* Labels - High Visibility */
 label,
 .stTextInput label,
+.stNumberInput label,
 .stSelectbox label {
     font-size: 14px !important;
     font-weight: 700 !important;
