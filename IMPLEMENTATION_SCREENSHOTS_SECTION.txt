@@ -1,0 +1,1383 @@
+6	IMPLEMENTATION
+6.1	Screenshots
+
+	Entry page for the Climate-Aware Crop & Organic Fertilizer Recommendation System
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.1: Entry page for the Climate-Aware Crop & Organic Fertilizer Recommendation System. 
+It is the general entry page for all users (Farmers and Agricultural Experts).
+
+This screen shows the main interface of the Climate-Aware Farming application. It contains a 
+Streamlit-based dashboard with an animated gradient background and navigation options in the 
+sidebar, allowing users to access various features like Crop Recommendation, Fertilizer 
+Recommendation, Organic Conversion, Weather Forecast, Community Platform, and History.
+
+ 
+	Login page for User Authentication
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.2: Login page for user authentication where farmers and agricultural experts can 
+securely access the system.
+
+This screenshot displays the login interface with a clean, modern design featuring a gradient 
+background. Users can enter their credentials (username and password) to access the system. 
+The page also includes options for "Forgot Password?" and a "Sign Up" button for new users 
+to create an account.
+
+ 
+	User Registration page of the application
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.3: User registration page of the application where new users can create their accounts 
+by selecting their role (Farmer or Agricultural Expert).
+
+This screenshot shows the registration module where users enter their username, password, 
+and select their role from a dropdown menu. The system provides role-based access control, 
+ensuring farmers and agricultural experts receive appropriate features and permissions.
+
+ 
+	Crop Recommendation Input Page of the application
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.4: Crop recommendation input page of the application where users enter soil parameters 
+and climate data to get crop predictions.
+
+This screen shows the crop recommendation module where users input soil parameters including 
+Nitrogen (N), Phosphorus (P), Potassium (K), and pH level, along with climate parameters 
+such as Temperature, Humidity, and Rainfall. The interface uses sliders and number inputs 
+for easy data entry.
+
+ 
+	Result page showing Recommended Crop with Duration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.5: Result page of the crop recommendation, after entering soil and climate data, the 
+system recommends the most suitable crop with growth duration.
+
+This screen displays the prediction result after processing the entered data using the Random 
+Forest machine learning model. It shows the recommended crop (e.g., "RICE"), estimated growth 
+duration (e.g., "120 days - Approximately 4 months"), and confidence score. The result is 
+presented in an attractive card format with crop-specific icons.
+
+ 
+	Fertilizer Recommendation Input Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.6: Fertilizer recommendation input page where users enter current soil nutrient levels 
+and crop type to get fertilizer suggestions.
+
+This screen displays the fertilizer recommendation module where users input current Nitrogen, 
+Phosphorus, and Potassium levels in their soil, select the crop type they want to grow, and 
+optionally specify soil type. The system calculates the nutrient deficit and recommends 
+appropriate fertilizers.
+
+ 
+	Result Page of Fertilizer Recommendation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.7: Result page of fertilizer recommendation showing NPK-based fertilizer suggestions 
+with dosage and application guidelines.
+
+The system generates and displays fertilizer recommendations based on the nutrient deficit 
+analysis. It shows the recommended fertilizer type (e.g., "Urea", "DAP", "NPK 20-20-20"), 
+required quantity per acre, and application instructions to optimize crop nutrition and yield.
+
+ 
+	Organic Fertilizer Conversion Input Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.8: Organic fertilizer conversion input page where users enter non-organic fertilizer 
+details to get organic alternatives.
+
+This screenshot shows the novel Organic Fertilizer Conversion Engine where users input the 
+name and NPK composition of synthetic fertilizers they currently use, along with the quantity 
+needed. The system then calculates equivalent organic alternatives to promote sustainable 
+farming practices.
+
+ 
+	Organic Fertilizer Conversion Result with Recipe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.9: Organic fertilizer conversion result page showing organic ingredient breakdown, 
+preparation instructions, and pie chart visualization.
+
+This screen displays the organic conversion results including a detailed recipe with 
+ingredients (e.g., Neem Cake, Vermicompost, Bone Meal, Wood Ash), their quantities and 
+percentages, a pie chart visualization of the composition, step-by-step preparation 
+instructions, composting time, and application guidelines.
+
+ 
+	Weather Forecast Display Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.10: Weather forecast page showing 7-14 day climate predictions integrated with 
+OpenWeatherMap API for climate-aware farming decisions.
+
+This screenshot shows the weather forecast module displaying current weather conditions and 
+a 7-14 day forecast including temperature, humidity, rainfall predictions, and weather icons. 
+The system provides climate-aware farming recommendations based on upcoming weather patterns 
+to help farmers plan their agricultural activities.
+
+ 
+	Community Platform - Posts Feed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.11: Community platform posts feed where farmers and agricultural experts can share 
+knowledge, experiences, and farming tips.
+
+This screen shows the community engagement feature with a feed of posts created by farmers 
+and experts. Users can view post titles, authors, timestamps, and engagement metrics (likes, 
+comments). The interface includes a "Create New Post" button for users to share their own 
+content and experiences.
+
+ 
+	Community Platform - Q&A Section
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.12: Community Q&A section where farmers can ask questions and agricultural experts 
+can provide answers and guidance.
+
+This screenshot displays the question-and-answer module where farmers post agricultural 
+queries and experts provide solutions. Each question shows the title, author, creation date, 
+view count, save count, and number of answers. Users can click on questions to view detailed 
+discussions and expert responses.
+
+ 
+	Expert Sessions Scheduling Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.13: Expert sessions scheduling page showing upcoming educational sessions conducted 
+by agricultural experts via video conferencing.
+
+This screen shows the expert sessions feature where farmers can view and join scheduled 
+virtual training sessions. Each session displays the title, expert name, scheduled time, 
+and meeting link (Zoom/Google Meet). Farmers can join live sessions for real-time guidance 
+and interactive learning.
+
+ 
+	User Prediction History Page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.14: User prediction history page displaying past crop and fertilizer recommendations 
+with timestamps and input parameters.
+
+This screenshot shows the history module where users can review their previous predictions. 
+Each entry displays the prediction type (crop/fertilizer), date and time, input parameters 
+used, and results obtained. This feature helps farmers track their farming decisions and 
+compare outcomes over time.
+
+ 
+	Admin Login Screen (Hidden Access)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.15: Admin login screen accessible via URL parameter (?admin=true) featuring enhanced 
+security with environment-based authentication.
+
+This screen displays the special admin login interface with a distinctive yellow "ADMIN LOGIN" 
+header, shield icon (🔐), and "Authorized Access Only" warning. The admin portal is hidden 
+from regular users and accessible only through a special URL parameter, providing an additional 
+security layer. Admin credentials are validated against environment variables rather than the 
+database.
+
+ 
+	Admin Control Panel - Dashboard Overview
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.16: Admin control panel overview showing the four main administrative modules for 
+comprehensive system management.
+
+This screenshot shows the admin dashboard with four tabs: User Management, System Analytics, 
+Content Management, and Sessions Management. The centralized control panel provides 
+administrators with complete oversight of the system, including user administration, 
+performance metrics, content moderation, and educational session scheduling.
+
+ 
+	Admin User Management Interface
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.17: Admin user management interface displaying all registered users with role-based 
+badges and inline editing controls.
+
+This screen shows the user management module where administrators can view all registered 
+users with their IDs, usernames, and color-coded role badges (green for farmers, blue for 
+agricultural experts). Admins can modify user roles using dropdown menus and "Update" buttons, 
+or delete accounts using the "🗑️ Delete" button for efficient user administration.
+
+ 
+	Admin System Analytics Dashboard
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.18: Admin system analytics dashboard providing real-time statistics on user 
+registrations, community engagement, and system usage.
+
+This screenshot displays the analytics module with gradient-styled metric cards showing 
+Total Users, Total Posts, Total Questions, and Total Predictions. The dashboard also includes 
+user role distribution (Farmers vs Experts count) enabling administrators to monitor platform 
+growth, user activity, and engagement trends.
+
+ 
+	Admin Content Management Interface
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.19: Admin content management interface for moderating community posts and questions 
+to maintain quality and appropriateness.
+
+This screen shows the content moderation module where administrators can view all community 
+posts and questions with details including titles, authors, timestamps, and engagement metrics. 
+Each item has a "🗑️ Delete" button allowing admins to remove inappropriate or low-quality 
+content, ensuring a healthy community environment.
+
+ 
+	Admin Sessions Management Interface
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.20: Admin sessions management interface for scheduling and managing expert-led 
+educational sessions with video conferencing integration.
+
+This screenshot displays the sessions management module featuring a "Create New Session" form 
+where admins can input session title, meeting link (Zoom/Google Meet), scheduled time, and 
+expert name. Below the form, existing sessions are listed with all details visible. This 
+feature enables structured farmer training programs and knowledge dissemination.
+
+ 
+	AI Crop Doctor Interface (Disease Diagnosis)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.21: AI Crop Doctor interface where farmers can upload plant images or describe symptoms 
+to get disease diagnosis and treatment recommendations.
+
+This screen shows the AI-powered plant disease diagnosis module where users can upload images 
+of affected plants or enter symptom descriptions. The system uses machine learning to identify 
+diseases and provides treatment recommendations, helping farmers take timely action to protect 
+their crops.
+
+ 
+	Mobile Responsive View - Dashboard
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.22: Mobile responsive view of the farmer dashboard demonstrating the application's 
+adaptability to different screen sizes.
+
+This screenshot shows the application's responsive design on mobile devices. The interface 
+automatically adjusts to smaller screens with touch-optimized buttons, collapsible sidebar, 
+and properly scaled content ensuring farmers can access the system from smartphones in the 
+field.
+
+ 
+	Organic Recipe PDF Generation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.23: Organic fertilizer recipe PDF generation feature allowing farmers to download 
+and print preparation instructions for offline reference.
+
+This screen shows the PDF generation capability where users can download detailed organic 
+fertilizer recipes including ingredient lists, preparation steps, composting instructions, 
+and application guidelines. This feature enables farmers to keep physical copies for reference 
+during field work without internet connectivity.
+
+ 
+	YouTube Tutorial Integration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.24: YouTube tutorial integration showing automatically fetched farming tutorial videos 
+related to the recommended crop or technique.
+
+This screenshot displays the educational video module where the system automatically searches 
+and displays relevant YouTube tutorials using pytube. Farmers can watch step-by-step farming 
+guides, best practices videos, and expert demonstrations directly within the application, 
+enhancing their agricultural knowledge.
+
+ 
+	Plagiarism Detection Interface (Content Verification)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 6.25: Plagiarism detection interface integrated with Google Custom Search API for 
+verifying content originality in community posts and research submissions.
+
+This screen shows the plagiarism checker module where users can upload PDF documents or paste 
+text content. The system uses Google Custom Search API to check for plagiarism by comparing 
+content against web sources, displaying plagiarism percentage, matched sources, and highlighted 
+sections. This feature ensures content authenticity in the community platform.
+
+
+---
+
+SUMMARY OF SCREENSHOTS:
+
+Total Screenshots: 25
+- User Interface Screenshots: 14 (Fig 6.1 - 6.14)
+- Admin Interface Screenshots: 6 (Fig 6.15 - 6.20)
+- Additional Features: 5 (Fig 6.21 - 6.25)
+
+Categories:
+1. Authentication & Registration: 3 screenshots
+2. Core Features (Crop, Fertilizer, Organic): 6 screenshots
+3. Community Platform: 4 screenshots
+4. Admin Panel: 6 screenshots
+5. Additional Features: 6 screenshots
+
+Each screenshot includes:
+✓ Figure number and title
+✓ Detailed caption explaining the functionality
+✓ Description of what users can see and do
+✓ Technical context where applicable
+
+---
+
+Note: The actual screenshots should be inserted in the blank spaces provided above each 
+figure caption. Ensure all screenshots are:
+- High resolution (minimum 1920x1080)
+- Clear and readable
+- Properly cropped to show relevant content
+- Saved as PNG format
+- Named according to the figure number (e.g., Fig_6_1.png, Fig_6_2.png, etc.)

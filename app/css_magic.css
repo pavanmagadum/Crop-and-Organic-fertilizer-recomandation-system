@@ -2,6 +2,7 @@
    🎨 CSS MAGIC - COMPLETE TRANSFORMATION
    Makes Streamlit look like Plagiarism Checker
    NO sidebar • Top nav • Card-based • Modern
+   VERSION: 2.0 - White inputs with black text
    ============================================ */
 
 /* ============================================
@@ -115,6 +116,136 @@ div,
 li {
     color: var(--text-secondary) !important;
     line-height: 1.7 !important;
+}
+
+/* ============================================
+   FORM INPUTS - WHITE BACKGROUNDS WITH BLACK TEXT
+   ULTRA-FORCEFUL RULES - MAXIMUM SPECIFICITY
+   ============================================ */
+
+/* Target ALL Streamlit text inputs with maximum specificity */
+[data-testid="stTextInput"] input,
+[data-testid="stTextInput"] input[type="text"],
+[data-testid="stTextInput"] input[type="number"],
+[data-testid="stTextInput"] input[type="password"],
+[data-testid="stTextInput"] input[type="email"],
+[data-testid="stNumberInput"] input,
+[data-testid="stNumberInput"] input[type="number"],
+div[data-baseweb="input"] input,
+div[data-baseweb="input"] input[type="text"],
+div[data-baseweb="input"] input[type="number"],
+div[data-baseweb="input"] input[type="password"],
+div[data-baseweb="input"] input[type="email"],
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"] {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 8px !important;
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    transition: all 0.2s ease !important;
+}
+
+/* Focus state for inputs */
+[data-testid="stTextInput"] input:focus,
+[data-testid="stNumberInput"] input:focus,
+div[data-baseweb="input"] input:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #8B5CF6 !important;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+    outline: none !important;
+}
+
+/* Placeholder text */
+[data-testid="stTextInput"] input::placeholder,
+[data-testid="stNumberInput"] input::placeholder,
+div[data-baseweb="input"] input::placeholder,
+input::placeholder {
+    color: #6b7280 !important;
+    opacity: 0.7 !important;
+}
+
+/* Disabled state */
+[data-testid="stTextInput"] input:disabled,
+[data-testid="stNumberInput"] input:disabled,
+div[data-baseweb="input"] input:disabled,
+input:disabled {
+    background-color: #f3f4f6 !important;
+    background: #f3f4f6 !important;
+    color: #6b7280 !important;
+    cursor: not-allowed !important;
+}
+
+/* Input container backgrounds */
+[data-testid="stTextInput"],
+[data-testid="stNumberInput"],
+div[data-baseweb="input"] {
+    background: transparent !important;
+}
+
+/* Remove any dark overlays on input containers */
+[data-testid="stTextInput"]>div,
+[data-testid="stNumberInput"]>div,
+div[data-baseweb="input"]>div {
+    background: transparent !important;
+}
+
+/* Ensure input wrapper divs don't have dark backgrounds */
+[data-testid="stTextInput"]>div>div,
+[data-testid="stNumberInput"]>div>div,
+div[data-baseweb="input"]>div>div {
+    background: transparent !important;
+}
+
+/* Labels for inputs - keep them visible */
+[data-testid="stTextInput"] label,
+[data-testid="stNumberInput"] label,
+label {
+    color: #e2e8f0 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    margin-bottom: 6px !important;
+}
+
+/* ============================================
+   TOOLTIPS - BLACK TEXT FOR VISIBILITY
+   ============================================ */
+
+/* Target Streamlit tooltips with maximum specificity */
+[data-testid="stTooltipContent"],
+[data-testid="stTooltipContent"] p,
+[data-testid="stTooltipContent"] span,
+[data-testid="stTooltipContent"] div,
+div[role="tooltip"],
+div[role="tooltip"] p,
+div[role="tooltip"] span {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+/* Tooltip container */
+[data-testid="stTooltipContent"] {
+    background-color: #ffffff !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Ensure all text inside tooltips is black */
+[data-testid="stTooltipContent"] * {
+    color: #000000 !important;
 }
 
 /* ============================================
@@ -245,8 +376,9 @@ textarea,
     padding: 16px 20px !important;
     border: 2px solid var(--border) !important;
     border-radius: 12px !important;
-    background: var(--bg-input) !important;
-    color: var(--text-primary) !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 500 !important;
     transition: all 0.3s ease !important;
 }
 
@@ -503,53 +635,15 @@ button[type="primary"]:active {
 }
 
 /* ============================================
-   INPUTS - MODERN DARK STYLING
+   INPUTS - MODERN DARK STYLING (CONSOLIDATED)
    ============================================ */
-input,
-select,
-textarea,
-[data-baseweb="select"],
-[data-baseweb="input"],
-.stTextInput input,
-.stNumberInput input,
-.stSelectbox select {
-    background: rgba(30, 41, 59, 0.8) !important;
-    color: var(--text-primary) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 10px !important;
-    padding: 12px 16px !important;
-    font-size: 15px !important;
-    transition: all 0.3s ease !important;
-}
+/* Removed duplicate input styling - using the earlier definition with solid backgrounds */
 
-input:focus,
-select:focus,
-textarea:focus,
-[data-baseweb="select"]:focus-within,
-[data-baseweb="input"]:focus-within,
-.stTextInput input:focus,
-.stNumberInput input:focus,
-.stSelectbox select:focus {
-    border-color: var(--accent-cyan) !important;
-    box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1) !important;
-    outline: none !important;
-}
-
-/* Input labels */
-label,
-.stTextInput label,
-.stNumberInput label,
-.stSelectbox label {
-    color: var(--text-primary) !important;
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    margin-bottom: 8px !important;
-}
-
-/* Fix white backgrounds in number inputs */
+/* Fix white backgrounds in number inputs - SOLID BACKGROUND FOR HIGH CONTRAST */
 [data-testid="stNumberInput"] input {
-    background: rgba(30, 41, 59, 0.8) !important;
-    color: #e2e8f0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 500 !important;
 }
 
 /* Fix white backgrounds in select boxes */
@@ -561,6 +655,42 @@ label,
     background: rgba(30, 41, 59, 0.8) !important;
     color: #e2e8f0 !important;
 }
+
+/* CRITICAL FIX: Disable text input in selectboxes - make them dropdown-only */
+/* Completely disable the input field inside selectbox */
+[data-testid="stSelectbox"] input[role="combobox"] {
+    pointer-events: none !important;
+    caret-color: transparent !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+}
+
+/* Make the entire selectbox clickable to open dropdown */
+[data-testid="stSelectbox"] div[data-baseweb="select"] {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+/* Hide the text cursor and prevent text selection */
+[data-testid="stSelectbox"] input {
+    caret-color: transparent !important;
+    cursor: pointer !important;
+    pointer-events: none !important;
+}
+
+/* Make the selectbox container clickable */
+[data-testid="stSelectbox"] {
+    cursor: pointer !important;
+}
+
+/* Ensure dropdown arrow is clickable */
+[data-testid="stSelectbox"] svg {
+    pointer-events: auto !important;
+}
+
 
 /* Dropdown menus */
 [role="listbox"],
@@ -1095,17 +1225,90 @@ h1 {
 }
 
 /* HOME PAGE FEATURE CARDS */
-.feature-card { background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%) !important; border: 2px solid rgba(139, 92, 246, 0.3) !important; border-radius: 20px !important; padding: 32px !important; }
-.feature-card:hover { transform: translateY(-8px) scale(1.02) !important; border-color: rgba(139, 92, 246, 0.8) !important; box-shadow: 0 20px 40px rgba(139, 92, 246, 0.35), 0 0 60px rgba(139, 92, 246, 0.25) !important; }
-.feature-card-icon { font-size: 48px !important; text-align: center !important; margin-bottom: 20px !important; }
-.feature-card-title { color: #e2e8f0 !important; font-size: 24px !important; font-weight: 700 !important; text-align: center !important; margin-bottom: 16px !important; }
-.feature-card-content p { color: #94a3b8 !important; font-size: 15px !important; line-height: 1.7 !important; }
+.feature-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%) !important;
+    border: 2px solid rgba(139, 92, 246, 0.3) !important;
+    border-radius: 20px !important;
+    padding: 32px !important;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    border-color: rgba(139, 92, 246, 0.8) !important;
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.35), 0 0 60px rgba(139, 92, 246, 0.25) !important;
+}
+
+.feature-card-icon {
+    font-size: 48px !important;
+    text-align: center !important;
+    margin-bottom: 20px !important;
+}
+
+.feature-card-title {
+    color: #e2e8f0 !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    margin-bottom: 16px !important;
+}
+
+.feature-card-content p {
+    color: #94a3b8 !important;
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+}
 
 
 /* GLOBAL FIX - ALL WHITE BOXES ON ALL PAGES */
-button, .stButton button, [data-testid='stButton'] button { background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important; color: white !important; border: none !important; }
-button:hover { background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important; transform: translateY(-2px) !important; }
-[data-testid='stExpander'] { background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%) !important; border: 1px solid rgba(139, 92, 246, 0.3) !important; }
-.stExpander { background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%) !important; }
-div[data-baseweb='popover'] { background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(26, 31, 58, 0.95) 100%) !important; border: 1px solid rgba(139, 92, 246, 0.3) !important; }
-.stPopover { background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(26, 31, 58, 0.95) 100%) !important; }
+button,
+.stButton button,
+[data-testid='stButton'] button {
+    background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
+    color: white !important;
+    border: none !important;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important;
+    transform: translateY(-2px) !important;
+}
+
+[data-testid='stExpander'] {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%) !important;
+    border: 1px solid rgba(139, 92, 246, 0.3) !important;
+}
+
+.stExpander {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%) !important;
+}
+
+div[data-baseweb='popover'] {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(26, 31, 58, 0.95) 100%) !important;
+    border: 1px solid rgba(139, 92, 246, 0.3) !important;
+}
+
+.stPopover {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(26, 31, 58, 0.95) 100%) !important;
+}
+
+
+/* FIX WARNING/INFO BOXES WITH LIGHT BACKGROUNDS */
+[data-testid='stAlert'],
+.stAlert,
+div[role='alert'] {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%) !important;
+    border: 1px solid rgba(251, 191, 36, 0.3) !important;
+    color: #FCD34D !important;
+}
+
+[data-testid='stAlert'] p,
+.stAlert p,
+div[role='alert'] p {
+    color: #FCD34D !important;
+}
+
+/* Fix warning icon */
+[data-testid='stAlert'] svg,
+.stAlert svg {
+    color: #FBBF24 !important;
+}

@@ -1,0 +1,94 @@
+% ---------------- REFERENCES ----------------
+\begin{thebibliography}{00}
+
+% Core ML and Agriculture References
+\bibitem{fao2017}
+Food and Agriculture Organization of the United Nations, ``The future of food and agriculture: Trends and challenges,'' FAO, Rome, Italy, 2017.
+
+\bibitem{liakos2018}
+K. G. Liakos, P. Busato, D. Moshou, S. Pearson, and D. Bochtis, ``Machine learning in agriculture: A review,'' \emph{Sensors}, vol. 18, no. 8, p. 2674, Aug. 2018.
+
+\bibitem{savci2012}
+S. Savci, ``An agricultural pollutant: Chemical fertilizer,'' \emph{International Journal of Environmental Science and Development}, vol. 3, no. 1, pp. 73--80, 2012.
+
+\bibitem{breiman2001}
+L. Breiman, ``Random forests,'' \emph{Machine Learning}, vol. 45, no. 1, pp. 5--32, Oct. 2001.
+
+% Crop and Fertilizer Recommendation Systems
+\bibitem{patel2021}
+J. Patel and D. Patel, ``Crop recommendation system using machine learning,'' in \emph{Proc. 2nd Int. Conf. on Intelligent Engineering and Management (ICIEM)}, 2021, pp. 1--6.
+
+\bibitem{kumar2021}
+S. Kumar, A. Singh, and R. Kumar, ``Fertilizer recommendation system using machine learning,'' \emph{International Journal of Computer Applications}, vol. 176, no. 25, pp. 1--6, 2020.
+
+% Organic Farming - Government and Research
+\bibitem{icar2015}
+Indian Council of Agricultural Research, ``Handbook of organic farming,'' ICAR, New Delhi, India, 2015.
+
+% Vermicompost Research (Essential Papers)
+\bibitem{sinha2010}
+R. K. Sinha, S. Agarwal, K. Chauhan, and D. Valani, ``The wonders of earthworms and its vermicompost in farm production: Charles Darwin's 'friends of farmers', with potential to replace destructive chemical fertilizers,'' \emph{Agricultural Sciences}, vol. 1, no. 2, pp. 76--94, Nov. 2010.
+
+\bibitem{yadav2013}
+A. Yadav and V. K. Garg, ``Recycling of organic wastes by employing *Eisenia fetida*,'' \emph{Bioresource Technology}, vol. 114, pp. 199--205, Jun. 2013.
+
+\bibitem{pathma2012}
+J. Pathma and N. Sakthivel, ``Microbial diversity of vermicompost bacteria that exhibit useful agricultural traits and waste management potential,'' \emph{SpringerPlus}, vol. 1, no. 1, pp. 1--19, Dec. 2012.
+
+% Traditional Indian Organic Farming (Jivamrutha)
+\bibitem{palekar2006zbnf}
+S. Palekar, ``Shoonya bandovalada naisargika krushi'' (Zero Budget Natural Farming), Swamy Vivekananda Parisar Pratishthan, Amravati, India, 2006.
+
+\bibitem{devakumar2014}
+N. Devakumar, G. G. E. Rao, S. N. Shubha, V. Imrankhan, and S. Nagaraj, ``Activities of organic farming research centre, University of Agricultural Sciences, Bangalore, India,'' in \emph{Proc. 4th ISOFAR Scientific Conf.}, Istanbul, Turkey, 2014, pp. 13--15.
+
+% Compost Tea
+\bibitem{scheuerell2002}
+S. Scheuerell and W. Mahaffee, ``Compost tea: Principles and prospects for plant disease control,'' \emph{Compost Science \& Utilization}, vol. 10, no. 4, pp. 313--338, 2002.
+
+\end{thebibliography}
+\end{document}
+
+===============================================================================
+SUMMARY: CLEANED REFERENCES (13 Total)
+===============================================================================
+
+KEPT (Essential for your paper):
+✓ FAO 2017 - Agriculture challenges (introduction)
+✓ Liakos 2018 - ML in agriculture (related work)
+✓ Savci 2012 - Chemical fertilizer problems (motivation)
+✓ Breiman 2001 - Random forests (methodology)
+✓ Patel 2021 - Crop recommendation ML (related work)
+✓ Kumar 2021 - Fertilizer recommendation ML (related work)
+✓ ICAR 2015 - Indian organic farming handbook (fertilizer mapping)
+✓ Sinha 2010 - Vermicompost replacing chemical fertilizers (fertilizer mapping)
+✓ Yadav 2013 - Vermicompost research (fertilizer mapping)
+✓ Pathma 2012 - Vermicompost bacteria (fertilizer mapping)
+✓ Palekar 2006 - Jivamrutha/ZBNF (fertilizer mapping)
+✓ Devakumar 2014 - Indian organic farming research (fertilizer mapping)
+✓ Scheuerell 2002 - Compost tea (fertilizer mapping)
+
+REMOVED (Not essential):
+✗ Porter 2014 - Crop responses to climate (not directly needed)
+✗ Kante 2019 - ICTs in agriculture (not core to your work)
+✗ Ramesh 2020 - Crop yield prediction (redundant with Patel 2021)
+✗ Kamilaris 2018 - Deep learning (you use Random Forest, not deep learning)
+✗ Wolfert 2017 - Big data (not core to your work)
+✗ Arancon 2004 - Vermicompost on strawberries (too specific)
+✗ Edwards 2010 - Vermiculture book (Sinha 2010 covers this)
+✗ Lazcano 2008 - Composting comparison (not needed)
+✗ Atiyeh 2002 - Vermicompost in containers (not relevant)
+✗ Pant 2009 - Vermicompost tea on pak choi (too specific)
+✗ Ingham 2005 - Compost tea manual (Scheuerell 2002 is enough)
+✗ Zaller 2007 - Vermicompost as peat substitute (not relevant)
+
+===============================================================================
+RESULT: 13 FOCUSED REFERENCES
+===============================================================================
+
+This gives you a clean, focused bibliography with:
+- 4 core ML/agriculture papers
+- 2 crop/fertilizer recommendation papers  
+- 7 organic fertilizer mapping papers (vermicompost, Jivamrutha, compost tea)
+
+All essential, no redundancy, perfect for an IEEE paper!

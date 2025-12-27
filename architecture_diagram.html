@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Architecture - Climate Aware Project</title>
+    <!-- Import Google Fonts for a sharper look -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #1a237e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #283593;
+        }
+
+        .diagram-container {
+            background: white;
+            padding: 50px;
+            /* Add whitespace for the image */
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: auto;
+            max-width: 100%;
+            overflow: auto;
+        }
+
+        /* Ensure the SVG is responsive but clear */
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>System Architecture Diagram</h2>
+    <div class="controls">
+        <button onclick="downloadSVGAsPNG()">Download High-Res Image (PNG)</button>
+    </div>
+
+    <div class="diagram-container" id="diagram">
+        <div class="mermaid">
+            %%{init: {
+            'theme': 'base',
+            'themeVariables': {
+            'primaryColor': '#ffffff',
+            'primaryTextColor': '#000000',
+            'primaryBorderColor': '#000000',
+            'lineColor': '#000000',
+            'fontFamily': 'Roboto'
+            },
+            'flowchart': {
+            'curve': 'basis',
+            'rankSpacing': 60,
+            'nodeSpacing': 50
+            }
+            }}%%
+
+            graph TD
+            %% Define Professional Styles
+            classDef actor fill:#e8eaf6,stroke:#1a237e,stroke-width:2px,rx:10,ry:10;
+            classDef external fill:#fff3e0,stroke:#e65100,stroke-width:2px,stroke-dasharray: 5 5,rx:5,ry:5;
+            classDef component fill:#ffffff,stroke:#37474f,stroke-width:2px,rx:5,ry:5;
+            classDef database fill:#f3e5f5,stroke:#4a148c,stroke-width:2px;
+            classDef output fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,rx:5,ry:5;
+
+            %% Actors
+            User("Farmer / User"):::actor
+            Admin("Admin / Expert"):::actor
+            WeatherAPI[Weather API]:::external
+
+            %% Main Workflow Container
+            subgraph System_Scope [System Scope]
+            direction TD
+
+            %% 1. Input Layer
+            subgraph Input_Layer [Data Acquisition]
+            direction TB
+            SoilData[Soil Parameters<br />(N, P, K, pH)]:::component
+            ImgData[Crop Image<br />Upload]:::component
+            CommInput[Community<br />Queries]:::component
+            end
+
+            %% 2. Processing Layer
+            subgraph Core_Logic [Core Processing Logic]
+            direction TB
+            PreProcess[Data Preprocessing<br />& Validation]:::component
+
+            %% Models
+            subgraph ML_Models [Machine Learning Engine]
+            direction TB
+            RF_Crop[Random Forest<br />Crop Model]:::component
+            Logic_Fert[Fertilizer Calculator<br />(N-P-K Logic)]:::component
+            CNN_Disease[CNN Model<br />(Disease Detection)]:::component
+            end
+
+            %% Database
+            DB[(Central Database)]:::database
+            end
+
+            %% 3. Output Layer
+            subgraph Output_Layer [Advisory & Results]
+            direction TB
+            Out_Crop[Recommended Crop]:::output
+            Out_Fert["Fertilizer Schedule<br />(Organic & Chemical)"]:::output
+            Out_Disease[Disease Diagnosis]:::output
+            end
+            end
+
+            %% Connections - Optimized for vertical flow
+            User -->|Input Data| SoilData
+            User -->|Upload Img| ImgData
+            User -->|Ask Query| CommInput
+
+            WeatherAPI -.->|Fetch Climate| PreProcess
+
+            %% Data Flow
+            SoilData --> PreProcess
+            PreProcess --> RF_Crop
+            RF_Crop --> Logic_Fert
+
+            ImgData --> CNN_Disease
+
+            %% Model Output Connections
+            RF_Crop --> Out_Crop
+            Logic_Fert --> Out_Fert
+            CNN_Disease --> Out_Disease
+
+            %% Database Interactions (Side Connections)
+            RF_Crop <--> DB
+                CommInput <--> DB
+                    Admin <-->|Manage Knowledge| DB
+
+        </div>
+    </div>
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <script>
+        // Function to download the Mermaid SVG as a PNG
+        function downloadSVGAsPNG() {
+            const svgElement = document.querySelector('.mermaid svg');
+            if (!svgElement) {
+                alert("Diagram explicitly loading... please wait.");
+                return;
+            }
+
+            const canvas = document.createElement('canvas');
+            const svgData = new XMLSerializer().serializeToString(svgElement);
+            const img = new Image();
+
+            // Add a small delay/loading logic if needed, but usually immediate
+            const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(svgBlob);
+
+            img.onload = function () {
+                // Set canvas dimensions based on SVG
+                const bbox = svgElement.getBoundingClientRect();
+                canvas.width = bbox.width * 2; // 2x scale for high res
+                canvas.height = bbox.height * 2;
+
+                const ctx = canvas.getContext('2d');
+                ctx.scale(2, 2); // Scale up context
+                ctx.fillStyle = "white"; // White background
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+
+                const pngUrl = canvas.toDataURL('image/png');
+                const downloadLink = document.createElement('a');
+                downloadLink.href = pngUrl;
+                downloadLink.download = 'Architecture_Diagram_HighRes.png';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                URL.revokeObjectURL(url);
+            };
+
+            img.src = url;
+        }
+    </script>
+</body>
+
+</html>

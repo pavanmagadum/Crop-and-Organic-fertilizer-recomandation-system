@@ -1,0 +1,484 @@
+/* ============================================
+   🎨 MODERN CARD-BASED DESIGN
+   Inspired by Plagiarism Checker
+   Professional • Clean • Beautiful
+   ============================================ */
+
+/* ============================================
+   HIDE STREAMLIT BRANDING
+   ============================================ */
+#MainMenu,
+footer,
+[data-testid="stToolbar"],
+.stDeployButton {
+    visibility: hidden !important;
+    display: none !important;
+}
+
+header[data-testid="stHeader"] {
+    display: none !important;
+}
+
+/* Hide sidebar completely */
+[data-testid="stSidebar"] {
+    display: none !important;
+}
+
+section[data-testid="stSidebar"] {
+    display: none !important;
+}
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ============================================
+   COLOR SYSTEM
+   ============================================ */
+:root {
+    --bg-primary: #0a0e27;
+    --bg-secondary: #151932;
+    --bg-card: #1a1f3a;
+    --bg-input: #1e2139;
+    --text-primary: #ffffff;
+    --text-secondary: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent-cyan: #00d9ff;
+    --accent-purple: #7c3aed;
+    --accent-pink: #ec4899;
+    --border: #2d3748;
+    --border-light: #374151;
+}
+
+/* ============================================
+   MAIN LAYOUT
+   ============================================ */
+.stApp {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%) !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+.main .block-container {
+    background: transparent !important;
+    max-width: 1400px !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+}
+
+/* ============================================
+   TOP NAVIGATION BAR
+   ============================================ */
+.top-nav {
+    background: rgba(21, 25, 50, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding: 1rem 2rem !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.nav-logo {
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+.nav-links {
+    display: flex !important;
+    gap: 8px !important;
+    align-items: center !important;
+}
+
+.nav-link {
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    color: var(--text-secondary) !important;
+    font-weight: 500 !important;
+    font-size: 15px !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.nav-link:hover {
+    background: rgba(0, 217, 255, 0.1) !important;
+    color: var(--text-primary) !important;
+}
+
+.nav-link.active {
+    background: rgba(0, 217, 255, 0.15) !important;
+    color: var(--accent-cyan) !important;
+    border-bottom: 2px solid var(--accent-cyan) !important;
+}
+
+/* ============================================
+   CONTENT AREA
+   ============================================ */
+.content-area {
+    padding: 3rem 2rem !important;
+    min-height: calc(100vh - 80px) !important;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1 {
+    font-size: 48px !important;
+    font-weight: 800 !important;
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    margin-bottom: 12px !important;
+    text-align: center !important;
+    line-height: 1.2 !important;
+}
+
+h2 {
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 16px !important;
+}
+
+h3 {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 12px !important;
+}
+
+p {
+    font-size: 16px !important;
+    color: var(--text-secondary) !important;
+    line-height: 1.7 !important;
+    text-align: center !important;
+}
+
+.subtitle {
+    font-size: 18px !important;
+    color: var(--text-muted) !important;
+    text-align: center !important;
+    margin-bottom: 48px !important;
+}
+
+/* ============================================
+   CARD SYSTEM
+   ============================================ */
+.card {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 16px !important;
+    padding: 32px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2) !important;
+    border-color: var(--border-light) !important;
+}
+
+/* Clickable feature cards */
+.feature-card {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 20px !important;
+    padding: 40px !important;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    text-align: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.feature-card::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 4px !important;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink)) !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+}
+
+.feature-card:hover::before {
+    opacity: 1 !important;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2) !important;
+    border-color: var(--accent-cyan) !important;
+}
+
+.feature-icon {
+    font-size: 64px !important;
+    margin-bottom: 20px !important;
+    display: block !important;
+}
+
+.feature-title {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 12px !important;
+}
+
+.feature-description {
+    font-size: 16px !important;
+    color: var(--text-muted) !important;
+    line-height: 1.6 !important;
+}
+
+/* ============================================
+   GRID LAYOUTS
+   ============================================ */
+.grid-2x2 {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px !important;
+    margin-top: 48px !important;
+}
+
+.grid-2-col {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+}
+
+/* ============================================
+   MODERN INPUTS
+   ============================================ */
+.input-group {
+    margin-bottom: 24px !important;
+}
+
+.input-label {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 10px !important;
+    display: block !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+input,
+select,
+textarea,
+.stTextInput input,
+.stNumberInput input,
+[data-baseweb="input"] input {
+    font-size: 16px !important;
+    padding: 16px 20px !important;
+    border: 2px solid var(--border) !important;
+    border-radius: 12px !important;
+    background: var(--bg-input) !important;
+    color: var(--text-primary) !important;
+    width: 100% !important;
+    transition: all 0.3s ease !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--accent-cyan) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.15) !important;
+}
+
+[data-baseweb="select"]>div {
+    background: var(--bg-input) !important;
+    border: 2px solid var(--border) !important;
+    border-radius: 12px !important;
+    min-height: 52px !important;
+}
+
+[data-baseweb="select"]>div * {
+    color: var(--text-primary) !important;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.stButton>button {
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, #0099cc 100%) !important;
+    color: var(--text-primary) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 16px 32px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3) !important;
+    width: 100% !important;
+}
+
+.stButton>button:hover {
+    background: linear-gradient(135deg, #0099cc 0%, #007799 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(0, 217, 255, 0.4) !important;
+}
+
+.stFormSubmitButton>button,
+button[kind="primary"] {
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--accent-pink) 100%) !important;
+    background-size: 200% 200% !important;
+    animation: gradientShift 3s ease infinite !important;
+    padding: 18px 36px !important;
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ============================================
+   LABELS
+   ============================================ */
+label,
+.stTextInput label,
+.stNumberInput label,
+.stSelectbox label {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 10px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* ============================================
+   FORCE DARK BACKGROUNDS
+   ============================================ */
+div[style*="background: white"],
+div[style*="background:white"],
+div[style*="background-color: white"],
+div[style*="background:#FFFFFF"] {
+    background: var(--bg-card) !important;
+}
+
+div[style*="color:#111827"],
+div[style*="color:#6B7280"],
+p[style*="color:#6B7280"] {
+    color: var(--text-primary) !important;
+}
+
+/* ============================================
+   TABS
+   ============================================ */
+[data-baseweb="tab-list"] {
+    gap: 12px !important;
+    background: var(--bg-primary) !important;
+    padding: 8px !important;
+    border-radius: 12px !important;
+}
+
+[data-baseweb="tab"] {
+    background: transparent !important;
+    color: var(--text-muted) !important;
+    border-radius: 10px !important;
+    padding: 14px 28px !important;
+    font-weight: 600 !important;
+}
+
+[data-baseweb="tab"]:hover {
+    background: rgba(0, 217, 255, 0.1) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-baseweb="tab"][aria-selected="true"] {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+    border-radius: 10px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+
+    .grid-2x2,
+    .grid-2-col {
+        grid-template-columns: 1fr !important;
+    }
+
+    .content-area {
+        padding: 2rem 1rem !important;
+    }
+
+    .top-nav {
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+
+    h1 {
+        font-size: 36px !important;
+    }
+}
+
+/* ============================================
+   LOADING SPINNER
+   ============================================ */
+[data-testid="stSpinner"]>div {
+    border-color: rgba(0, 217, 255, 0.2) !important;
+    border-top-color: var(--accent-cyan) !important;
+}
+
+/* ============================================
+   ALERTS
+   ============================================ */
+.stSuccess {
+    background: rgba(0, 217, 255, 0.15) !important;
+    border-left: 4px solid var(--accent-cyan) !important;
+    color: var(--text-primary) !important;
+    border-radius: 10px !important;
+    padding: 18px !important;
+}
+
+.stError {
+    background: rgba(239, 68, 68, 0.15) !important;
+    border-left: 4px solid #ef4444 !important;
+    color: var(--text-primary) !important;
+    border-radius: 10px !important;
+    padding: 18px !important;
+}

@@ -1,0 +1,62 @@
+===============================================================================
+FERTILIZER MAPPING REFERENCE BOOKS - FOR IEEE PAPER REFERENCES SECTION
+===============================================================================
+
+ADD THESE TO YOUR \begin{thebibliography}{00} SECTION
+(Just copy and paste before \end{thebibliography})
+
+-------------------------------------------------------------------------------
+
+\bibitem{solomon2012}
+S. Solomon, \emph{The Intelligent Gardener: Growing Nutrient Dense Food}. Gabriola Island, BC, Canada: New Society Publishers, 2012.
+
+\bibitem{magdoff2021}
+F. Magdoff and H. Van Es, \emph{Building Soils for Better Crops: Sustainable Soil Management}, 4th ed. College Park, MD, USA: Sustainable Agriculture Research and Education (SARE), 2021.
+
+\bibitem{brady2016}
+N. C. Brady and R. R. Weil, \emph{The Nature and Properties of Soils}, 15th ed. Upper Saddle River, NJ, USA: Pearson, 2016.
+
+\bibitem{ramamoorthy2015}
+V. Ramamoorthy and S. Balasubramanian, \emph{Organic Farming: Theory and Practices}. Jodhpur, India: Scientific Publishers, 2015.
+
+\bibitem{palekar2006}
+S. Palekar, \emph{Zero Budget Natural Farming}. Amravati, India: Swamy Vivekananda Parisar Pratishthan, 2006.
+
+\bibitem{martin1992}
+D. L. Martin and G. Gershuny, \emph{The Rodale Book of Composting: Easy Methods for Every Gardener}. Emmaus, PA, USA: Rodale Books, 1992.
+
+\bibitem{sharma2017}
+K. Sharma and V. K. Garg, ``Vermicompost: An eco-friendly approach for waste management and nutrient enhancement,'' in \emph{Organic Fertilizers - From Basic Concepts to Applied Outcomes}, M. L. Larramendy and S. Soloneski, Eds. IntechOpen, 2017, pp. 155--176.
+
+\bibitem{ncof2019}
+National Centre of Organic Farming (NCOF), ``Guide to organic farming,'' Ministry of Agriculture and Farmers Welfare, Government of India, Ghaziabad, India, 2019.
+
+-------------------------------------------------------------------------------
+
+THESE ARE THE KEY BOOKS WE READ TO LEARN FERTILIZER MAPPING:
+
+1. Steve Solomon - "The Intelligent Gardener" (2012)
+   → For NPK calculations and organic fertilizer substitution formulas
+
+2. Fred Magdoff & Harold Van Es - "Building Soils for Better Crops" (2021)
+   → For nutrient equivalency and conversion methodology
+
+3. Nyle Brady & Ray Weil - "The Nature and Properties of Soils" (2016)
+   → For soil chemistry and nutrient behavior
+
+4. V. Ramamoorthy & S. Balasubramanian - "Organic Farming: Theory and Practices" (2015)
+   → For Indian organic farming context
+
+5. Subhash Palekar - "Zero Budget Natural Farming" (2006)
+   → For traditional Indian practices (Jivamrutha, etc.)
+
+6. D.L. Martin & G. Gershuny - "The Rodale Book of Composting" (1992)
+   → For compost tea and vermicompost preparation
+
+7. K. Sharma & V.K. Garg - Vermicompost research paper (2017)
+   → For scientific validation
+
+8. NCOF - Government of India guidelines (2019)
+   → For official organic farming standards
+
+===============================================================================

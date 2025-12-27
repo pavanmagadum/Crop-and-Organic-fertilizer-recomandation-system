@@ -1,0 +1,525 @@
+/* ============================================
+   🎨 COMPLETE DARK THEME - OVERRIDE EVERYTHING
+   Forces dark backgrounds and white text everywhere
+   ============================================ */
+
+/* Hide Streamlit Branding */
+#MainMenu,
+footer,
+header,
+[data-testid="stToolbar"],
+.stDeployButton {
+    visibility: hidden !important;
+    display: none !important;
+}
+
+header[data-testid="stHeader"] {
+    background: transparent !important;
+}
+
+/* Navigation Icons */
+button[kind="header"]::before {
+    color: #00d9ff !important;
+}
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ============================================
+   FORCE DARK BACKGROUNDS EVERYWHERE
+   ============================================ */
+.stApp {
+    background: #0a0e27 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.main .block-container {
+    background: transparent !important;
+    max-width: 1400px !important;
+    padding: 2rem !important;
+}
+
+/* FORCE ALL DIVS TO HAVE DARK BACKGROUND */
+div[style*="background"] {
+    background: #151932 !important;
+}
+
+div[style*="background: white"],
+div[style*="background:white"],
+div[style*="background-color: white"],
+div[style*="background-color:white"],
+div[style*="background:#FFFFFF"],
+div[style*="background: #FFFFFF"] {
+    background: #151932 !important;
+}
+
+/* FORCE ALL TEXT TO BE WHITE */
+div[style*="color"],
+p[style*="color"],
+span[style*="color"],
+h1[style*="color"],
+h2[style*="color"],
+h3[style*="color"],
+h4[style*="color"] {
+    color: #ffffff !important;
+}
+
+/* Override specific dark colors to white */
+div[style*="color:#111827"],
+div[style*="color: #111827"],
+p[style*="color:#6B7280"],
+p[style*="color: #6B7280"],
+div[style*="color:#6B7280"],
+div[style*="color: #6B7280"],
+div[style*="color:#92400E"],
+div[style*="color: #92400E"],
+div[style*="color:#78350F"],
+div[style*="color: #78350F"] {
+    color: #ffffff !important;
+}
+
+/* Typography */
+h1 {
+    font-size: 48px !important;
+    font-weight: 800 !important;
+    background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    margin-bottom: 12px !important;
+}
+
+h2 {
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 16px !important;
+}
+
+h3 {
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    margin-bottom: 12px !important;
+}
+
+p,
+span,
+div,
+li {
+    color: #e2e8f0 !important;
+    line-height: 1.7;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #151932 0%, #0a0e27 100%) !important;
+    border-right: 1px solid #2d3748 !important;
+    padding: 2rem 1.5rem !important;
+}
+
+[data-testid="stSidebar"] * {
+    color: #ffffff !important;
+}
+
+/* Radio Navigation */
+[data-testid="stSidebar"] .stRadio>label {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 16px !important;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+[data-testid="stSidebar"] .stRadio>div>label {
+    background: rgba(0, 217, 255, 0.05) !important;
+    border: 2px solid rgba(0, 217, 255, 0.2) !important;
+    border-radius: 12px !important;
+    padding: 16px 20px !important;
+    margin: 8px 0 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: #e2e8f0 !important;
+}
+
+[data-testid="stSidebar"] .stRadio>div>label:hover {
+    background: rgba(0, 217, 255, 0.1) !important;
+    border-color: #00d9ff !important;
+    transform: translateX(8px);
+}
+
+[data-testid="stSidebar"] .stRadio>div>label[data-baseweb="radio"]>div:first-child {
+    background-color: #00d9ff !important;
+    border-color: #00d9ff !important;
+}
+
+/* Buttons */
+.stButton>button {
+    background: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 16px 32px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3) !important;
+    width: 100%;
+}
+
+.stButton>button:hover {
+    background: linear-gradient(135deg, #0099cc 0%, #007799 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 217, 255, 0.4) !important;
+}
+
+.stFormSubmitButton>button,
+button[kind="primary"] {
+    background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 50%, #ec4899 100%) !important;
+    background-size: 200% 200% !important;
+    animation: gradientShift 3s ease infinite !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 14px !important;
+    padding: 18px 36px !important;
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 6px 20px rgba(0, 217, 255, 0.4) !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100% !important;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.stFormSubmitButton>button:hover,
+button[kind="primary"]:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 217, 255, 0.5) !important;
+}
+
+/* Input Fields */
+input,
+select,
+textarea,
+.stTextInput input,
+.stNumberInput input,
+[data-baseweb="input"] input {
+    font-size: 16px !important;
+    padding: 16px 20px !important;
+    border: 2px solid #2d3748 !important;
+    border-radius: 12px !important;
+    background: #1e2139 !important;
+    color: #ffffff !important;
+    transition: all 0.3s ease !important;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: #4a5568 !important;
+    background: #252a42 !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #00d9ff !important;
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.15) !important;
+    background: #252a42 !important;
+}
+
+.stTextInput>div,
+.stNumberInput>div {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Selectbox */
+[data-baseweb="select"]>div {
+    background: #1e2139 !important;
+    border: 2px solid #2d3748 !important;
+    border-radius: 12px !important;
+    min-height: 56px !important;
+}
+
+[data-baseweb="select"]>div * {
+    background: transparent !important;
+    color: #ffffff !important;
+}
+
+[data-baseweb="select"]:hover>div {
+    border-color: #4a5568 !important;
+}
+
+[data-baseweb="select"]:focus-within>div {
+    border-color: #00d9ff !important;
+    box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.15) !important;
+}
+
+/* Dropdown */
+[data-baseweb="popover"] {
+    background: #1e2139 !important;
+    border: 1px solid #2d3748 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-baseweb="popover"] li {
+    color: #e2e8f0 !important;
+    padding: 14px 20px !important;
+    background: transparent !important;
+}
+
+[data-baseweb="popover"] li:hover {
+    background: rgba(0, 217, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+/* Labels */
+label,
+.stTextInput label,
+.stNumberInput label,
+.stSelectbox label {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 10px !important;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: block !important;
+}
+
+input::placeholder {
+    color: #718096 !important;
+    opacity: 0.7 !important;
+}
+
+/* Containers with borders */
+[data-testid="stVerticalBlock"],
+.stMarkdown {
+    background: transparent !important;
+}
+
+/* Force containers to dark */
+div[data-testid="stVerticalBlock"]>div[data-testid="element-container"] {
+    background: transparent !important;
+}
+
+/* Expanders */
+[data-testid="stExpander"] {
+    background: #151932 !important;
+    border: 1px solid #2d3748 !important;
+    border-radius: 12px !important;
+    margin-bottom: 16px !important;
+}
+
+[data-testid="stExpander"] summary {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    padding: 18px !important;
+    font-size: 16px !important;
+}
+
+[data-testid="stExpander"]:hover {
+    border-color: rgba(0, 217, 255, 0.3) !important;
+}
+
+/* Metrics */
+[data-testid="stMetric"] {
+    background: #151932 !important;
+    border: 1px solid #2d3748 !important;
+    border-radius: 14px !important;
+    padding: 24px !important;
+}
+
+[data-testid="stMetric"] label {
+    color: #a0aec0 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+}
+
+[data-testid="stMetric"] [data-testid="stMetricValue"] {
+    color: #00d9ff !important;
+    font-size: 40px !important;
+    font-weight: 800 !important;
+}
+
+/* Tabs */
+[data-baseweb="tab-list"] {
+    gap: 12px !important;
+    background: #0a0e27 !important;
+    padding: 8px !important;
+    border-radius: 12px !important;
+}
+
+[data-baseweb="tab"] {
+    background: transparent !important;
+    color: #a0aec0 !important;
+    border-radius: 10px !important;
+    padding: 14px 28px !important;
+    font-weight: 600 !important;
+}
+
+[data-baseweb="tab"]:hover {
+    background: rgba(0, 217, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+[data-baseweb="tab"][aria-selected="true"] {
+    background: linear-gradient(135deg, #00d9ff, #7c3aed) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3) !important;
+}
+
+/* Alerts */
+.stSuccess {
+    background: rgba(0, 217, 255, 0.15) !important;
+    border-left: 4px solid #00d9ff !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+    padding: 18px !important;
+}
+
+.stError {
+    background: rgba(239, 68, 68, 0.15) !important;
+    border-left: 4px solid #ef4444 !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+    padding: 18px !important;
+}
+
+.stWarning {
+    background: rgba(245, 158, 11, 0.15) !important;
+    border-left: 4px solid #f59e0b !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+    padding: 18px !important;
+}
+
+.stInfo {
+    background: rgba(124, 58, 237, 0.15) !important;
+    border-left: 4px solid #7c3aed !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+    padding: 18px !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0e27;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00d9ff, #7c3aed);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #7c3aed, #ec4899);
+}
+
+/* DataFrames */
+[data-testid="stDataFrame"] {
+    background: #151932 !important;
+    border-radius: 12px !important;
+    border: 1px solid #2d3748 !important;
+}
+
+[data-testid="stDataFrame"] table {
+    color: #e2e8f0 !important;
+}
+
+[data-testid="stDataFrame"] th {
+    background: rgba(0, 217, 255, 0.15) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+[data-testid="stDataFrame"] tr:hover {
+    background: rgba(0, 217, 255, 0.05) !important;
+}
+
+/* Auth Cards */
+[data-testid="stVerticalBlockBorderWrapper"] {
+    background: #151932 !important;
+    border: 2px solid rgba(0, 217, 255, 0.3) !important;
+    border-radius: 20px !important;
+    padding: 48px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"] label,
+[data-testid="stVerticalBlockBorderWrapper"] p,
+[data-testid="stVerticalBlockBorderWrapper"] h2,
+[data-testid="stVerticalBlockBorderWrapper"] div {
+    color: #ffffff !important;
+}
+
+/* Columns */
+[data-testid="column"] {
+    padding: 0 12px !important;
+}
+
+[data-testid="column"]:first-child {
+    padding-left: 0 !important;
+}
+
+[data-testid="column"]:last-child {
+    padding-right: 0 !important;
+}
+
+/* Loading Spinner */
+[data-testid="stSpinner"]>div {
+    border-color: rgba(0, 217, 255, 0.2) !important;
+    border-top-color: #00d9ff !important;
+}
+
+/* FORCE OVERRIDE ALL INLINE STYLES */
+div[style*="background:#F9FAFB"],
+div[style*="background: #F9FAFB"],
+div[style*="background-color:#F9FAFB"],
+div[style*="background-color: #F9FAFB"] {
+    background: #151932 !important;
+}
+
+div[style*="border:1px solid #E5E7EB"],
+div[style*="border: 1px solid #E5E7EB"] {
+    border: 1px solid #2d3748 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main .block-container {
+        padding: 1.5rem 1rem !important;
+    }
+
+    h1 {
+        font-size: 36px !important;
+    }
+
+    h2 {
+        font-size: 28px !important;
+    }
+}

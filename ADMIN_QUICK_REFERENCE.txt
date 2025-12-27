@@ -1,0 +1,25 @@
+# 🔐 ADMIN ACCESS - QUICK REFERENCE
+
+## Login Credentials
+- **Username:** admin
+- **Password:** Admin@2025
+
+## Access URL
+- **Local:** http://localhost:8501?admin=true
+- **Deployed:** https://your-app.com?admin=true
+
+## Important Notes
+1. The `?admin=true` parameter is REQUIRED to see admin login
+2. Regular users access: http://localhost:8501 (without ?admin=true)
+3. Change password in `.env` file: ADMIN_PASSWORD=YourNewPassword
+
+## Admin Dashboard Tabs
+1. 👥 User Management - View/Edit/Delete users
+2. 📊 System Analytics - View statistics
+3. 📰 Content Management - Moderate posts/questions
+4. 🎓 Sessions Management - Create/Manage sessions
+
+## Security
+- Never share admin credentials
+- Change default password before deployment
+- Keep `.env` file secure (already in .gitignore)

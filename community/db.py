@@ -112,3 +112,76 @@ def get_session(session_id, path=DB_PATH):
     conn = sqlite3.connect(path); c = conn.cursor()
     c.execute('SELECT id,title,link,scheduled_at,expert FROM sessions WHERE id=?',(session_id,))
     row = c.fetchone(); conn.close(); return row
+
+# ============================================
+# ADMIN FUNCTIONS
+# ============================================
+
+def authenticate_admin(username, password, admin_password_env):
+    """Authenticate admin using environment variable password"""
+    if username == 'admin' and password == admin_password_env:
+        return {'username': 'admin', 'role': 'admin'}
+    return None
+
+def get_all_users(path=DB_PATH):
+    """Get all registered users (for admin dashboard)"""
+    conn = sqlite3.connect(path); c = conn.cursor()
+    c.execute('SELECT id, username, role FROM users ORDER BY id DESC')
+    rows = c.fetchall(); conn.close(); return rows
+
+def delete_user(username, path=DB_PATH):
+    """Delete a user (admin only)"""
+    conn = sqlite3.connect(path); c = conn.cursor()
+    try:
+        c.execute('DELETE FROM users WHERE username=?', (username,))
+        conn.commit(); return True
+    except Exception as e:
+        return False
+    finally:
+        conn.close()
+
+def update_user_role(username, new_role, path=DB_PATH):
+    """Update user role (admin only)"""
+    conn = sqlite3.connect(path); c = conn.cursor()
+    try:
+        c.execute('UPDATE users SET role=? WHERE username=?', (new_role, username))
+        conn.commit(); return True
+    except Exception as e:
+        return False
+    finally:
+        conn.close()
+
+def get_all_posts_admin(path=DB_PATH):
+    """Get all posts with more details (admin view)"""
+    conn = sqlite3.connect(path); c = conn.cursor()
+    c.execute('SELECT id, title, content, author, created_at FROM posts ORDER BY id DESC')
+    rows = c.fetchall(); conn.close(); return rows
+
+def delete_post(post_id, path=DB_PATH):
+    """Delete a post (admin only)"""
+    conn = sqlite3.connect(path); c = conn.cursor()
+    try:
+        c.execute('DELETE FROM posts WHERE id=?', (post_id,))
+        conn.commit(); return True
+    except Exception as e:
+        return False
+    finally:
+        conn.close()
+
+def get_all_questions_admin(path=DB_PATH):
+    """Get all questions with details (admin view)"""
+    conn = sqlite3.connect(path); c = conn.cursor()
+    c.execute('SELECT id, title, content, author, created_at, views, saves FROM questions ORDER BY id DESC')
+    rows = c.fetchall(); conn.close(); return rows
+
+def delete_question(question_id, path=DB_PATH):
+    """Delete a question (admin only)"""
+    conn = sqlite3.connect(path); c = conn.cursor()
+    try:
+        c.execute('DELETE FROM questions WHERE id=?', (question_id,))
+        c.execute('DELETE FROM answers WHERE question_id=?', (question_id,))
+        conn.commit(); return True
+    except Exception as e:
+        return False
+    finally:
+        conn.close()

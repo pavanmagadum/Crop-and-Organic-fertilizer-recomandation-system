@@ -1,0 +1,66 @@
+% ---------------- REFERENCES ----------------
+\begin{thebibliography}{00}
+\bibitem{fao2017}
+Food and Agriculture Organization of the United Nations, ``The future of food and agriculture: Trends and challenges,'' FAO, Rome, Italy, 2017.
+
+\bibitem{liakos2018}
+K. G. Liakos, P. Busato, D. Moshou, S. Pearson, and D. Bochtis, ``Machine learning in agriculture: A review,'' \emph{Sensors}, vol. 18, no. 8, p. 2674, Aug. 2018.
+
+\bibitem{savci2012}
+S. Savci, ``An agricultural pollutant: Chemical fertilizer,'' \emph{International Journal of Environmental Science and Development}, vol. 3, no. 1, pp. 73--80, 2012.
+
+\bibitem{porter2014}
+J. R. Porter and M. A. Semenov, ``Crop responses to climatic variation,'' \emph{Philosophical Transactions of the Royal Society B: Biological Sciences}, vol. 360, no. 1463, pp. 2021--2035, 2005.
+
+\bibitem{kante2019}
+M. Kante, K. Oboko, and C. Chepken, ``Factors affecting the use of ICTs on agricultural input information by farmers in developing countries,'' \emph{AIMS Agriculture and Food}, vol. 4, no. 2, pp. 315--329, 2019.
+
+\bibitem{ramesh2020}
+D. Ramesh and B. Vardhan, ``Analysis of crop yield prediction using data mining techniques,'' \emph{International Journal of Research in Engineering and Technology}, vol. 4, no. 1, pp. 47--473, 2015.
+
+\bibitem{patel2021}
+J. Patel and D. Patel, ``Crop recommendation system using machine learning,'' in \emph{Proc. 2nd Int. Conf. on Intelligent Engineering and Management (ICIEM)}, 2021, pp. 1--6.
+
+\bibitem{kumar2021}
+S. Kumar, A. Singh, and R. Kumar, ``Fertilizer recommendation system using machine learning,'' \emph{International Journal of Computer Applications}, vol. 176, no. 25, pp. 1--6, 2020.
+
+\bibitem{icar2015}
+Indian Council of Agricultural Research, ``Handbook of organic farming,'' ICAR, New Delhi, India, 2015.
+
+\bibitem{kamilaris2018}
+A. Kamilaris and F. X. Prenafeta-Boldú, ``Deep learning in agriculture: A survey,'' \emph{Computers and Electronics in Agriculture}, vol. 147, pp. 70--90, Apr. 2018.
+
+\bibitem{breiman2001}
+L. Breiman, ``Random forests,'' \emph{Machine Learning}, vol. 45, no. 1, pp. 5--32, Oct. 2001.
+
+\bibitem{wolfert2017}
+S. Wolfert, L. Ge, C. Verdouw, and M. J. Bogaardt, ``Big data in smart farming -- A review,'' \emph{Agricultural Systems}, vol. 153, pp. 69--80, May 2017.
+
+% -------- Organic Fertilizer Mapping References --------
+
+\bibitem{solomon2012}
+S. Solomon, \emph{The Intelligent Gardener: Growing Nutrient Dense Food}. Gabriola Island, BC, Canada: New Society Publishers, 2012.
+
+\bibitem{magdoff2021}
+F. Magdoff and H. Van Es, \emph{Building Soils for Better Crops: Sustainable Soil Management}, 4th ed. College Park, MD, USA: Sustainable Agriculture Research and Education (SARE), 2021.
+
+\bibitem{brady2016}
+N. C. Brady and R. R. Weil, \emph{The Nature and Properties of Soils}, 15th ed. Upper Saddle River, NJ, USA: Pearson, 2016.
+
+\bibitem{ramamoorthy2015}
+V. Ramamoorthy and S. Balasubramanian, \emph{Organic Farming: Theory and Practices}. Jodhpur, India: Scientific Publishers, 2015.
+
+\bibitem{palekar2006}
+S. Palekar, \emph{Zero Budget Natural Farming}. Amravati, India: Swamy Vivekananda Parisar Pratishthan, 2006.
+
+\bibitem{martin1992}
+D. L. Martin and G. Gershuny, \emph{The Rodale Book of Composting: Easy Methods for Every Gardener}. Emmaus, PA, USA: Rodale Books, 1992.
+
+\bibitem{sharma2017}
+K. Sharma and V. K. Garg, ``Vermicompost: An eco-friendly approach for waste management and nutrient enhancement,'' in \emph{Organic Fertilizers - From Basic Concepts to Applied Outcomes}, M. L. Larramendy and S. Soloneski, Eds. IntechOpen, 2017, pp. 155--176.
+
+\bibitem{ncof2019}
+National Centre of Organic Farming (NCOF), ``Guide to organic farming,'' Ministry of Agriculture and Farmers Welfare, Government of India, Ghaziabad, India, 2019.
+
+\end{thebibliography}
+\end{document}
