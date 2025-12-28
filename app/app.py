@@ -1062,9 +1062,8 @@ elif page == 'Prediction':
                             colors=['#FF6B6B', '#FFA07A', '#FFD700', '#FF8C00'],
                             line=dict(color='#1e293b', width=2)
                         ),
-                        textinfo='label+percent',
-                        textposition='auto',
-                        textfont=dict(size=14, color='white', family='Arial Black'),
+                        textinfo='none',  # No text inside slices - using legend below
+                        textposition='none',
                         hoverinfo='label+percent+value',
                         hole=0.3,  # Donut style for modern look
                         pull=[0.05, 0, 0, 0],  # Pull out first slice
@@ -1079,9 +1078,8 @@ elif page == 'Prediction':
                             colors=['#2D5016', '#6B8E23', '#8FBC8F', '#90EE90'],
                             line=dict(color='#1e293b', width=2)
                         ),
-                        textinfo='label+percent',
-                        textposition='auto',
-                        textfont=dict(size=14, color='white', family='Arial Black'),
+                        textinfo='none',  # No text inside slices - using legend below
+                        textposition='none',
                         hoverinfo='label+percent+value',
                         hole=0.3,  # Donut style for modern look
                         pull=[0.05, 0, 0, 0],  # Pull out first slice
