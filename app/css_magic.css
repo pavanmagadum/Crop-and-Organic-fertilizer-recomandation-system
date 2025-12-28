@@ -459,26 +459,7 @@ input::placeholder {
 /* ============================================
    BUTTONS - ENHANCED MAGIC CSS
    ============================================ */
-/* Navigation buttons - styled as header links */
-[data-testid="column"] .stButton>button {
-    background: transparent !important;
-    color: #e2e8f0 !important;
-    border: none !important;
-    border-radius: 6px !important;
-    padding: 8px 16px !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    transition: all 0.3s ease !important;
-    box-shadow: none !important;
-    width: auto !important;
-}
-
-[data-testid="column"] .stButton>button:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: var(--accent-cyan) !important;
-    transform: none !important;
-    box-shadow: none !important;
-}
+/* Global magic styles for buttons in columns are handled by the general stButton styles below */
 
 /* Primary action buttons with gradient and animation */
 .stFormSubmitButton>button,
@@ -1388,5 +1369,72 @@ div[role='alert'] p {
 
     .hero-subtitle {
         font-size: 14px !important;
+    }
+}
+
+/* ============================================
+   INTEGRATED HEADER & NAVIGATION
+   ============================================ */
+/* Target the container holding the title and buttons using the anchor */
+div[data-testid="stVerticalBlock"]:has(#header-bar-anchor) {
+    background: rgba(21, 25, 50, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid #2d3748 !important;
+    padding: 10px 40px !important;
+    margin: -6rem -2rem 2rem -2rem !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 999999 !important;
+    width: 100vw !important;
+    left: 0 !important;
+}
+
+/* Specific styling for navigation links in the header only */
+.nav-link-container {
+    padding-top: 25px !important;
+}
+
+.nav-link-container .stButton>button {
+    background: transparent !important;
+    border: none !important;
+    color: #94a3b8 !important;
+    /* Muted color for inactive state */
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    transition: all 0.3s ease !important;
+    text-transform: none !important;
+    width: auto !important;
+    min-width: unset !important;
+}
+
+.nav-link-container .stButton>button:hover {
+    color: #00d9ff !important;
+    background: transparent !important;
+    transform: translateY(-1px) !important;
+    box-shadow: none !important;
+}
+
+/* Mobile responsive fixes for integrated header */
+@media (max-width: 900px) {
+    div[data-testid="stVerticalBlock"]:has(#header-bar-anchor) {
+        padding: 15px !important;
+        margin-top: -4rem !important;
+    }
+
+    div[data-testid="stVerticalBlock"]:has(#header-bar-anchor) [data-testid="stHorizontalBlock"] {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    .nav-link-container {
+        padding-top: 5px !important;
+    }
+
+    .nav-link-container .stButton>button {
+        margin: 0 !important;
+        padding: 5px 15px !important;
     }
 }

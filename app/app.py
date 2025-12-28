@@ -450,42 +450,52 @@ st.markdown('''
 # </style>
 # ''', unsafe_allow_html=True)
 
-# TOP NAVIGATION BAR with WORKING LINKS
-st.markdown("""
-<div style="background: rgba(21, 25, 50, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid #2d3748; padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; margin: -2rem -2rem 2rem -2rem;">
-    <div style="font-size: 24px; font-weight: 800; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 12px;">
-        🌾 Climate-Aware Farming
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
 # Initialize session state for page navigation
 if 'page' not in st.session_state:
     st.session_state['page'] = 'Home'
 
-# WORKING NAVIGATION - Using columns for clickable buttons styled as links
-nav_col1, nav_col2, nav_col3, nav_col4, nav_col5 = st.columns([3, 1, 1, 1, 1])
+# TOP NAVIGATION BAR with INTEGRATED BUTTONS
+with st.container():
+    # Unique ID to target ONLY this container
+    st.markdown('<div id="header-bar-anchor"></div>', unsafe_allow_html=True)
+    
+    # Create the horizontal header layout
+    h_col1, h_col2, h_col3, h_col4, h_col5 = st.columns([3.5, 0.8, 1, 1, 1])
+    
+    with h_col1:
+        st.markdown("""
+        <div style="font-size: 24px; font-weight: 800; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 12px; padding: 15px 0 0 20px;">
+            🌾 Climate-Aware Farming
+        </div>
+        """, unsafe_allow_html=True)
 
-with nav_col1:
-    st.markdown("", unsafe_allow_html=True)  # Spacer
+    with h_col2:
+        st.markdown('<div class="nav-link-container">', unsafe_allow_html=True)
+        if st.button("Home", key="nav_home"):
+            st.session_state['page'] = 'Home'
+        st.markdown('</div>', unsafe_allow_html=True)
 
-with nav_col2:
-    if st.button("Home", key="nav_home", use_container_width=True):
-        st.session_state['page'] = 'Home'
+    with h_col3:
+        st.markdown('<div class="nav-link-container">', unsafe_allow_html=True)
+        if st.button("Prediction", key="nav_pred"):
+            st.session_state['page'] = 'Prediction'
+        st.markdown('</div>', unsafe_allow_html=True)
 
-with nav_col3:
-    if st.button("Prediction", key="nav_pred", use_container_width=True):
-        st.session_state['page'] = 'Prediction'
+    with h_col4:
+        st.markdown('<div class="nav-link-container">', unsafe_allow_html=True)
+        if st.button("Preparation", key="nav_prep"):
+            st.session_state['page'] = 'Preparation'
+        st.markdown('</div>', unsafe_allow_html=True)
 
-with nav_col4:
-    if st.button("Preparation", key="nav_prep", use_container_width=True):
-        st.session_state['page'] = 'Preparation'
+    with h_col5:
+        st.markdown('<div class="nav-link-container">', unsafe_allow_html=True)
+        if st.button("Community", key="nav_comm"):
+            st.session_state['page'] = 'Community'
+        st.markdown('</div>', unsafe_allow_html=True)
 
-with nav_col5:
-    if st.button("Community", key="nav_comm", use_container_width=True):
-        st.session_state['page'] = 'Community'
+# Add spacing after header
+st.markdown('<div style="margin-bottom: 30px;"></div>', unsafe_allow_html=True)
 
-st.markdown('<br>', unsafe_allow_html=True)
 
 # Get current page
 page = st.session_state['page']
