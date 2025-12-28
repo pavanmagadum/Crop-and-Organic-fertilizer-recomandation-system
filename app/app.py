@@ -460,11 +460,11 @@ with st.container():
     st.markdown('<div id="header-bar-anchor"></div>', unsafe_allow_html=True)
     
     # Create the horizontal header layout
-    h_col1, h_col2, h_col3, h_col4, h_col5 = st.columns([3.5, 0.8, 1, 1, 1])
+    h_col1, h_col2, h_col3, h_col4, h_col5 = st.columns([5.5, 1, 1.2, 1.2, 1.1])
     
     with h_col1:
         st.markdown("""
-        <div style="font-size: 24px; font-weight: 800; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 12px; padding: 15px 0 0 20px;">
+        <div style="font-size: 24px; font-weight: 800; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 12px; padding: 25px 0 0 20px;">
             🌾 Climate-Aware Farming
         </div>
         """, unsafe_allow_html=True)
