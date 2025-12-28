@@ -380,6 +380,8 @@ textarea,
     color: #000000 !important;
     font-weight: 500 !important;
     transition: all 0.3s ease !important;
+    caret-color: #000000 !important;
+    /* Make cursor visible */
 }
 
 input:hover,
