@@ -456,11 +456,43 @@ if 'page' not in st.session_state:
 
 # TOP NAVIGATION BAR with INTEGRATED BUTTONS
 with st.container():
-    # Unique ID to target ONLY this container
-    st.markdown('<div id="header-bar-anchor"></div>', unsafe_allow_html=True)
+    # DIRECT STYLE INJECTION TO OVERRIDE MAGIC CSS
+    st.markdown("""
+    <style>
+        /* Target the specific buttons in the header bar */
+        div[data-testid="stHorizontalBlock"] .nav-link-container .stButton > button {
+            background: rgba(255, 255, 255, 0.05) !important;
+            background-image: none !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
+            width: 140px !important; /* UNIFORM WIDTH */
+            height: 45px !important;  /* UNIFORM HEIGHT */
+            border-radius: 8px !important;
+            box-shadow: none !important;
+            text-transform: none !important;
+            font-weight: 600 !important;
+            margin-top: 15px !important; /* CENTER VERTICALLY */
+            transition: all 0.3s ease !important;
+        }
+        
+        div[data-testid="stHorizontalBlock"] .nav-link-container .stButton > button:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: #00d9ff !important;
+            color: #00d9ff !important;
+            transform: translateY(-2px) !important;
+        }
+
+        /* Ensure columns are centered */
+        div[data-testid="column"] {
+            display: flex !important;
+            justify-content: center !important;
+        }
+    </style>
+    <div id="header-bar-anchor"></div>
+    """, unsafe_allow_html=True)
     
-    # Create the horizontal header layout
-    h_col1, h_col2, h_col3, h_col4, h_col5 = st.columns([5.5, 1, 1.2, 1.2, 1.1])
+    # Create columns with equal spacing for buttons
+    h_col1, h_col2, h_col3, h_col4, h_col5 = st.columns([3.5, 1.2, 1.2, 1.2, 1.2])
     
     with h_col1:
         st.markdown("""

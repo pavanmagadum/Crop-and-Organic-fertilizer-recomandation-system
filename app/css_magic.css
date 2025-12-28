@@ -1375,74 +1375,61 @@ div[role='alert'] p {
 /* ============================================
    INTEGRATED HEADER & NAVIGATION
    ============================================ */
-/* Target the container holding the title and buttons using the anchor */
+/* Target the header bar with natural margins to avoid corruption */
 div[data-testid="stVerticalBlock"]:has(#header-bar-anchor) {
     background: rgba(21, 25, 50, 0.98) !important;
     backdrop-filter: blur(20px) !important;
     border-bottom: 1px solid #2d3748 !important;
-    padding: 0 40px !important;
-    /* Sticky is better for scrolling */
+    padding: 10px 20px !important;
     position: sticky !important;
     top: 0 !important;
-    z-index: 999999 !important;
-    margin: -6rem -2rem 2rem -2rem !important;
-    width: calc(100% + 4rem) !important;
-    height: auto !important;
-    min-height: 80px !important;
+    z-index: 99999 !important;
+    margin: -1rem 0 2rem 0 !important;
+    border-radius: 12px !important;
 }
 
-/* Ensure horizontal block inside doesn't have extra margins */
+/* Correctly space the horizontal columns inside the header */
 div[data-testid="stVerticalBlock"]:has(#header-bar-anchor) [data-testid="stHorizontalBlock"] {
     align-items: center !important;
-    gap: 0 !important;
 }
 
-/* Specific styling for navigation links in the header only */
+/* Style only the header navigation buttons as clean links with UNIFORM SIZE */
 .nav-link-container {
-    padding-top: 25px !important;
+    padding-top: 15px !important;
 }
 
 .nav-link-container .stButton>button {
-    background: transparent !important;
-    border: none !important;
-    color: #94a3b8 !important;
-    /* Muted color for inactive state */
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #e2e8f0 !important;
     font-size: 15px !important;
-    font-weight: 500 !important;
-    padding: 0 !important;
-    box-shadow: none !important;
+    font-weight: 600 !important;
+    /* UNIFORM SIZE FOR ALL BUTTONS */
+    min-width: 140px !important;
+    height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     transition: all 0.3s ease !important;
+    box-shadow: none !important;
     text-transform: none !important;
-    width: auto !important;
-    min-width: unset !important;
+    border-radius: 12px !important;
+    white-space: nowrap !important;
+    width: 100% !important;
 }
 
 .nav-link-container .stButton>button:hover {
     color: #00d9ff !important;
-    background: transparent !important;
-    transform: translateY(-1px) !important;
-    box-shadow: none !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: #00d9ff !important;
+    transform: translateY(-2px) !important;
 }
 
-/* Mobile responsive fixes for integrated header */
+
+/* Ensure other page content isn't shifted or corrupted */
 @media (max-width: 900px) {
     div[data-testid="stVerticalBlock"]:has(#header-bar-anchor) {
-        padding: 15px !important;
-        margin-top: -4rem !important;
-    }
-
-    div[data-testid="stVerticalBlock"]:has(#header-bar-anchor) [data-testid="stHorizontalBlock"] {
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 10px !important;
-    }
-
-    .nav-link-container {
-        padding-top: 5px !important;
-    }
-
-    .nav-link-container .stButton>button {
         margin: 0 !important;
-        padding: 5px 15px !important;
+        padding: 5px !important;
     }
 }
