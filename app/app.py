@@ -456,43 +456,41 @@ if 'page' not in st.session_state:
 
 # TOP NAVIGATION BAR with INTEGRATED BUTTONS
 with st.container():
-    # DIRECT STYLE INJECTION TO OVERRIDE MAGIC CSS
+    # BRUTE FORCE override of the Magic CSS
     st.markdown("""
     <style>
-        /* Target the specific buttons in the header bar */
-        div[data-testid="stHorizontalBlock"] .nav-link-container .stButton > button {
-            background: rgba(255, 255, 255, 0.05) !important;
-            background-image: none !important;
+        /* Target buttons in columns 2, 3, 4, and 5 of the header row */
+        div[data-testid="column"]:nth-child(2) button,
+        div[data-testid="column"]:nth-child(3) button,
+        div[data-testid="column"]:nth-child(4) button,
+        div[data-testid="column"]:nth-child(5) button {
+            background: #1e293b !important; /* Solid dark background */
+            background-image: none !important; /* Force kill gradients */
             border: 1px solid rgba(255, 255, 255, 0.2) !important;
             color: #ffffff !important;
-            width: 140px !important; /* UNIFORM WIDTH */
-            height: 45px !important;  /* UNIFORM HEIGHT */
-            border-radius: 8px !important;
+            width: 160px !important; /* FORCED UNIFORM LARGE WIDTH */
+            height: 48px !important;
+            border-radius: 10px !important;
             box-shadow: none !important;
-            text-transform: none !important;
-            font-weight: 600 !important;
-            margin-top: 15px !important; /* CENTER VERTICALLY */
-            transition: all 0.3s ease !important;
+            font-weight: 700 !important;
+            margin-top: 20px !important; /* VERTICAL ALIGNMENT */
+            padding: 0 !important;
         }
         
-        div[data-testid="stHorizontalBlock"] .nav-link-container .stButton > button:hover {
-            background: rgba(255, 255, 255, 0.1) !important;
+        div[data-testid="column"]:nth-child(2) button:hover,
+        div[data-testid="column"]:nth-child(3) button:hover,
+        div[data-testid="column"]:nth-child(4) button:hover,
+        div[data-testid="column"]:nth-child(5) button:hover {
             border-color: #00d9ff !important;
             color: #00d9ff !important;
-            transform: translateY(-2px) !important;
-        }
-
-        /* Ensure columns are centered */
-        div[data-testid="column"] {
-            display: flex !important;
-            justify-content: center !important;
+            background: #2d3748 !important;
         }
     </style>
     <div id="header-bar-anchor"></div>
     """, unsafe_allow_html=True)
     
-    # Create columns with equal spacing for buttons
-    h_col1, h_col2, h_col3, h_col4, h_col5 = st.columns([3.5, 1.2, 1.2, 1.2, 1.2])
+    # Create the columns
+    h_col1, h_col2, h_col3, h_col4, h_col5 = st.columns([3, 1, 1, 1, 1])
     
     with h_col1:
         st.markdown("""
@@ -502,28 +500,20 @@ with st.container():
         """, unsafe_allow_html=True)
 
     with h_col2:
-        st.markdown('<div class="nav-link-container">', unsafe_allow_html=True)
         if st.button("Home", key="nav_home"):
             st.session_state['page'] = 'Home'
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with h_col3:
-        st.markdown('<div class="nav-link-container">', unsafe_allow_html=True)
         if st.button("Prediction", key="nav_pred"):
             st.session_state['page'] = 'Prediction'
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with h_col4:
-        st.markdown('<div class="nav-link-container">', unsafe_allow_html=True)
         if st.button("Preparation", key="nav_prep"):
             st.session_state['page'] = 'Preparation'
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with h_col5:
-        st.markdown('<div class="nav-link-container">', unsafe_allow_html=True)
         if st.button("Community", key="nav_comm"):
             st.session_state['page'] = 'Community'
-        st.markdown('</div>', unsafe_allow_html=True)
 
 # Add spacing after header
 st.markdown('<div style="margin-bottom: 30px;"></div>', unsafe_allow_html=True)
