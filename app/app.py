@@ -32,6 +32,8 @@ from dotenv import load_dotenv
 load_dotenv()
 ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD', 'Admin@2025')  # Default password if .env not found
 
+# Initialize community database at startup
+cdb.init_db()
 
 # Comprehensive crop duration data (in days) - Complete coverage for all crops
 CROP_DURATION = {
@@ -1612,6 +1614,14 @@ elif page == 'Community':
             # TAB 1: User Management
             with tab1:
                 st.markdown("### 👥 Registered Users")
+                
+                # Add refresh button
+                col_refresh, col_count = st.columns([1, 3])
+                with col_refresh:
+                    if st.button("🔄 Refresh Users", key="refresh_users", use_container_width=True):
+                        st.rerun()
+                with col_count:
+                    st.markdown("")
                 
                 users = cdb.get_all_users()
                 if users:

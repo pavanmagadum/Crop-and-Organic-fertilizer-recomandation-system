@@ -1,6 +1,10 @@
 import sqlite3, hashlib, os, datetime
-DB_PATH = 'community/community.db'
-def init_db(path=DB_PATH):
+from .config import DB_PATH  # Import from config file
+
+# Keep DB_PATH for backward compatibility
+def init_db(path=None):
+    if path is None:
+        path = DB_PATH
     os.makedirs(os.path.dirname(path), exist_ok=True)
     conn = sqlite3.connect(path)
     c = conn.cursor()
