@@ -1,0 +1,16 @@
+# Railway Deployment Configuration
+# https://railway.app - Better for Streamlit than Vercel
+
+[build]
+builder = "nixpacks"
+buildpacks = ["python"]
+
+[deploy]
+numReplicas = 1
+port = 8502
+startCommand = "streamlit run app/app.py --server.port=8502 --server.address=0.0.0.0 --logger.level=info"
+
+[env]
+ADMIN_PASSWORD = "$ADMIN_PASSWORD"
+DATABASE_TYPE = "sqlite"
+PYTHONUNBUFFERED = "1"

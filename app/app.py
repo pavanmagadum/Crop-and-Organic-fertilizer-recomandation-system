@@ -467,34 +467,53 @@ st.markdown("""
 if 'page' not in st.session_state:
     st.session_state['page'] = 'Home'
 
-# NAV WRAPPER - This will handle the buttons
-# Use a custom div to target with CSS for stickiness if needed
-st.markdown('<div class="nav-container-wrapper">', unsafe_allow_html=True)
-nav_col1, nav_col2, nav_col3, nav_col4, nav_col5 = st.columns([3, 1, 1, 1, 1])
+# NAV WRAPPER - OPTIMIZED PROPORTIONAL BUTTONS
+st.markdown('''
+<style>
+.nav-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    padding: 12px 20px;
+    flex-wrap: wrap;
+}
+.nav-button {
+    flex: 1;
+    min-width: 120px;
+}
+/* Optimize button appearance */
+[data-testid="stButton"] > button {
+    width: 100% !important;
+    border-radius: 10px !important;
+    padding: 12px 20px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+}
+</style>
+''', unsafe_allow_html=True)
+
+# FIXED: Equal width columns for proportional buttons
+nav_col1, nav_col2, nav_col3, nav_col4 = st.columns([1, 1, 1, 1], gap='medium')
 
 with nav_col1:
-    st.markdown("", unsafe_allow_html=True)  # Spacer
-
-with nav_col2:
     if st.button("🏠 Home", key="nav_home", use_container_width=True):
         st.session_state['page'] = 'Home'
         st.rerun()
 
-with nav_col3:
+with nav_col2:
     if st.button("🎯 Prediction", key="nav_pred", use_container_width=True):
         st.session_state['page'] = 'Prediction'
         st.rerun()
 
-with nav_col4:
+with nav_col3:
     if st.button("📋 Preparation", key="nav_prep", use_container_width=True):
         st.session_state['page'] = 'Preparation'
         st.rerun()
 
-with nav_col5:
+with nav_col4:
     if st.button("🤝 Community", key="nav_comm", use_container_width=True):
         st.session_state['page'] = 'Community'
         st.rerun()
-st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown('<br>', unsafe_allow_html=True)
 
