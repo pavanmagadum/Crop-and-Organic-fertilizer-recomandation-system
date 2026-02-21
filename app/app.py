@@ -1419,19 +1419,27 @@ elif page == 'Community':
     
     # SMALLER, SIMPLER HERO SECTION
     st.markdown('''
-    <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.08) 100%), 
-    linear-gradient(135deg, rgba(30, 41, 59, 0.3) 0%, rgba(26, 31, 58, 0.4) 100%);
-    border-radius: 16px; padding: 24px; margin-bottom: 24px; text-align: center;
-    border: 1px solid rgba(139, 92, 246, 0.2);">
-        <div style="font-size: 32px; margin-bottom: 8px;">👥</div>
-        <h2 style="color: #e2e8f0; margin: 0; font-size: 24px; font-weight: 700;">
-            Welcome to Community
-        </h2>
-        <p style="color: #94a3b8; margin: 8px 0 0 0; font-size: 14px;">
-            Connect with agricultural experts and get verified answers
-        </p>
-    </div>
-    ''', unsafe_allow_html=True)
+        <style>
+            .comm-hero{background: linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(59,130,246,0.06) 100%), linear-gradient(135deg, rgba(30,41,59,0.28) 0%, rgba(26,31,58,0.36) 100%); border-radius:16px; padding:20px; margin-bottom:20px; border:1px solid rgba(139,92,246,0.18);}
+            .comm-hero .left{display:flex; align-items:center; gap:18px}
+            .comm-hero .icon{font-size:34px}
+            .admin-quick-btn{background: linear-gradient(90deg,#FBBF24,#F59E0B); color:#0b1220; padding:10px 16px; border-radius:12px; font-weight:800; text-decoration:none; box-shadow:0 6px 18px rgba(245,158,11,0.18); border: none;}
+            .admin-quick-btn:hover{transform:translateY(-2px); box-shadow:0 10px 28px rgba(245,158,11,0.22)}
+            @media (max-width:720px){ .comm-hero{padding:16px} .admin-quick-btn{padding:8px 12px; font-size:14px} }
+        </style>
+        <div class="comm-hero" style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+            <div class="left" style="flex:1;">
+                <div class="icon">👥</div>
+                <div style="line-height:1;">
+                    <h2 style="color:#e2e8f0; margin:0; font-size:22px; font-weight:700;">Welcome to Community</h2>
+                    <p style="color:#94a3b8; margin:6px 0 0 0; font-size:14px;">Connect with agricultural experts and get verified answers</p>
+                </div>
+            </div>
+            <div style="flex:0 0 auto;">
+                <a href="?admin=true" class="admin-quick-btn" aria-label="Admin Login">🔐 Admin</a>
+            </div>
+        </div>
+        ''', unsafe_allow_html=True)
     
     # Initialize show_register state if not exists
     if 'show_register' not in st.session_state:
