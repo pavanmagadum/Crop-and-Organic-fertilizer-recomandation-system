@@ -458,253 +458,170 @@ st.markdown('''
 # </style>
 # ''', unsafe_allow_html=True)
 
-# Theme Toggle Button - ISOLATED CONTAINER FIX
-theme_container = st.container()
-with theme_container:
-    theme_icon = "☀️" if st.session_state['theme'] == 'dark' else "🌙"
-    st.markdown('<span id="theme-button-marker"></span>', unsafe_allow_html=True)
-    if st.button(theme_icon, key="theme_toggle_nav_btn"):
-        st.session_state['theme'] = 'light' if st.session_state['theme'] == 'dark' else 'dark'
-        st.rerun()
-
-# Initialize session state for page navigation
+# Initialize session state for theme and page
+if 'theme' not in st.session_state:
+    st.session_state['theme'] = 'dark'
 if 'page' not in st.session_state:
     st.session_state['page'] = 'Home'
 
-# CONSOLIDATED HTML & CSS INJECTION 
-# (Bundled together to prevent Streamlit from generating empty vertical gaps between elements)
-st.markdown("""
-<div class="top-nav-bar">
-    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 100%; margin: 0 auto;">
-        <div style="font-size: 22px; font-weight: 800; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 10px;">
-            🌾 Climate-Aware Farming
-        </div>
-    </div>
-</div>
+# Helper function for theme toggle
+def toggle_theme():
+    st.session_state['theme'] = 'light' if st.session_state['theme'] == 'dark' else 'dark'
 
-<style>
-/* 1. Target the specific innermost stVerticalBlock for our container completely removing its normal spacing */
-div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) {
-    position: absolute !important;
-    height: 0px !important;
-    width: 0px !important;
-    min-height: 0px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    z-index: 9999999 !important;
-    overflow: visible !important;
-}
-
-/* 2. Style the Button inside that innermost block, floating it cleanly to the top navbar right-corner */
-div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) .stButton > button {
-    position: fixed !important;
-    top: 15px !important;
-    right: 3% !important;
-    width: 42px !important;
-    height: 42px !important;
-    border-radius: 50% !important;
-    background: rgba(100, 100, 100, 0.1) !important;
-    background-image: none !important; /* Erase any gradient from css_magic globally */
-    backdrop-filter: blur(10px) !important;
-    color: var(--text-primary) !important;
-    border: 1px solid rgba(100, 100, 100, 0.2) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 20px !important;
-    padding: 0 !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
-    transform: none !important;
-    z-index: 9999999 !important;
-}
-
-div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) .stButton > button:hover {
-    transform: scale(1.1) rotate(15deg) !important;
-    background: rgba(100, 100, 100, 0.2) !important;
-    border-color: rgba(100, 100, 100, 0.4) !important;
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-page = st.session_state.get('page', 'Home')
-
-# ═══ ICON RIBBON (non-Home pages) — WhatsApp-style left strip ═══
-if page != 'Home':
-    # Determine ribbon colors based on theme
-    is_dark = st.session_state.get('theme', 'dark') == 'dark'
-    ribbon_bg  = "#151932" if is_dark else "#f0fdf4"
-    ribbon_bdr = "rgba(255,255,255,0.08)" if is_dark else "rgba(0,0,0,0.08)"
-    icon_bg    = "rgba(255,255,255,0.05)" if is_dark else "rgba(0,0,0,0.04)"
-    icon_bdr   = "rgba(255,255,255,0.12)" if is_dark else "rgba(0,150,100,0.25)"
-
-    # Inject a hidden HTML ribbon using a unique ID approach
-    st.markdown(f"""
-<div id="wapp-icon-ribbon" style="
-    position: fixed;
-    top: 56px;
-    left: 0;
-    width: 72px;
-    height: calc(100vh - 56px);
-    background: {ribbon_bg};
-    border-right: 1px solid {ribbon_bdr};
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 28px;
-    gap: 14px;
-    z-index: 88888;
-    box-shadow: 2px 0 12px rgba(0,0,0,0.15);
-">
-  <a id="rib-btn-home"  title="🏠 Home"       style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;background:{icon_bg};border:1px solid {icon_bdr};text-decoration:none;transition:all 0.25s;">🏠</a>
-  <a id="rib-btn-pred"  title="🎯 Prediction"  style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;background:{icon_bg};border:1px solid {icon_bdr};text-decoration:none;transition:all 0.25s;">🎯</a>
-  <a id="rib-btn-prep"  title="📋 Preparation" style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;background:{icon_bg};border:1px solid {icon_bdr};text-decoration:none;transition:all 0.25s;">📋</a>
-  <a id="rib-btn-comm"  title="🤝 Community"   style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;background:{icon_bg};border:1px solid {icon_bdr};text-decoration:none;transition:all 0.25s;">🤝</a>
-</div>
-
-<style>
-/* 1. AGGRESSIVE SUB-PAGE SHIM - ROOT PRIORITY */
-#root [data-testid="stAppViewBlockContainer"],
-#root [data-testid="stMainBlockContainer"],
-#root .main .block-container,
-section.main > div > div > div.block-container {{
-    padding: 85px 3% 50px 125px !important; /* Top Right Bottom Left */
-    margin: 0 !important;
-    max-width: 100% !important;
-    width: auto !important;
-    background: transparent !important;
-}}
-
-    background: transparent !important;
-}}
-
-/* Ribbon icon hover effects */
-#wapp-icon-ribbon a:hover {{
-    background: rgba(139,92,246,0.22) !important;
-    border-color: rgba(139,92,246,0.55) !important;
-    transform: scale(1.13);
-}}
-
-/* Native tooltip on hover */
-#wapp-icon-ribbon a::after {{
-    content: attr(title);
-    position: absolute;
-    left: 76px;
-    background: rgba(15,17,40,0.92);
-    color: #e2e8f0;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.12);
-}}
-#wapp-icon-ribbon a:hover::after {{
-    opacity: 1;
-}}
-
-/* Responsive: hide ribbon on mobile and reset all paddings */
-@media (max-width: 768px) {{
-    #wapp-icon-ribbon {{ display: none !important; }}
-    div[data-testid="stAppViewBlockContainer"],
-    div[data-testid="stMainBlockContainer"],
-    .main .block-container,
-    section[data-testid="stMain"] > div > div.block-container {{
-        padding-left: 1.5rem !important;
-        padding-right: 1.5rem !important;
-        padding-top: 5rem !important;
-    }}
-}}
-</style>
-
-<script>
-// Wire up HTML ribbon anchors to fire Streamlit button clicks
-(function() {{
-    function wireButtons() {{
-        var pairs = [
-            ['rib-btn-home', 'rib_home'],
-            ['rib-btn-pred', 'rib_pred'],
-            ['rib-btn-prep', 'rib_prep'],
-            ['rib-btn-comm', 'rib_comm'],
-        ];
-        pairs.forEach(function(p) {{
-            var anchor = document.getElementById(p[0]);
-            if (anchor) {{
-                anchor.onclick = function(e) {{
-                    e.preventDefault();
-                    var stBtn = document.querySelector('[data-testid="stButton"] button.st-key-' + p[1]);
-                    if (!stBtn) {{
-                        var emojis = {{'rib_home':'🏠','rib_pred':'🎯','rib_prep':'📋','rib_comm':'🤝'}};
-                        var allBtns = document.querySelectorAll('[data-testid="stButton"] button');
-                        allBtns.forEach(function(b) {{ if(b.innerText.trim() === emojis[p[1]]) stBtn = b; }});
-                    }}
-                    if (stBtn) stBtn.click();
-                }};
-            }}
-        }});
-    }}
-    setTimeout(wireButtons, 300);
-    setTimeout(wireButtons, 800);
-    setTimeout(wireButtons, 2000);
-}})();
-</script>
-""", unsafe_allow_html=True)
-
-
-elif page == 'Home':
-    # HORIZONTAL NAV FOR HOME PAGE ONLY
-    nav_col1, nav_col2, nav_col3, nav_col4 = st.columns([1, 1, 1, 1], gap='medium')
-
-    with nav_col1:
-        if st.button("🏠 Home", key="nav_home", use_container_width=True):
-            st.session_state['page'] = 'Home'
-            st.rerun()
-
-    with nav_col2:
-        if st.button("🎯 Prediction", key="nav_pred", use_container_width=True):
-            st.session_state['page'] = 'Prediction'
-            st.rerun()
-
-    with nav_col3:
-        if st.button("📋 Preparation", key="nav_prep", use_container_width=True):
-            st.session_state['page'] = 'Preparation'
-            st.rerun()
-
-    with nav_col4:
-        if st.button("🤝 Community", key="nav_comm", use_container_width=True):
-            st.session_state['page'] = 'Community'
-            st.rerun()
-
-    st.markdown('<br>', unsafe_allow_html=True)
-    
-    # HOME PAGE FULL WIDTH FIX
-    st.markdown("""
-    <style>
-    [data-testid="stAppViewContainer"], 
-    [data-testid="stMainBlockContainer"], 
-    .main .block-container {
-        padding-top: 56px !important; /* exactly header height */
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        margin-left: 0 !important;
-        max-width: 100% !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-page = st.session_state['page']
-
-# Update session state with current page
-
-# Helper function for navigation
+# Helper function for page navigation
 def navigate_to(target_page):
     st.session_state['page'] = target_page
+
+# ── NAVBAR CONTROL (RELIABLE, REMOVED BLUE ICON BOXES) ──
+
+def render_navbar():
+    is_dark = st.session_state.get('theme', 'dark') == 'dark'
+    bg = '#0c1130' if is_dark else '#ffffff'
+    text_color = '#e2e8f0' if is_dark else '#0f172a'
+    tile_bg = 'rgba(255, 255, 255, 0.08)' if is_dark else 'rgba(15, 23, 42, 0.06)'
+    active_bg = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)' if is_dark else 'linear-gradient(135deg, #059669 0%, #10b981 100%)'
+
+    st.markdown(f"""
+    <style>
+    .top-nav-control {{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 0.7rem 1rem;
+        background: {bg} !important;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.18) !important;
+        position: sticky;
+        top: 0;
+        z-index: 999999;
+        backdrop-filter: blur(14px);
+    }}
+
+    .top-nav-logo {{
+        color: {text_color} !important;
+        font-size: 1.25rem;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 220px;
+        text-transform: none;
+    }}
+
+    .top-nav-actions {{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+    }}
+
+    .nav-item {{
+        min-width: 90px;
+        padding: 7px 11px;
+        border-radius: 11px;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        background: {tile_bg};
+        color: {text_color} !important;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: none;
+        transition: all 0.18s ease;
+    }}
+
+    .nav-item.active {{
+        background: {active_bg} !important;
+        color: #fff !important;
+        border-color: transparent !important;
+        box-shadow: 0 7px 20px rgba(16,185,129,0.30);
+    }}
+
+    .nav-item:hover {{
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.16);
+    }}
+
+    .theme-btn {{
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        font-size: 14px;
+        background: {tile_bg} !important;
+        border: 1px solid rgba(148, 163, 184, 0.25) !important;
+        color: {text_color} !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 !important;
+    }}
+
+    @media (max-width: 800px) {{
+        .top-nav-control {{
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+            padding: 0.7rem 0.75rem;
+        }}
+        .top-nav-logo {{
+            min-width: auto;
+            justify-content: center;
+            width: 100%;
+        }}
+        .top-nav-actions {{
+            justify-content: space-between;
+            width: 100%;
+        }}
+        .nav-item {{
+            min-width: 100px;
+            font-size: 12px;
+            padding: 6px 9px;
+        }}
+    }}
+    </style>
+    """, unsafe_allow_html=True)
+
+    nav_items = [
+        ('Home', 'Home'),
+        ('Prediction', 'Prediction'),
+        ('Preparation', 'Preparation'),
+        ('Community', 'Community')
+    ]
+
+    cols = st.columns([2, 4, 1], gap='small')
+
+    with cols[0]:
+        st.markdown('<div class="top-nav-logo">🌾 <span>Climate-Aware Farming</span></div>', unsafe_allow_html=True)
+
+    with cols[1]:
+        current = st.session_state.get('page', 'Home')
+        for label, target in nav_items:
+            key = f"nav_{target.lower()}"
+            if st.button(label, key=key, help=f"Go to {label}", use_container_width=False):
+                navigate_to(target)
+                st.rerun()
+            # style active by adding CSS class via workaround using markdown injection immediately after button
+            if current == target:
+                st.markdown(f'<style>button[aria-label="{label}"]{{background: {active_bg} !important; color:#fff !important;}}</style>', unsafe_allow_html=True)
+
+    with cols[2]:
+        theme_icon = '☀️' if st.session_state['theme'] == 'dark' else '🌙'
+        if st.button(theme_icon, key='theme_toggle_nav_btn', help='Toggle light/dark theme', use_container_width=False):
+            toggle_theme()
+            st.rerun()
+
+
+render_navbar()
+
+# ── PAGE STATE ──
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
+
+page = st.session_state.page
+# Page rendering: Home, Prediction, Preparation, Community
 
 # Keep OpenWeather API key input tucked under auth (optional)
 OPENWEATHER_KEY = None
@@ -2103,18 +2020,6 @@ elif page == 'Community':
             
             # TAB 1: Community Feed (Sessions + Posts)
             with tab1:
-                # ... (Existing Community Feed Code is preserved, just indented if needed, but here we just leave the tab structure. 
-                # NOTE: The replace_file_content tool requires me to match the existing content strictly. 
-                # Since I am changing the TABS definition, I must ensure the subsequent code flow is correct.
-                # However, to avoid re-writing the HUGE Tab 1 block, I will just match the START of the block and update the tab list.)
-                pass # Placeholder for this specific tool call explanation - I will actually replace the logic below.
-
-            # We need to insert the new tab content. 
-            # Strategy: I'll rewrite the tab definition line and then insert the AI Tab logic BEFORE the others or modify the structure.
-            # Actually, inserting it as Tab 2 is best.
-
-            # Let's target the Tab definition.
-
                 # Create a 2-column layout: Main Content (Left) + Interaction Sidebar (Right)
                 feed_col, side_col = st.columns([2, 1], gap="medium")
                 
@@ -2511,7 +2416,6 @@ elif page == 'Community':
                             # combine date/time
                             when_str = f"{s_date} {s_time}"
                             if hasattr(cdb, 'create_session'):
-                                cdb.create_session(s_title, s_link, when_str, user.get('username'))
                                 cdb.create_session(s_title, s_link, when_str, user.get('username'))
                                 st.success('Session Published!')
                                 st.rerun()
