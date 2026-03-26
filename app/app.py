@@ -247,15 +247,21 @@ def set_query_params_safe(**kwargs):
         st.session_state[k] = v
 
 # ULTRA-PROFESSIONAL RESPONSIVE WEBAPP - Load External CSS
-# Load CSS MAGIC (Complete UI Transformation)
 import os
-css_file_path = os.path.join(os.path.dirname(__file__), 'css_magic.css')
+
+if 'theme' not in st.session_state:
+    st.session_state['theme'] = 'dark'
+# Theme Toggle Button moved to Top Navigation Bar block
+
+# Load CSS MAGIC (Complete UI Transformation)
+css_file_name = 'css_magic.css' if st.session_state['theme'] == 'dark' else 'css_magic_light.css'
+css_file_path = os.path.join(os.path.dirname(__file__), css_file_name)
 if os.path.exists(css_file_path):
     with open(css_file_path, 'r', encoding='utf-8') as f:
         custom_css = f.read()
     st.markdown(f'<style>{custom_css}</style>', unsafe_allow_html=True)
 else:
-    st.warning("Dark Theme CSS file not found!")
+    st.warning("CSS theme file not found!")
 
 # Load button fix CSS
 button_fix_path = os.path.join(os.path.dirname(__file__), 'button_fix.css')
@@ -452,72 +458,246 @@ st.markdown('''
 # </style>
 # ''', unsafe_allow_html=True)
 
-# TOP NAVIGATION BAR with WORKING LINKS
-st.markdown("""
-<div style="background: rgba(21, 25, 50, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid #2d3748; padding: 0.8rem 2rem; position: sticky; top: 0; z-index: 1000; margin: -2rem -2rem 0 -2rem;">
-    <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto;">
-        <div style="font-size: 22px; font-weight: 800; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 10px;">
-            🌾 Climate-Aware Farming
-        </div>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+# Theme Toggle Button - ISOLATED CONTAINER FIX
+theme_container = st.container()
+with theme_container:
+    theme_icon = "☀️" if st.session_state['theme'] == 'dark' else "🌙"
+    st.markdown('<span id="theme-button-marker"></span>', unsafe_allow_html=True)
+    if st.button(theme_icon, key="theme_toggle_nav_btn"):
+        st.session_state['theme'] = 'light' if st.session_state['theme'] == 'dark' else 'dark'
+        st.rerun()
 
 # Initialize session state for page navigation
 if 'page' not in st.session_state:
     st.session_state['page'] = 'Home'
 
-# NAV WRAPPER - OPTIMIZED PROPORTIONAL BUTTONS
-st.markdown('''
+# CONSOLIDATED HTML & CSS INJECTION 
+# (Bundled together to prevent Streamlit from generating empty vertical gaps between elements)
+st.markdown("""
+<div class="top-nav-bar">
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 100%; margin: 0 auto;">
+        <div style="font-size: 22px; font-weight: 800; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 10px;">
+            🌾 Climate-Aware Farming
+        </div>
+    </div>
+</div>
+
 <style>
-.nav-buttons {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    padding: 12px 20px;
-    flex-wrap: wrap;
+/* 1. Target the specific innermost stVerticalBlock for our container completely removing its normal spacing */
+div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) {
+    position: absolute !important;
+    height: 0px !important;
+    width: 0px !important;
+    min-height: 0px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 9999999 !important;
+    overflow: visible !important;
 }
-.nav-button {
-    flex: 1;
-    min-width: 120px;
+
+/* 2. Style the Button inside that innermost block, floating it cleanly to the top navbar right-corner */
+div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) .stButton > button {
+    position: fixed !important;
+    top: 15px !important;
+    right: 3% !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
+    background: rgba(100, 100, 100, 0.1) !important;
+    background-image: none !important; /* Erase any gradient from css_magic globally */
+    backdrop-filter: blur(10px) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid rgba(100, 100, 100, 0.2) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 20px !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    transform: none !important;
+    z-index: 9999999 !important;
 }
-/* Optimize button appearance */
-[data-testid="stButton"] > button {
-    width: 100% !important;
-    border-radius: 10px !important;
-    padding: 12px 20px !important;
-    font-size: 15px !important;
-    font-weight: 600 !important;
+
+div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) .stButton > button:hover {
+    transform: scale(1.1) rotate(15deg) !important;
+    background: rgba(100, 100, 100, 0.2) !important;
+    border-color: rgba(100, 100, 100, 0.4) !important;
 }
+
 </style>
-''', unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
-# FIXED: Equal width columns for proportional buttons
-nav_col1, nav_col2, nav_col3, nav_col4 = st.columns([1, 1, 1, 1], gap='medium')
+page = st.session_state.get('page', 'Home')
 
-with nav_col1:
-    if st.button("🏠 Home", key="nav_home", use_container_width=True):
-        st.session_state['page'] = 'Home'
-        st.rerun()
+# ═══ ICON RIBBON (non-Home pages) — WhatsApp-style left strip ═══
+if page != 'Home':
+    # Determine ribbon colors based on theme
+    is_dark = st.session_state.get('theme', 'dark') == 'dark'
+    ribbon_bg  = "#151932" if is_dark else "#f0fdf4"
+    ribbon_bdr = "rgba(255,255,255,0.08)" if is_dark else "rgba(0,0,0,0.08)"
+    icon_bg    = "rgba(255,255,255,0.05)" if is_dark else "rgba(0,0,0,0.04)"
+    icon_bdr   = "rgba(255,255,255,0.12)" if is_dark else "rgba(0,150,100,0.25)"
 
-with nav_col2:
-    if st.button("🎯 Prediction", key="nav_pred", use_container_width=True):
-        st.session_state['page'] = 'Prediction'
-        st.rerun()
+    # Inject a hidden HTML ribbon using a unique ID approach
+    st.markdown(f"""
+<div id="wapp-icon-ribbon" style="
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 72px;
+    height: calc(100vh - 56px);
+    background: {ribbon_bg};
+    border-right: 1px solid {ribbon_bdr};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 28px;
+    gap: 14px;
+    z-index: 88888;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+">
+  <a id="rib-btn-home"  title="🏠 Home"       style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;background:{icon_bg};border:1px solid {icon_bdr};text-decoration:none;transition:all 0.25s;">🏠</a>
+  <a id="rib-btn-pred"  title="🎯 Prediction"  style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;background:{icon_bg};border:1px solid {icon_bdr};text-decoration:none;transition:all 0.25s;">🎯</a>
+  <a id="rib-btn-prep"  title="📋 Preparation" style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;background:{icon_bg};border:1px solid {icon_bdr};text-decoration:none;transition:all 0.25s;">📋</a>
+  <a id="rib-btn-comm"  title="🤝 Community"   style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;background:{icon_bg};border:1px solid {icon_bdr};text-decoration:none;transition:all 0.25s;">🤝</a>
+</div>
 
-with nav_col3:
-    if st.button("📋 Preparation", key="nav_prep", use_container_width=True):
-        st.session_state['page'] = 'Preparation'
-        st.rerun()
+<style>
+/* 1. AGGRESSIVE SUB-PAGE SHIM - ROOT PRIORITY */
+#root [data-testid="stAppViewBlockContainer"],
+#root [data-testid="stMainBlockContainer"],
+#root .main .block-container,
+section.main > div > div > div.block-container {{
+    padding: 85px 3% 50px 125px !important; /* Top Right Bottom Left */
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: auto !important;
+    background: transparent !important;
+}}
 
-with nav_col4:
-    if st.button("🤝 Community", key="nav_comm", use_container_width=True):
-        st.session_state['page'] = 'Community'
-        st.rerun()
+    background: transparent !important;
+}}
 
-st.markdown('<br>', unsafe_allow_html=True)
+/* Ribbon icon hover effects */
+#wapp-icon-ribbon a:hover {{
+    background: rgba(139,92,246,0.22) !important;
+    border-color: rgba(139,92,246,0.55) !important;
+    transform: scale(1.13);
+}}
 
-# Get current page
+/* Native tooltip on hover */
+#wapp-icon-ribbon a::after {{
+    content: attr(title);
+    position: absolute;
+    left: 76px;
+    background: rgba(15,17,40,0.92);
+    color: #e2e8f0;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.12);
+}}
+#wapp-icon-ribbon a:hover::after {{
+    opacity: 1;
+}}
+
+/* Responsive: hide ribbon on mobile and reset all paddings */
+@media (max-width: 768px) {{
+    #wapp-icon-ribbon {{ display: none !important; }}
+    div[data-testid="stAppViewBlockContainer"],
+    div[data-testid="stMainBlockContainer"],
+    .main .block-container,
+    section[data-testid="stMain"] > div > div.block-container {{
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        padding-top: 5rem !important;
+    }}
+}}
+</style>
+
+<script>
+// Wire up HTML ribbon anchors to fire Streamlit button clicks
+(function() {{
+    function wireButtons() {{
+        var pairs = [
+            ['rib-btn-home', 'rib_home'],
+            ['rib-btn-pred', 'rib_pred'],
+            ['rib-btn-prep', 'rib_prep'],
+            ['rib-btn-comm', 'rib_comm'],
+        ];
+        pairs.forEach(function(p) {{
+            var anchor = document.getElementById(p[0]);
+            if (anchor) {{
+                anchor.onclick = function(e) {{
+                    e.preventDefault();
+                    var stBtn = document.querySelector('[data-testid="stButton"] button.st-key-' + p[1]);
+                    if (!stBtn) {{
+                        var emojis = {{'rib_home':'🏠','rib_pred':'🎯','rib_prep':'📋','rib_comm':'🤝'}};
+                        var allBtns = document.querySelectorAll('[data-testid="stButton"] button');
+                        allBtns.forEach(function(b) {{ if(b.innerText.trim() === emojis[p[1]]) stBtn = b; }});
+                    }}
+                    if (stBtn) stBtn.click();
+                }};
+            }}
+        }});
+    }}
+    setTimeout(wireButtons, 300);
+    setTimeout(wireButtons, 800);
+    setTimeout(wireButtons, 2000);
+}})();
+</script>
+""", unsafe_allow_html=True)
+
+
+elif page == 'Home':
+    # HORIZONTAL NAV FOR HOME PAGE ONLY
+    nav_col1, nav_col2, nav_col3, nav_col4 = st.columns([1, 1, 1, 1], gap='medium')
+
+    with nav_col1:
+        if st.button("🏠 Home", key="nav_home", use_container_width=True):
+            st.session_state['page'] = 'Home'
+            st.rerun()
+
+    with nav_col2:
+        if st.button("🎯 Prediction", key="nav_pred", use_container_width=True):
+            st.session_state['page'] = 'Prediction'
+            st.rerun()
+
+    with nav_col3:
+        if st.button("📋 Preparation", key="nav_prep", use_container_width=True):
+            st.session_state['page'] = 'Preparation'
+            st.rerun()
+
+    with nav_col4:
+        if st.button("🤝 Community", key="nav_comm", use_container_width=True):
+            st.session_state['page'] = 'Community'
+            st.rerun()
+
+    st.markdown('<br>', unsafe_allow_html=True)
+    
+    # HOME PAGE FULL WIDTH FIX
+    st.markdown("""
+    <style>
+    [data-testid="stAppViewContainer"], 
+    [data-testid="stMainBlockContainer"], 
+    .main .block-container {
+        padding-top: 56px !important; /* exactly header height */
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        max-width: 100% !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 page = st.session_state['page']
 
 # Update session state with current page
@@ -684,25 +864,19 @@ if page == 'Home':
             st.rerun()
 
 elif page == 'Prediction':
-    # Title and subtitle
-    st.markdown("""
-    <h1 style="font-size: 42px; font-weight: 800; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); 
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 12px;">
-        🌾 Smart Crop & Fertilizer Prediction
-    </h1>
-    <p style="font-size: 17px; color: #94a3b8; text-align: center; margin-bottom: 40px;">
-        Get personalized recommendations based on your soil and climate conditions
-    </p>
-    """, unsafe_allow_html=True)
+    # Space for cleaner aesthetic
+    st.markdown('<div style="height: 10px"></div>', unsafe_allow_html=True)
     
-    # Two-column layout: left for inputs, right for results
-    left, right = st.columns([1.2, 1], gap='large')
+    # Two-column layout: left for inputs, right for results - MATCH PREPARATION RATIO
+    left, right = st.columns([1.6, 1], gap='large')
 
     with left:
         # SINGLE BEAUTIFUL INPUT CARD - Using Streamlit's native bordered container
         with st.container(border=True):
             st.markdown("""
-                <h3 style="color: #00d9ff; margin-bottom: 24px; font-size: 22px; font-weight: 700;">
+                <h3 style="color: #00d9ff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; 
+                font-size: 22px; font-weight: 700; border-bottom: 1px solid rgba(100, 116, 139, 0.3); 
+                padding-bottom: 15px; margin-top: 0;">
                     📊 Enter Your Farm Details
                 </h3>
             """, unsafe_allow_html=True)
@@ -937,6 +1111,16 @@ elif page == 'Prediction':
 
     # RIGHT: Result card with pie chart
     with right:
+        # Unified Header for Results column to match Preparation
+        with st.container(border=True):
+            st.markdown("""
+                <h3 style="color: #00d9ff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; 
+                font-size: 22px; font-weight: 700; border-bottom: 1px solid rgba(100, 116, 139, 0.3); 
+                padding-bottom: 15px; margin-top: 0;">
+                    🎯 Prediction Results
+                </h3>
+            """, unsafe_allow_html=True)
+            
         if 'last_result' in st.session_state:
             lr = st.session_state['last_result']
             
@@ -1068,7 +1252,7 @@ elif page == 'Prediction':
                         'DAP': 30,
                         'Potash': 20,
                         'Ammonium': 10
-                    }
+                    }   
                     
                     organic_comp = {
                         'Compost': 30,
@@ -1077,79 +1261,76 @@ elif page == 'Prediction':
                         'Vermicompost': 20
                     }
                     
-                    # Create side-by-side 3D pie charts
-                    fig = make_subplots(
-                        rows=1, cols=2,
-                        specs=[[{'type':'pie'}, {'type':'pie'}]],
-                        subplot_titles=('<b>Non-Organic Fertilizer</b>', '<b>Organic Fertilizer Alternative</b>')
-                    )
+                    # Create two responsive columns for the pie charts
+                    col_pie1, col_pie2 = st.columns(2)
                     
-                    # Non-organic 3D pie chart with beautiful colors
-                    fig.add_trace(go.Pie(
-                        labels=list(non_organic_comp.keys()),
-                        values=list(non_organic_comp.values()),
-                        marker=dict(
-                            colors=['#FF6B6B', '#FFA07A', '#FFD700', '#FF8C00'],
-                            line=dict(color='#1e293b', width=2)
-                        ),
-                        textinfo='none',  # No text inside slices - using legend below
-                        textposition='none',
-                        hoverinfo='label+percent+value',
-                        hole=0.3,  # Donut style for modern look
-                        pull=[0.05, 0, 0, 0],  # Pull out first slice
-                        name='Non-Organic'
-                    ), row=1, col=1)
-                    
-                    # Organic 3D pie chart with beautiful green colors
-                    fig.add_trace(go.Pie(
-                        labels=list(organic_comp.keys()),
-                        values=list(organic_comp.values()),
-                        marker=dict(
-                            colors=['#2D5016', '#6B8E23', '#8FBC8F', '#90EE90'],
-                            line=dict(color='#1e293b', width=2)
-                        ),
-                        textinfo='none',  # No text inside slices - using legend below
-                        textposition='none',
-                        hoverinfo='label+percent+value',
-                        hole=0.3,  # Donut style for modern look
-                        pull=[0.05, 0, 0, 0],  # Pull out first slice
-                        name='Organic'
-                    ), row=1, col=2)
-                    
-                    # Update layout for dark theme and responsiveness
-                    fig.update_layout(
-                        showlegend=False,
-                        margin=dict(l=50, r=50, t=80, b=50),  # Increased margins to prevent label cutoff
-                        height=500,  # Increased height for better visibility
-                        paper_bgcolor='rgba(0,0,0,0)',
-                        plot_bgcolor='rgba(0,0,0,0)',
-                        font=dict(size=15, color='#e2e8f0', family='Arial, sans-serif'),
-                        annotations=[
-                            dict(
-                                text='<b>Non-Organic Fertilizer</b>',
-                                x=0.18,
-                                y=1.08,
-                                xref='paper',
-                                yref='paper',
-                                showarrow=False,
-                                font=dict(size=16, color='#FFA07A', family='Arial Black')
+                    with col_pie1:
+                        # Non-organic 3D pie chart with beautiful colors
+                        fig1 = go.Figure(data=[go.Pie(
+                            labels=list(non_organic_comp.keys()),
+                            values=list(non_organic_comp.values()),
+                            marker=dict(
+                                colors=['#FF6B6B', '#FFA07A', '#FFD700', '#FF8C00'],
+                                line=dict(color='#1e293b', width=2)
                             ),
-                            dict(
+                            textinfo='none',  # No text inside slices - using legend below
+                            hoverinfo='label+percent+value',
+                            hole=0.3,  # Donut style for modern look
+                            pull=[0.05, 0, 0, 0],  # Pull out first slice
+                            name='Non-Organic'
+                        )])
+                        
+                        fig1.update_layout(
+                            title=dict(
+                                text='<b>Non-Organic Fertilizer</b>',
+                                font=dict(size=12, color='#FFA07A', family='Arial Black'),
+                                x=0.5,
+                                y=0.9,
+                                xanchor='center',
+                                yanchor='top'
+                            ),
+                            showlegend=False,
+                            margin=dict(l=10, r=10, t=50, b=10),
+                            height=300,
+                            paper_bgcolor='rgba(0,0,0,0)',
+                            plot_bgcolor='rgba(0,0,0,0)',
+                            font=dict(size=15, color='#e2e8f0', family='Arial, sans-serif'),
+                        )
+                        st.plotly_chart(fig1, use_container_width=True, config={'displayModeBar': False, 'staticPlot': True})
+                        
+                    with col_pie2:
+                        # Organic 3D pie chart with beautiful green colors
+                        fig2 = go.Figure(data=[go.Pie(
+                            labels=list(organic_comp.keys()),
+                            values=list(organic_comp.values()),
+                            marker=dict(
+                                colors=['#2D5016', '#6B8E23', '#8FBC8F', '#90EE90'],
+                                line=dict(color='#1e293b', width=2)
+                            ),
+                            textinfo='none',  # No text inside slices - using legend below
+                            hoverinfo='label+percent+value',
+                            hole=0.3,  # Donut style for modern look
+                            pull=[0.05, 0, 0, 0],  # Pull out first slice
+                            name='Organic'
+                        )])
+                        
+                        fig2.update_layout(
+                            title=dict(
                                 text='<b>Organic Fertilizer Alternative</b>',
-                                x=0.82,
-                                y=1.08,
-                                xref='paper',
-                                yref='paper',
-                                showarrow=False,
-                                font=dict(size=16, color='#90EE90', family='Arial Black')
-                            )
-                        ],
-                        uniformtext_minsize=10,  # Ensure labels are readable
-                        uniformtext_mode='hide'  # Hide labels that don't fit instead of overlapping
-                    )
-                    
-                    # Display chart with responsive width (INSIDE THE CONTAINER)
-                    st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+                                font=dict(size=12, color='#90EE90', family='Arial Black'),
+                                x=0.5,
+                                y=0.9,
+                                xanchor='center',
+                                yanchor='top'
+                            ),
+                            showlegend=False,
+                            margin=dict(l=10, r=10, t=50, b=10),
+                            height=300,
+                            paper_bgcolor='rgba(0,0,0,0)',
+                            plot_bgcolor='rgba(0,0,0,0)',
+                            font=dict(size=15, color='#e2e8f0', family='Arial, sans-serif'),
+                        )
+                        st.plotly_chart(fig2, use_container_width=True, config={'displayModeBar': False, 'staticPlot': True})
                     
                     # Add color legends below the charts
                     col_legend1, col_legend2 = st.columns(2)
@@ -1207,19 +1388,20 @@ elif page == 'Prediction':
                          on_click=navigate_to,
                          args=('Preparation',))
         else:
-            st.markdown('''
-            <div class="empty-state">
-                <div class="empty-icon">📊</div>
-                <div class="empty-title">No Results Yet</div>
-                <div class="empty-text">Fill in the form and click "Get Recommendations" to see your personalized crop and fertilizer suggestions</div>
+            is_dark = st.session_state.get('theme', 'dark') == 'dark'
+            bg_grad = "rgba(30, 41, 59, 0.4), rgba(26, 31, 58, 0.5)" if is_dark else "rgba(255, 255, 255, 0.8), rgba(240, 253, 244, 0.9)"
+            st.markdown(f'''
+            <div style="background: linear-gradient(135deg, {bg_grad});
+            border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 16px; padding: 60px 40px; text-align: center;">
+                <div style="font-size: 60px; margin-bottom: 20px;">📊</div>
+                <div style="color: #e2e8f0; font-size: 24px; font-weight: 700; margin-bottom: 12px;">No Results Yet</div>
+                <div style="color: #94a3b8; font-size: 16px; line-height: 1.6;">Fill in the form and click "Get Recommendations" to see your personalized crop and fertilizer suggestions</div>
             </div>
             ''', unsafe_allow_html=True)
 
 elif page == 'Preparation':
-    # No navigation buttons - using top header navigation only
+    # Header removed for WhatsApp-style sleekness
     st.markdown('<div style="height: 10px"></div>', unsafe_allow_html=True)
-    st.header('📋 Organic Fertilizer Preparation Guide', anchor=False)
-    st.markdown('<p style="font-size:16px; color: #94a3b8;">Step-by-step instructions and video tutorials</p>', unsafe_allow_html=True)
     
     if 'last_result' not in st.session_state:
         st.markdown('''
