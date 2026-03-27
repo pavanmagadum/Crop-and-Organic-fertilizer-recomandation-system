@@ -470,21 +470,46 @@ with theme_container:
 # Initialize session state for page navigation
 if 'page' not in st.session_state:
     st.session_state['page'] = 'Home'
+page = st.session_state['page']
+
+# ═══ SIDEBAR NAVIGATION (Moved to Top for Reliability) ═══
+with st.sidebar:
+    st.markdown("### 🧭 Navigation")
+    if st.button("🏠 Home", key="nav_home_side", use_container_width=True):
+        st.session_state['page'] = 'Home'
+        st.rerun()
+    if st.button("🎯 Prediction", key="nav_pred_side", use_container_width=True):
+        st.session_state['page'] = 'Prediction'
+        st.rerun()
+    if st.button("📋 Preparation", key="nav_prep_side", use_container_width=True):
+        st.session_state['page'] = 'Preparation'
+        st.rerun()
+    if st.button("🤝 Community", key="nav_comm_side", use_container_width=True):
+        st.session_state['page'] = 'Community'
+        st.rerun()
+    st.markdown('---')
+
 
 # CONSOLIDATED HTML & CSS INJECTION 
 # (Bundled together to prevent Streamlit from generating empty vertical gaps between elements)
-st.markdown("""
-<div class="top-nav-bar">
-    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 100%; margin: 0 auto;">
-        <div style="font-size: 22px; font-weight: 800; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 10px;">
+is_dark = st.session_state.get('theme', 'dark') == 'dark'
+icon_bg    = "rgba(255,255,255,0.05)" if is_dark else "rgba(0,0,0,0.04)"
+icon_bdr   = "rgba(255,255,255,0.12)" if is_dark else "rgba(0,150,100,0.25)"
+
+st.markdown(f"""
+<div class="top-nav-bar" style="pointer-events: none; background: {'rgba(21, 25, 50, 0.95)' if is_dark else 'rgba(255, 255, 255, 0.953)'} !important; border-bottom: 1px solid {'#2d3748' if is_dark else '#e2e8f0'} !important;">
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 100%; margin: 0 auto; pointer-events: none;">
+        <div style="font-size: 22px; font-weight: 800; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 10px; margin-left: 60px; pointer-events: auto;">
             🌾 Climate-Aware Farming
         </div>
     </div>
 </div>
 
+
+
 <style>
-/* 1. Target the specific innermost stVerticalBlock for our container completely removing its normal spacing */
-div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) {
+/* theme button marker to prevent vertical block spacing */
+div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) {{
     position: absolute !important;
     height: 0px !important;
     width: 0px !important;
@@ -493,10 +518,9 @@ div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-t
     padding: 0 !important;
     z-index: 9999999 !important;
     overflow: visible !important;
-}
+}}
 
-/* 2. Style the Button inside that innermost block, floating it cleanly to the top navbar right-corner */
-div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) .stButton > button {
+div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) .stButton > button {{
     position: fixed !important;
     top: 15px !important;
     right: 3% !important;
@@ -504,7 +528,7 @@ div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-t
     height: 42px !important;
     border-radius: 50% !important;
     background: rgba(100, 100, 100, 0.1) !important;
-    background-image: none !important; /* Erase any gradient from css_magic globally */
+    background-image: none !important;
     backdrop-filter: blur(10px) !important;
     color: var(--text-primary) !important;
     border: 1px solid rgba(100, 100, 100, 0.2) !important;
@@ -518,186 +542,62 @@ div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-t
     box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
     transform: none !important;
     z-index: 9999999 !important;
-}
+    pointer-events: auto !important;
+}}
 
-div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) .stButton > button:hover {
+
+div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) .stButton > button:hover {{
     transform: scale(1.1) rotate(15deg) !important;
     background: rgba(100, 100, 100, 0.2) !important;
     border-color: rgba(100, 100, 100, 0.4) !important;
-}
+}}
 
-</style>
-""", unsafe_allow_html=True)
-
-page = st.session_state.get('page', 'Home')
-
-# ═══ ICON RIBBON (non-Home pages) — WhatsApp-style left strip ═══
-if page != 'Home':
-    # Determine ribbon colors based on theme
-    is_dark = st.session_state.get('theme', 'dark') == 'dark'
-    ribbon_bg  = "#151932" if is_dark else "#f0fdf4"
-    ribbon_bdr = "rgba(255,255,255,0.08)" if is_dark else "rgba(0,0,0,0.08)"
-    icon_bg    = "rgba(255,255,255,0.05)" if is_dark else "rgba(0,0,0,0.04)"
-    icon_bdr   = "rgba(255,255,255,0.12)" if is_dark else "rgba(0,150,100,0.25)"
-
-    # Inject a hidden HTML ribbon using a unique ID approach
-    st.markdown(f"""
-<div id="wapp-icon-ribbon" style="
-    position: fixed;
-    top: 56px;
-    left: 0;
-    width: 72px;
-    height: calc(100vh - 56px);
-    background: {ribbon_bg};
-    border-right: 1px solid {ribbon_bdr};
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 28px;
-    gap: 14px;
-    z-index: 88888;
-    box-shadow: 2px 0 12px rgba(0,0,0,0.15);
-">
-  <a id="rib-btn-home"  title="🏠 Home"       style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;background:{icon_bg};border:1px solid {icon_bdr};text-decoration:none;transition:all 0.25s;">🏠</a>
-  <a id="rib-btn-pred"  title="🎯 Prediction"  style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;background:{icon_bg};border:1px solid {icon_bdr};text-decoration:none;transition:all 0.25s;">🎯</a>
-  <a id="rib-btn-prep"  title="📋 Preparation" style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;background:{icon_bg};border:1px solid {icon_bdr};text-decoration:none;transition:all 0.25s;">📋</a>
-  <a id="rib-btn-comm"  title="🤝 Community"   style="display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;background:{icon_bg};border:1px solid {icon_bdr};text-decoration:none;transition:all 0.25s;">🤝</a>
-</div>
-
-<style>
-/* 1. AGGRESSIVE SUB-PAGE SHIM - ROOT PRIORITY */
-#root [data-testid="stAppViewBlockContainer"],
-#root [data-testid="stMainBlockContainer"],
-#root .main .block-container,
-section.main > div > div > div.block-container {{
-    padding: 85px 3% 50px 125px !important; /* Top Right Bottom Left */
-    margin: 0 !important;
-    max-width: 100% !important;
-    width: auto !important;
+/* FORCE SIDEBAR TOGGLE (ARROW) VISIBILITY & POSITION */
+header[data-testid="stHeader"] {{
+    display: flex !important;
+    visibility: visible !important;
     background: transparent !important;
 }}
 
-    background: transparent !important;
+[data-testid="stExpandSidebarButton"],
+[data-testid="stSidebarCollapseButton"] {{
+    position: fixed !important;
+    left: 10px !important;
+    top: 10px !important;
+    visibility: visible !important;
+    display: flex !important;
+    z-index: 10000001 !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease !important;
 }}
 
-/* Ribbon icon hover effects */
-#wapp-icon-ribbon a:hover {{
-    background: rgba(139,92,246,0.22) !important;
-    border-color: rgba(139,92,246,0.55) !important;
-    transform: scale(1.13);
+/* DYNAMIC SIDEBAR ARROW COLORS */
+[data-testid="stExpandSidebarButton"],
+[data-testid="stSidebarCollapseButton"] {{
+    background: {'rgba(255, 215, 0, 0.15)' if is_dark else 'rgba(79, 70, 229, 0.1)'} !important;
+    border: 1px solid {'rgba(255, 215, 0, 0.4)' if is_dark else 'rgba(79, 70, 229, 0.3)'} !important;
+    box-shadow: 0 0 15px {'rgba(255, 215, 0, 0.2)' if is_dark else 'rgba(79, 70, 229, 0.1)'} !important;
+    color: {'#FFD700' if is_dark else '#4F46E5'} !important;
 }}
 
-/* Native tooltip on hover */
-#wapp-icon-ribbon a::after {{
-    content: attr(title);
-    position: absolute;
-    left: 76px;
-    background: rgba(15,17,40,0.92);
-    color: #e2e8f0;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.12);
-}}
-#wapp-icon-ribbon a:hover::after {{
-    opacity: 1;
-}}
-
-/* Responsive: hide ribbon on mobile and reset all paddings */
-@media (max-width: 768px) {{
-    #wapp-icon-ribbon {{ display: none !important; }}
-    div[data-testid="stAppViewBlockContainer"],
-    div[data-testid="stMainBlockContainer"],
-    .main .block-container,
-    section[data-testid="stMain"] > div > div.block-container {{
-        padding-left: 1.5rem !important;
-        padding-right: 1.5rem !important;
-        padding-top: 5rem !important;
-    }}
+[data-testid="stExpandSidebarButton"] svg,
+[data-testid="stSidebarCollapseButton"] svg {{
+    fill: {'#FFD700' if is_dark else '#4F46E5'} !important;
+    color: {'#FFD700' if is_dark else '#4F46E5'} !important;
 }}
 </style>
 
-<script>
-// Wire up HTML ribbon anchors to fire Streamlit button clicks
-(function() {{
-    function wireButtons() {{
-        var pairs = [
-            ['rib-btn-home', 'rib_home'],
-            ['rib-btn-pred', 'rib_pred'],
-            ['rib-btn-prep', 'rib_prep'],
-            ['rib-btn-comm', 'rib_comm'],
-        ];
-        pairs.forEach(function(p) {{
-            var anchor = document.getElementById(p[0]);
-            if (anchor) {{
-                anchor.onclick = function(e) {{
-                    e.preventDefault();
-                    var stBtn = document.querySelector('[data-testid="stButton"] button.st-key-' + p[1]);
-                    if (!stBtn) {{
-                        var emojis = {{'rib_home':'🏠','rib_pred':'🎯','rib_prep':'📋','rib_comm':'🤝'}};
-                        var allBtns = document.querySelectorAll('[data-testid="stButton"] button');
-                        allBtns.forEach(function(b) {{ if(b.innerText.trim() === emojis[p[1]]) stBtn = b; }});
-                    }}
-                    if (stBtn) stBtn.click();
-                }};
-            }}
-        }});
-    }}
-    setTimeout(wireButtons, 300);
-    setTimeout(wireButtons, 800);
-    setTimeout(wireButtons, 2000);
-}})();
-</script>
+
+
+
 """, unsafe_allow_html=True)
 
 
-elif page == 'Home':
-    # HORIZONTAL NAV FOR HOME PAGE ONLY
-    nav_col1, nav_col2, nav_col3, nav_col4 = st.columns([1, 1, 1, 1], gap='medium')
 
-    with nav_col1:
-        if st.button("🏠 Home", key="nav_home", use_container_width=True):
-            st.session_state['page'] = 'Home'
-            st.rerun()
 
-    with nav_col2:
-        if st.button("🎯 Prediction", key="nav_pred", use_container_width=True):
-            st.session_state['page'] = 'Prediction'
-            st.rerun()
-
-    with nav_col3:
-        if st.button("📋 Preparation", key="nav_prep", use_container_width=True):
-            st.session_state['page'] = 'Preparation'
-            st.rerun()
-
-    with nav_col4:
-        if st.button("🤝 Community", key="nav_comm", use_container_width=True):
-            st.session_state['page'] = 'Community'
-            st.rerun()
-
-    st.markdown('<br>', unsafe_allow_html=True)
-    
-    # HOME PAGE FULL WIDTH FIX
-    st.markdown("""
-    <style>
-    [data-testid="stAppViewContainer"], 
-    [data-testid="stMainBlockContainer"], 
-    .main .block-container {
-        padding-top: 56px !important; /* exactly header height */
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        margin-left: 0 !important;
-        max-width: 100% !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+if page == 'Home':
+    # HOME PAGE FULL WIDTH FIX - Reusing same padding as Global
+    pass
 page = st.session_state['page']
 
 # Update session state with current page
@@ -864,10 +764,10 @@ if page == 'Home':
             st.rerun()
 
 elif page == 'Prediction':
-    # Space for cleaner aesthetic
-    st.markdown('<div style="height: 10px"></div>', unsafe_allow_html=True)
+    # Removed sidebar navigation - using global navigation
     
     # Two-column layout: left for inputs, right for results - MATCH PREPARATION RATIO
+
     left, right = st.columns([1.6, 1], gap='large')
 
     with left:
@@ -1400,8 +1300,8 @@ elif page == 'Prediction':
             ''', unsafe_allow_html=True)
 
 elif page == 'Preparation':
-    # Header removed for WhatsApp-style sleekness
-    st.markdown('<div style="height: 10px"></div>', unsafe_allow_html=True)
+    # Removed sidebar navigation - using global navigation
+
     
     if 'last_result' not in st.session_state:
         st.markdown('''
@@ -1596,8 +1496,8 @@ elif page == 'Preparation':
 
 
 elif page == 'Community':
-    # No navigation buttons - using top header navigation only
-    st.markdown('<div style="height: 10px"></div>', unsafe_allow_html=True)
+    # Removed sidebar navigation - using global navigation
+
     
     # SMALLER, SIMPLER HERO SECTION
     st.markdown('''
