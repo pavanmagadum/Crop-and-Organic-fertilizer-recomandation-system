@@ -553,37 +553,52 @@ div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-t
 }}
 
 /* FORCE SIDEBAR TOGGLE (ARROW) VISIBILITY & POSITION */
-header[data-testid="stHeader"] {{
+header[data-testid="stHeader"],
+[data-testid="stToolbar"] {{
     display: flex !important;
     visibility: visible !important;
     background: transparent !important;
+    z-index: 10000000 !important;
+    pointer-events: none !important;
 }}
 
 [data-testid="stExpandSidebarButton"],
-[data-testid="stSidebarCollapseButton"] {{
+[data-testid="stSidebarCollapseButton"],
+[data-testid="collapsedControl"] {{
     position: fixed !important;
-    left: 10px !important;
+    left: 15px !important;
     top: 10px !important;
     visibility: visible !important;
     display: flex !important;
-    z-index: 10000001 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 99999999 !important;
     opacity: 1 !important;
     transition: all 0.3s ease !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
 }}
 
 /* DYNAMIC SIDEBAR ARROW COLORS */
 [data-testid="stExpandSidebarButton"],
-[data-testid="stSidebarCollapseButton"] {{
-    background: {'rgba(255, 215, 0, 0.15)' if is_dark else 'rgba(79, 70, 229, 0.1)'} !important;
-    border: 1px solid {'rgba(255, 215, 0, 0.4)' if is_dark else 'rgba(79, 70, 229, 0.3)'} !important;
-    box-shadow: 0 0 15px {'rgba(255, 215, 0, 0.2)' if is_dark else 'rgba(79, 70, 229, 0.1)'} !important;
-    color: {'#FFD700' if is_dark else '#4F46E5'} !important;
+[data-testid="stSidebarCollapseButton"],
+[data-testid="collapsedControl"] {{
+    background: {'rgba(255, 215, 0, 0.2)' if is_dark else 'rgba(16, 185, 129, 0.3)'} !important;
+    border: 1px solid {'rgba(255, 215, 0, 0.5)' if is_dark else 'rgba(16, 185, 129, 0.6)'} !important;
+    box-shadow: 0 0 15px {'rgba(255, 215, 0, 0.3)' if is_dark else 'rgba(16, 185, 129, 0.3)'} !important;
+    color: {'#FFD700' if is_dark else '#059669'} !important;
 }}
 
 [data-testid="stExpandSidebarButton"] svg,
-[data-testid="stSidebarCollapseButton"] svg {{
-    fill: {'#FFD700' if is_dark else '#4F46E5'} !important;
-    color: {'#FFD700' if is_dark else '#4F46E5'} !important;
+[data-testid="stSidebarCollapseButton"] svg,
+[data-testid="collapsedControl"] svg {{
+    fill: {'#FFD700' if is_dark else '#10B981'} !important;
+    color: {'#FFD700' if is_dark else '#10B981'} !important;
+    width: 20px !important;
+    height: 20px !important;
 }}
 </style>
 
@@ -598,6 +613,7 @@ header[data-testid="stHeader"] {{
 if page == 'Home':
     # HOME PAGE FULL WIDTH FIX - Reusing same padding as Global
     pass
+
 page = st.session_state['page']
 
 # Update session state with current page

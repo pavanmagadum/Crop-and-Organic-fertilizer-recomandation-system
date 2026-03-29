@@ -10,24 +10,12 @@
    ============================================ */
 #MainMenu,
 footer,
-[data-testid="stToolbar"],
 .stDeployButton {
     visibility: hidden !important;
     display: none !important;
 }
 
-header[data-testid="stHeader"] {
-    display: none !important;
-}
-
-/* COMPLETELY HIDE SIDEBAR */
-[data-testid="stSidebar"],
-section[data-testid="stSidebar"],
-[data-testid="collapsedControl"] {
-    display: none !important;
-    width: 0 !important;
-    min-width: 0 !important;
-}
+/* DYNAMIC SIDEBAR - ALLOW TOGGLE (State handled by Streamlit) */
 
 /* Expand main content to full width */
 .main,

@@ -22,11 +22,7 @@
 
 
 
-/* RESTORE SIDEBAR & PREMIUM LOOK */
-[data-testid="stSidebar"],
-section[data-testid="stSidebar"] {
-    visibility: visible !important;
-}
+/* DYNAMIC SIDEBAR - ALLOW COLLAPSE (Handled by Streamlit default toggle) */
 
 
 [data-testid="stSidebar"] {
