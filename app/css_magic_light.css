@@ -132,10 +132,10 @@ h4 {
     color: var(--text-primary) !important;
 }
 
-p,
-span,
-div,
-li {
+p:not(button p), 
+span:not(button span), 
+div:not(button div):not(.top-nav-bar div):not(.feature-card div):not(.premium-hero-card div):not(.app-card div):not([data-testid="stChatMessage"] div), 
+li:not(button li) {
     color: var(--text-secondary) !important;
     line-height: 1.7 !important;
 }
@@ -194,8 +194,8 @@ input[type="email"]:focus {
 [data-testid="stNumberInput"] input::placeholder,
 div[data-baseweb="input"] input::placeholder,
 input::placeholder {
-    color: #6b7280 !important;
-    opacity: 0.7 !important;
+    color: #4b5563 !important; /* Darker gray for better contrast in light mode */
+    opacity: 0.8 !important;
 }
 
 /* Disabled state */

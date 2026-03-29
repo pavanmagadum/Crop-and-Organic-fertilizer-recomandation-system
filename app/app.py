@@ -112,6 +112,18 @@ def render_ai_doctor():
         ]
 
     # Display Chat History
+    # Theme-aware colors
+    is_dark = st.session_state.get('theme', 'dark') == 'dark'
+    
+    # Message bubble styles
+    user_bg = "rgba(16, 185, 129, 0.2)" if is_dark else "#DCFCE7"
+    user_text = "#34D399" if is_dark else "#166534"
+    user_border = "rgba(16, 185, 129, 0.3)" if is_dark else "#BBF7D0"
+    
+    assistant_bg = "rgba(30, 41, 59, 0.7)" if is_dark else "#FFFFFF"
+    assistant_text = "#E2E8F0" if is_dark else "#374151"
+    assistant_border = "rgba(100, 116, 139, 0.3)" if is_dark else "#E5E7EB"
+
     # Display Chat History with Premium Styles
     for msg in st.session_state.messages:
         role = msg["role"]
@@ -120,7 +132,7 @@ def render_ai_doctor():
         if role == "user":
             with st.chat_message("user", avatar="🧑‍🌾"):
                 st.markdown(f"""
-                <div style="background-color: #DCFCE7; color: #166534; padding: 12px 16px; border-radius: 12px; border-bottom-right-radius: 2px; margin-bottom: 5px; font-size: 15px; border: 1px solid #BBF7D0;">
+                <div style="background: {user_bg}; color: {user_text}; padding: 12px 18px; border-radius: 16px; border-bottom-right-radius: 4px; margin-bottom: 5px; font-size: 15px; border: 1px solid {user_border}; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-weight: 500;">
                     {content}
                 </div>
                 """, unsafe_allow_html=True)
@@ -129,7 +141,7 @@ def render_ai_doctor():
         else:
             with st.chat_message("assistant", avatar="🤖"):
                 st.markdown(f"""
-                <div style="background-color: #FFFFFF; color: #374151; padding: 12px 16px; border-radius: 12px; border-bottom-left-radius: 2px; margin-bottom: 5px; font-size: 15px; border: 1px solid #E5E7EB; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                <div style="background: {assistant_bg}; color: {assistant_text}; padding: 12px 18px; border-radius: 16px; border-bottom-left-radius: 4px; margin-bottom: 5px; font-size: 15px; border: 1px solid {assistant_border}; box-shadow: 0 4px 15px rgba(0,0,0,0.15); line-height: 1.6;">
                     {content}
                 </div>
                 """, unsafe_allow_html=True)
@@ -142,7 +154,7 @@ def render_ai_doctor():
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user", avatar="🧑‍🌾"):
             st.markdown(f"""
-            <div style="background-color: #DCFCE7; color: #166534; padding: 12px 16px; border-radius: 12px; border-bottom-right-radius: 2px; margin-bottom: 5px; font-size: 15px; border: 1px solid #BBF7D0;">
+            <div style="background: {user_bg}; color: {user_text}; padding: 12px 18px; border-radius: 16px; border-bottom-right-radius: 4px; margin-bottom: 5px; font-size: 15px; border: 1px solid {user_border}; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-weight: 500;">
                 {prompt}
             </div>
             """, unsafe_allow_html=True)
@@ -185,7 +197,7 @@ def render_ai_doctor():
                     response = random.choice(g_responses)
                 
                 st.markdown(f"""
-                <div style="background-color: #FFFFFF; color: #374151; padding: 12px 16px; border-radius: 12px; border-bottom-left-radius: 2px; margin-bottom: 5px; font-size: 15px; border: 1px solid #E5E7EB; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                <div style="background: {assistant_bg}; color: {assistant_text}; padding: 12px 18px; border-radius: 16px; border-bottom-left-radius: 4px; margin-bottom: 5px; font-size: 15px; border: 1px solid {assistant_border}; box-shadow: 0 4px 15px rgba(0,0,0,0.15); line-height: 1.6;">
                     {response}
                 </div>
                 """, unsafe_allow_html=True)
@@ -490,16 +502,23 @@ with st.sidebar:
     st.markdown('---')
 
 
-# CONSOLIDATED HTML & CSS INJECTION 
-# (Bundled together to prevent Streamlit from generating empty vertical gaps between elements)
+# GLOBAL DYNAMIC STYLES (THEME AWARE)
 is_dark = st.session_state.get('theme', 'dark') == 'dark'
-icon_bg    = "rgba(255,255,255,0.05)" if is_dark else "rgba(0,0,0,0.04)"
-icon_bdr   = "rgba(255,255,255,0.12)" if is_dark else "rgba(0,150,100,0.25)"
+card_bg = "linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%)" if is_dark else "linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 253, 244, 0.9) 100%)"
+card_border = "rgba(139, 92, 246, 0.3)" if is_dark else "rgba(16, 185, 129, 0.2)"
+card_text = "#f8fafc" if is_dark else "#064e3b"
+card_muted = "#94a3b8" if is_dark else "#475569"
+card_shadow = "0 8px 32px rgba(0, 0, 0, 0.3)" if is_dark else "0 8px 32px rgba(16, 185, 129, 0.1)"
 
 st.markdown(f"""
-<div class="top-nav-bar" style="pointer-events: none; background: {'rgba(21, 25, 50, 0.95)' if is_dark else 'rgba(255, 255, 255, 0.953)'} !important; border-bottom: 1px solid {'#2d3748' if is_dark else '#e2e8f0'} !important;">
+<div class="top-nav-bar" style="pointer-events: none; background: {'rgba(15, 23, 42, 0.95)' if is_dark else 'rgba(255, 255, 255, 0.953)'} !important; border-bottom: 1px solid {'#1e293b' if is_dark else '#d1fae5'} !important;">
     <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 100%; margin: 0 auto; pointer-events: none;">
-        <div style="font-size: 22px; font-weight: 800; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 10px; margin-left: 60px; pointer-events: auto;">
+        <div style="font-size: 22px; font-weight: 900; 
+            background: linear-gradient(135deg, {'#38bdf8' if is_dark else '#059669'} 0%, {'#818cf8' if is_dark else '#10b981'} 100%) !important; 
+            -webkit-background-clip: text !important; 
+            background-clip: text !important; 
+            -webkit-text-fill-color: transparent !important; 
+            display: flex; align-items: center; gap: 10px; margin-left: 60px; pointer-events: auto;">
             🌾 Climate-Aware Farming
         </div>
     </div>
@@ -631,62 +650,59 @@ if 'user' not in st.session_state:
 
 # Page rendering: Home, Prediction, Preparation, Community
 if page == 'Home':
-    # FIX WHITE CARDS - INJECT CSS
-    st.markdown("""
+    # FEATURE CARDS DYNAMIC CSS
+    st.markdown(f"""
     <style>
-    /* Feature Cards */
-    .feature-card {
-        background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%) !important;
-        border: 2px solid rgba(139, 92, 246, 0.3) !important;
+    .feature-card {{
+        background: {card_bg} !important;
+        border: 2px solid {card_border} !important;
         border-radius: 20px !important;
         padding: 32px !important;
-    }
-    .feature-card:hover {
-        transform: translateY(-8px) !important;
-        box-shadow: 0 20px 40px rgba(139, 92, 246, 0.35) !important;
-    }
-    .feature-card-title { color: #e2e8f0 !important; }
+        box-shadow: {card_shadow} !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }}
+    .feature-card:hover {{
+        transform: translateY(-8px) scale(1.02) !important;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
+        border-color: #10b981 !important;
+    }}
+    .feature-card-title {{ 
+        color: {card_text} !important; 
+        font-weight: 700 !important;
+        font-size: 20px !important;
+    }}
     
-    /* Fix all white boxes/containers */
+    /* Global Card Override */
     div[style*="background-color: white"],
     div[style*="background: white"],
     div[style*="background-color:#fff"],
-    div[style*="background:#fff"],
-    div[style*="background: #F3F4F6"],
-    div[style*="background:#F3F4F6"] {
-        background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%) !important;
-        border: 1px solid rgba(139, 92, 246, 0.3) !important;
-    }
+    div[style*="background:#fff"] {{
+        background: {card_bg} !important;
+        border: 1px solid {card_border} !important;
+        color: {card_text} !important;
+    }}
     
-    /* Fix white text on white background */
-    div[style*="color: white"] {
-        color: #e2e8f0 !important;
-    }
-    
-    /* Fix action buttons */
-    .action-btn, a.action-btn {
-        background: #8B5CF6 !important;
+    .action-btn, a.action-btn {{
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
         color: white !important;
-        padding: 8px 16px !important;
-        border-radius: 8px !important;
+        padding: 10px 20px !important;
+        border-radius: 10px !important;
         text-decoration: none !important;
         display: inline-block !important;
-        font-weight: 600 !important;
-    }
-    .action-btn:hover {
-        background: #7C3AED !important;
-        transform: translateY(-2px) !important;
-    }
+        font-weight: 700 !important;
+        border: none !important;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2) !important;
+    }}
     </style>
     """, unsafe_allow_html=True)
     
     # Title and subtitle
-    st.markdown("""
-    <h1 style="font-size: 48px; font-weight: 800; background: linear-gradient(135deg, #00d9ff 0%, #7c3aed 100%); 
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 12px;">
+    st.markdown(f"""
+    <h1 style="font-size: clamp(32px, 5vw, 48px); font-weight: 800; background: linear-gradient(135deg, {'#38bdf8' if is_dark else '#059669'} 0%, {'#818cf8' if is_dark else '#10b981'} 100%); 
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 12px; line-height: 1.2;">
         Climate-Aware Crop & Fertilizer Recommendation
     </h1>
-    <p style="font-size: 18px; color: #94a3b8; text-align: center; margin-bottom: 48px;">
+    <p style="font-size: 18px; color: {card_muted}; text-align: center; margin-bottom: 48px; font-weight: 500;">
         Sustainable agriculture powered by climate-aware technology
     </p>
     """, unsafe_allow_html=True)
@@ -699,13 +715,13 @@ if page == 'Home':
     
     with col1:
         # Card 1: Smart Crop Prediction
-        st.markdown("""
+        st.markdown(f"""
         <div class="feature-card-container">
             <div class="feature-card">
                 <div class="feature-card-icon">🌾</div>
                 <h3 class="feature-card-title">Smart Crop Prediction</h3>
                 <div class="feature-card-content">
-                    <p style="color: #94a3b8; font-size: 15px; line-height: 1.6; margin: 0 0 20px 0;">
+                    <p style="color: {card_muted}; font-size: 15px; line-height: 1.6; margin: 0 0 20px 0;">
                         Get personalized crop recommendations based on your soil's NPK levels, pH, 
                         rainfall, and temperature data.
                     </p>
@@ -720,13 +736,13 @@ if page == 'Home':
         st.markdown("<br>", unsafe_allow_html=True)
         
         # Card 3: Preparation Guides
-        st.markdown("""
+        st.markdown(f"""
         <div class="feature-card-container">
             <div class="feature-card">
                 <div class="feature-card-icon">📋</div>
                 <h3 class="feature-card-title">Preparation Guides</h3>
                 <div class="feature-card-content">
-                    <p style="color: #94a3b8; font-size: 15px; line-height: 1.6; margin: 0 0 20px 0;">
+                    <p style="color: {card_muted}; font-size: 15px; line-height: 1.6; margin: 0 0 20px 0;">
                         Download detailed PDF guides with step-by-step recipes and instructions 
                         for making organic fertilizers at home.
                     </p>
@@ -740,13 +756,13 @@ if page == 'Home':
     
     with col2:
         # Card 2: Organic Fertilizer
-        st.markdown("""
+        st.markdown(f"""
         <div class="feature-card-container">
             <div class="feature-card">
                 <div class="feature-card-icon">🍃</div>
                 <h3 class="feature-card-title">Organic Fertilizer</h3>
                 <div class="feature-card-content">
-                    <p style="color: #94a3b8; font-size: 15px; line-height: 1.6; margin: 0 0 20px 0;">
+                    <p style="color: {card_muted}; font-size: 15px; line-height: 1.6; margin: 0 0 20px 0;">
                         Convert conventional fertilizers to organic alternatives with our 
                         comprehensive conversion tool and preparation guides.
                     </p>
@@ -761,13 +777,13 @@ if page == 'Home':
         st.markdown("<br>", unsafe_allow_html=True)
         
         # Card 4: Expert Community
-        st.markdown("""
+        st.markdown(f"""
         <div class="feature-card-container">
             <div class="feature-card">
                 <div class="feature-card-icon">👥</div>
                 <h3 class="feature-card-title">Expert Community</h3>
                 <div class="feature-card-content">
-                    <p style="color: #94a3b8; font-size: 15px; line-height: 1.6; margin: 0 0 20px 0;">
+                    <p style="color: {card_muted}; font-size: 15px; line-height: 1.6; margin: 0 0 20px 0;">
                         Connect with agricultural experts and farmers. Ask questions and get 
                         verified answers from professionals.
                     </p>
@@ -798,19 +814,19 @@ elif page == 'Prediction':
             """, unsafe_allow_html=True)
             
             # Location & Soil
-            st.markdown('<p style="color: #e2e8f0; font-weight: 600; margin-bottom: 12px; font-size: 15px;">📍 Location & Soil</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="color: {card_text}; font-weight: 700; margin-bottom: 12px; font-size: 16px;">📍 Location & Soil</p>', unsafe_allow_html=True)
             cols = st.columns(2, gap='medium')
             with cols[0]:
-                st.markdown('<p style="color: #94a3b8; font-size: 13px; margin-bottom: 6px; font-weight: 500;">Region / Zone</p>', unsafe_allow_html=True)
+                st.markdown(f'<p style="color: {card_muted}; font-size: 13px; margin-bottom: 6px; font-weight: 600;">Region / Zone</p>', unsafe_allow_html=True)
                 region = st.radio('Region / Zone', ['North','South','East','West','Central'], label_visibility='collapsed', key='region_select', horizontal=False)
             with cols[1]:
-                st.markdown('<p style="color: #94a3b8; font-size: 13px; margin-bottom: 6px; font-weight: 500;">Soil Texture</p>', unsafe_allow_html=True)
+                st.markdown(f'<p style="color: {card_muted}; font-size: 13px; margin-bottom: 6px; font-weight: 600;">Soil Texture</p>', unsafe_allow_html=True)
                 soil = st.radio('Soil Texture', ['Loamy','Sandy','Clayey','Silty'], label_visibility='collapsed', key='soil_select', horizontal=False)
             
             st.markdown('<div style="height: 20px"></div>', unsafe_allow_html=True)
             
             # Soil Nutrients (NPK)
-            st.markdown('<p style="color: #e2e8f0; font-weight: 600; margin-bottom: 12px; font-size: 15px;">🧪 Soil Nutrients (NPK)</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="color: {card_text}; font-weight: 700; margin-bottom: 12px; font-size: 16px;">🧪 Soil Nutrients (NPK)</p>', unsafe_allow_html=True)
             ncols = st.columns(3, gap='small')
             with ncols[0]:
                 N = st.number_input('Nitrogen (N)', min_value=0.0, max_value=300.0, value=100.0, step=5.0, label_visibility="visible")
@@ -822,7 +838,7 @@ elif page == 'Prediction':
             st.markdown('<div style="height: 20px"></div>', unsafe_allow_html=True)
             
             # Environmental Factors
-            st.markdown('<p style="color: #e2e8f0; font-weight: 600; margin-bottom: 12px; font-size: 15px;">🌤️ Environmental Factors</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="color: {card_text}; font-weight: 700; margin-bottom: 12px; font-size: 16px;">🌤️ Environmental Factors</p>', unsafe_allow_html=True)
             ccols1 = st.columns(2, gap='medium')
             with ccols1[0]:
                 pH = st.number_input('Soil pH Level', min_value=3.0, max_value=9.0, value=6.5, step=0.1, format='%.1f', label_visibility="visible")
@@ -980,49 +996,47 @@ elif page == 'Prediction':
                 d2 = (today + datetime.timedelta(days=2)).strftime('%a')
                 d3 = (today + datetime.timedelta(days=3)).strftime('%a')
                 
-                # Use plain string concatenation with NO indentation to prevent Markdown code block interpretation
-                html_content = f"""
-<div style="margin-top: 20px; background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(26, 31, 58, 0.5) 100%); border-radius: 16px; padding: 20px; border: 1px solid rgba(100, 116, 139, 0.3);">
-<h3 style="color: #00d9ff; font-size: 18px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; font-weight: 700;">📅 Crop Calendar</h3>
+                # Use a single string with no leading indentation to prevent Markdown code block rendering
+                html_content = f"""<div style="margin-top: 20px; background: {card_bg}; border-radius: 16px; padding: 25px; border: 1px solid {card_border}; box-shadow: {card_shadow};">
+<h3 style="color: {'#10B981' if not is_dark else '#34D399'}; font-size: 18px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; font-weight: 700;">📅 Crop Calendar</h3>
 <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-<div style="text-align: center; flex: 1; border-right: 1px solid rgba(100, 116, 139, 0.3);">
-<div style="font-size: 12px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Sowing</div>
-<div style="font-size: 16px; font-weight: 600; color: #10B981; margin-top: 4px;">{sow}</div>
+<div style="text-align: center; flex: 1; border-right: 1px solid {card_border};">
+<div style="font-size: 11px; color: {card_muted}; text-transform: uppercase; letter-spacing: 0.5px;">Sowing</div>
+<div style="font-size: 16px; font-weight: 700; color: #10B981; margin-top: 4px;">{sow}</div>
 </div>
 <div style="text-align: center; flex: 1;">
-<div style="font-size: 12px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Harvest</div>
-<div style="font-size: 16px; font-weight: 600; color: #F59E0B; margin-top: 4px;">{hvst}</div>
+<div style="font-size: 11px; color: {card_muted}; text-transform: uppercase; letter-spacing: 0.5px;">Harvest</div>
+<div style="font-size: 16px; font-weight: 700; color: #F59E0B; margin-top: 4px;">{hvst}</div>
 </div>
 </div>
-<h3 style="color: #00d9ff; font-size: 18px; margin-bottom: 15px; margin-top: 25px; display: flex; align-items: center; gap: 8px; font-weight: 700;">🌤️ 5-Day Forecast</h3>
-<div style="display: flex; justify-content: space-between; gap: 8px;">
-<div style="text-align: center; background: rgba(30, 41, 59, 0.4); padding: 8px; border-radius: 8px; flex: 1; border: 1px solid rgba(100, 116, 139, 0.2);">
-<div style="font-size: 12px; font-weight: 600; color: #e2e8f0;">Today</div>
-<div style="font-size: 20px;">☀️</div>
-<div style="font-size: 12px; font-weight: 600; color: #e2e8f0;">32°</div>
+<h3 style="color: {'#3B82F6' if not is_dark else '#60A5FA'}; font-size: 18px; margin-bottom: 20px; margin-top: 30px; display: flex; align-items: center; gap: 8px; font-weight: 700;">🌤️ 5-Day Forecast</h3>
+<div style="display: flex; justify-content: space-between; gap: 10px;">
+<div style="text-align: center; background: {'rgba(16, 185, 129, 0.1)' if is_dark else 'rgba(16, 185, 129, 0.05)'}; padding: 10px; border-radius: 10px; flex: 1; border: 1px solid {card_border};">
+<div style="font-size: 11px; color: {card_muted};">Today</div>
+<div style="font-size: 22px; margin: 5px 0;">☀️</div>
+<div style="font-size: 14px; font-weight: 700; color: {card_text};">32°</div>
 </div>
-<div style="text-align: center; background: rgba(30, 41, 59, 0.4); padding: 8px; border-radius: 8px; flex: 1; border: 1px solid rgba(100, 116, 139, 0.2);">
-<div style="font-size: 12px; color: #cbd5e1;">{d1}</div>
-<div style="font-size: 20px;">⛅</div>
-<div style="font-size: 12px; color: #cbd5e1;">30°</div>
+<div style="text-align: center; background: {'rgba(59, 130, 246, 0.1)' if is_dark else 'rgba(59, 130, 246, 0.05)'}; padding: 10px; border-radius: 10px; flex: 1; border: 1px solid {card_border};">
+<div style="font-size: 11px; color: {card_muted};">{d1}</div>
+<div style="font-size: 22px; margin: 5px 0;">⛅</div>
+<div style="font-size: 14px; font-weight: 700; color: {card_text};">30°</div>
 </div>
-<div style="text-align: center; background: rgba(30, 41, 59, 0.4); padding: 8px; border-radius: 8px; flex: 1; border: 1px solid rgba(100, 116, 139, 0.2);">
-<div style="font-size: 12px; color: #cbd5e1;">{d2}</div>
-<div style="font-size: 20px;">🌧️</div>
-<div style="font-size: 12px; color: #cbd5e1;">28°</div>
+<div style="text-align: center; background: {'rgba(59, 130, 246, 0.1)' if is_dark else 'rgba(59, 130, 246, 0.05)'}; padding: 10px; border-radius: 10px; flex: 1; border: 1px solid {card_border};">
+<div style="font-size: 11px; color: {card_muted};">{d2}</div>
+<div style="font-size: 22px; margin: 5px 0;">🌧️</div>
+<div style="font-size: 14px; font-weight: 700; color: {card_text};">28°</div>
 </div>
-<div style="text-align: center; background: rgba(30, 41, 59, 0.4); padding: 8px; border-radius: 8px; flex: 1; border: 1px solid rgba(100, 116, 139, 0.2);">
-<div style="font-size: 12px; color: #cbd5e1;">{d3}</div>
-<div style="font-size: 20px;">☁️</div>
-<div style="font-size: 12px; color: #cbd5e1;">29°</div>
-</div>
-</div>
-<div style="margin-top: 25px; background: rgba(245, 158, 11, 0.1); padding: 12px; border-radius: 8px; border-left: 4px solid #F59E0B;">
-<div style="font-size: 13px; font-weight: 600; color: #FCD34D; margin-bottom: 4px;">💡 Farming Tip</div>
-<div style="font-size: 13px; color: #FDE68A; line-height: 1.4;">Ensure proper drainage in the field to prevent waterlogging during the upcoming rains.</div>
+<div style="text-align: center; background: {'rgba(100, 116, 139, 0.1)' if is_dark else 'rgba(100, 116, 139, 0.05)'}; padding: 10px; border-radius: 10px; flex: 1; border: 1px solid {card_border};">
+<div style="font-size: 11px; color: {card_muted};">{d3}</div>
+<div style="font-size: 22px; margin: 5px 0;">☁️</div>
+<div style="font-size: 14px; font-weight: 700; color: {card_text};">29°</div>
 </div>
 </div>
-"""
+<div style="margin-top: 30px; background: {'rgba(245, 158, 11, 0.15)' if is_dark else 'rgba(245, 158, 11, 0.1)'}; padding: 15px; border-radius: 12px; border-left: 4px solid #F59E0B;">
+<div style="font-size: 14px; font-weight: 800; color: #F59E0B; margin-bottom: 6px;">💡 Farming Tip</div>
+<div style="font-size: 14px; color: {card_text}; line-height: 1.5; font-style: italic;">Ensure proper drainage in the field to prevent waterlogging during the upcoming rains.</div>
+</div>
+</div>"""
                 st.markdown(html_content, unsafe_allow_html=True)
 
     # RIGHT: Result card with pie chart
@@ -1076,49 +1090,47 @@ elif page == 'Prediction':
             
             alts = alternatives_map.get(crop_name.strip().lower(), 'Similar seasonal crops')
             
-            # CROP PREDICTION CARD - EVEN LIGHTER background
+            # CROP PREDICTION CARD
             st.markdown(f'''
-            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.03) 100%), 
-            linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(26, 31, 58, 0.5) 100%);
+            <div style="background: {card_bg};
             border: 2px solid #10B981; border-radius: 20px; padding: 32px; margin-bottom: 24px;
-            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15), 0 0 30px rgba(16, 185, 129, 0.03);
+            box-shadow: {card_shadow};
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);">
                 <div style="text-align:center; margin-bottom:16px;">
                     <span style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); 
                     color: #ffffff; padding: 8px 20px; border-radius: 25px; font-size: 13px; 
-                    font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+                    font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
                     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);">✨ Top Recommendation</span>
                 </div>
-                <div style="font-size: 48px; font-weight: 900; text-align: center; margin-bottom: 12px;
+                <div style="font-size: clamp(36px, 6vw, 48px); font-weight: 900; text-align: center; margin-bottom: 12px;
                 background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
                 -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
                     {crop_name}
                 </div>
-                <div style="color: #cbd5e1; font-size: 16px; margin-bottom: 20px; font-weight: 500; text-align: center;">
-                    <span style="color: #10B981; font-weight: 700;">Alternatives:</span> <span style="color: #e2e8f0;">{alts}</span>
+                <div style="color: {card_muted}; font-size: 16px; margin-bottom: 20px; font-weight: 600; text-align: center;">
+                    <span style="color: #10B981; font-weight: 800;">Alternatives:</span> <span style="color: {card_text};">{alts}</span>
                 </div>
-                <div style="text-align: center; color: #cbd5e1; font-size: 15px; font-weight: 600;">
-                    <span style="color: #10B981;">⏱ Duration:</span> <span style="color: #e2e8f0;">{duration_display}</span>
+                <div style="text-align: center; color: {card_muted}; font-size: 15px; font-weight: 700;">
+                    <span style="color: #10B981;">⏱ Duration:</span> <span style="color: {card_text};">{duration_display}</span>
                 </div>
             </div>
             ''', unsafe_allow_html=True)
             
-            # CHEMICAL FERTILIZER CARD - EVEN LIGHTER background
+            # CHEMICAL FERTILIZER CARD
             nf = lr.get('nf', 'N/A')
             st.markdown(f'''
-            <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.03) 100%), 
-            linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(26, 31, 58, 0.5) 100%);
-            border: 2px solid #3B82F6; border-radius: 20px; padding: 28px; margin-bottom: 24px;
-            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15), 0 0 30px rgba(59, 130, 246, 0.03);
+            <div style="background: {card_bg};
+            border: 2px solid #3B82F6; border-radius: 20px; padding: 32px; margin-bottom: 24px;
+            box-shadow: {card_shadow};
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);">
-                <div style="color: #60A5FA; font-size: 20px; font-weight: 700; margin-bottom: 16px; 
+                <div style="color: {'#60A5FA' if is_dark else '#2563EB'}; font-size: 22px; font-weight: 800; margin-bottom: 16px; 
                 display: flex; align-items: center; gap: 10px;">
                     🧪 Chemical Recommendation
                 </div>
-                <div style="background: rgba(59, 130, 246, 0.05); border-radius: 12px; padding: 20px; 
-                border: 1px solid rgba(59, 130, 246, 0.15);">
-                    <div style="font-size: 28px; font-weight: 800; color: #60A5FA; margin-bottom: 8px;">{nf}</div>
-                    <div style="color: #cbd5e1; font-size: 14px; line-height: 1.6;">
+                <div style="background: {'rgba(59, 130, 246, 0.1)' if is_dark else 'rgba(59, 130, 246, 0.05)'}; border-radius: 12px; padding: 20px; 
+                border: 1px solid rgba(59, 130, 246, 0.2);">
+                    <div style="font-size: 28px; font-weight: 900; color: {'#60A5FA' if is_dark else '#2563EB'}; margin-bottom: 8px;">{nf}</div>
+                    <div style="color: {card_muted}; font-size: 14px; line-height: 1.6; font-weight: 500;">
                         Standard chemical fertilizer for immediate nutrient boost.
                     </div>
                 </div>
@@ -1129,21 +1141,20 @@ elif page == 'Prediction':
             org = conv.get('organic') or ''
             
             if org:
-                # ORGANIC ALTERNATIVE CARD - EVEN LIGHTER background
+                # ORGANIC ALTERNATIVE CARD
                 st.markdown(f'''
-                <div style="background: linear-gradient(135deg, rgba(101, 163, 13, 0.05) 0%, rgba(77, 124, 15, 0.03) 100%), 
-                linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(26, 31, 58, 0.5) 100%);
-                border: 2px solid #84CC16; border-radius: 20px; padding: 28px; margin-bottom: 24px;
-                box-shadow: 0 8px 32px rgba(132, 204, 22, 0.15), 0 0 30px rgba(132, 204, 22, 0.03);
+                <div style="background: {card_bg};
+                border: 2px solid #84CC16; border-radius: 20px; padding: 32px; margin-bottom: 24px;
+                box-shadow: {card_shadow};
                 transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);">
-                    <div style="color: #A3E635; font-size: 20px; font-weight: 700; margin-bottom: 16px; 
+                    <div style="color: {'#A3E635' if is_dark else '#65A30D'}; font-size: 22px; font-weight: 800; margin-bottom: 16px; 
                     display: flex; align-items: center; gap: 10px;">
                         🌿 Organic Alternative
                     </div>
-                    <div style="background: rgba(132, 204, 22, 0.05); border-radius: 12px; padding: 20px; 
-                    border: 1px solid rgba(132, 204, 22, 0.15);">
-                        <div style="font-size: 28px; font-weight: 800; color: #A3E635; margin-bottom: 8px;">{org}</div>
-                        <div style="color: #cbd5e1; font-size: 14px; line-height: 1.6;">
+                    <div style="background: {'rgba(132, 204, 22, 0.1)' if is_dark else 'rgba(132, 204, 22, 0.05)'}; border-radius: 12px; padding: 20px; 
+                    border: 1px solid rgba(132, 204, 22, 0.2);">
+                        <div style="font-size: 28px; font-weight: 900; color: {'#A3E635' if is_dark else '#65A30D'}; margin-bottom: 8px;">{org}</div>
+                        <div style="color: {card_muted}; font-size: 14px; line-height: 1.6; font-weight: 500;">
                             Sustainable choice for long-term soil health and environmental benefits.
                         </div>
                     </div>
@@ -1277,22 +1288,22 @@ elif page == 'Prediction':
                     with col_legend2:
                         st.markdown("**🌿 Organic Components:**")
                         st.markdown(f'''
-                        <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; background: rgba(30, 41, 59, 0.3); border-radius: 8px;">
+                        <div style="display: flex; flex-direction: column; gap: 8px; padding: 12px; background: {'rgba(255, 255, 255, 0.05)' if is_dark else 'rgba(0, 0, 0, 0.03)'}; border-radius: 8px; border: 1px solid {card_border};">
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <div style="width: 20px; height: 20px; background: #2D5016; border-radius: 4px;"></div>
-                                <span style="color: #e2e8f0;">Compost (30%)</span>
+                                <span style="color: {card_text};">Compost (30%)</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <div style="width: 20px; height: 20px; background: #6B8E23; border-radius: 4px;"></div>
-                                <span style="color: #e2e8f0;">Fish Emulsion (25%)</span>
+                                <span style="color: {card_text};">Fish Emulsion (25%)</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <div style="width: 20px; height: 20px; background: #8FBC8F; border-radius: 4px;"></div>
-                                <span style="color: #e2e8f0;">Neem Cake (25%)</span>
+                                <span style="color: {card_text};">Neem Cake (25%)</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <div style="width: 20px; height: 20px; background: #90EE90; border-radius: 4px;"></div>
-                                <span style="color: #e2e8f0;">Vermicompost (20%)</span>
+                                <span style="color: {card_text};">Vermicompost (20%)</span>
                             </div>
                         </div>
                         ''', unsafe_allow_html=True)
@@ -1307,11 +1318,13 @@ elif page == 'Prediction':
             is_dark = st.session_state.get('theme', 'dark') == 'dark'
             bg_grad = "rgba(30, 41, 59, 0.4), rgba(26, 31, 58, 0.5)" if is_dark else "rgba(255, 255, 255, 0.8), rgba(240, 253, 244, 0.9)"
             st.markdown(f'''
-            <div style="background: linear-gradient(135deg, {bg_grad});
-            border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 16px; padding: 60px 40px; text-align: center;">
-                <div style="font-size: 60px; margin-bottom: 20px;">📊</div>
-                <div style="color: #e2e8f0; font-size: 24px; font-weight: 700; margin-bottom: 12px;">No Results Yet</div>
-                <div style="color: #94a3b8; font-size: 16px; line-height: 1.6;">Fill in the form and click "Get Recommendations" to see your personalized crop and fertilizer suggestions</div>
+            <div style="background: {card_bg};
+            border: 1px solid {card_border}; border-radius: 16px; padding: 60px 40px; text-align: center; box-shadow: {card_shadow};">
+                <div style="font-size: 64px; margin-bottom: 24px;">📊</div>
+                <div style="color: {card_text}; font-size: 26px; font-weight: 800; margin-bottom: 12px;">No Results Yet</div>
+                <div style="color: {card_muted}; font-size: 16px; line-height: 1.6; font-weight: 500; max-width: 500px; margin: 0 auto;">
+                    Fill in the form and click "Get Recommendations" to see your personalized crop and fertilizer suggestions
+                </div>
             </div>
             ''', unsafe_allow_html=True)
 
@@ -1320,12 +1333,14 @@ elif page == 'Preparation':
 
     
     if 'last_result' not in st.session_state:
-        st.markdown('''
-        <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(26, 31, 58, 0.5) 100%);
-        border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 16px; padding: 60px 40px; text-align: center;">
-            <div style="font-size: 60px; margin-bottom: 20px;">🍃</div>
-            <div style="color: #e2e8f0; font-size: 24px; font-weight: 700; margin-bottom: 12px;">No Organic Fertilizer Selected</div>
-            <div style="color: #94a3b8; font-size: 16px; line-height: 1.6;">Go to the Prediction page and calculate recommendations first to see the preparation guide.</div>
+        st.markdown(f'''
+        <div style="background: {card_bg};
+        border: 1px solid {card_border}; border-radius: 16px; padding: 60px 40px; text-align: center; box-shadow: {card_shadow};">
+            <div style="font-size: 64px; margin-bottom: 24px;">🍃</div>
+            <div style="color: {card_text}; font-size: 26px; font-weight: 800; margin-bottom: 12px;">No Organic Fertilizer Selected</div>
+            <div style="color: {card_muted}; font-size: 16px; line-height: 1.6; font-weight: 500; max-width: 500px; margin: 0 auto;">
+                Go to the Prediction page and calculate recommendations first to see the preparation guide.
+            </div>
         </div>
         ''', unsafe_allow_html=True)
     else:
@@ -1354,9 +1369,9 @@ elif page == 'Preparation':
         with col1:
             # PREPARATION METHOD CARD - DARK THEME
             with st.container(border=True):
-                st.markdown('''
-                    <h3 style="color: #00d9ff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; 
-                    font-size: 22px; font-weight: 700; border-bottom: 1px solid rgba(100, 116, 139, 0.3); 
+                st.markdown(f'''
+                    <h3 style="color: {'#38bdf8' if is_dark else '#0369a1'}; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; 
+                    font-size: 22px; font-weight: 800; border-bottom: 1px solid {card_border}; 
                     padding-bottom: 15px; margin-top: 0;">
                         🥣 Preparation Method
                     </h3>
@@ -1370,9 +1385,9 @@ elif page == 'Preparation':
                             <div style="flex-shrink: 0; width: 36px; height: 36px; 
                             background: linear-gradient(135deg, #10B981 0%, #059669 100%); 
                             color: white; border-radius: 50%; display: flex; align-items: center; 
-                            justify-content: center; font-weight: 700; font-size: 16px;
+                            justify-content: center; font-weight: 800; font-size: 16px;
                             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">{i}</div>
-                            <div style="color: #e2e8f0; font-size: 16px; line-height: 1.7; padding-top: 6px; flex: 1;">
+                            <div style="color: {card_text}; font-size: 16px; line-height: 1.7; padding-top: 6px; flex: 1; font-weight: 500;">
                                 {step_text}
                             </div>
                         </div>
@@ -1383,25 +1398,25 @@ elif page == 'Preparation':
         with col2:
             # IMPORTANT NOTES CARD - DARK THEME
             st.markdown(f'''
-            <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.1) 100%), 
-            linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(26, 31, 58, 0.5) 100%);
+            <div style="background: {card_bg};
             padding: 24px; border-radius: 16px; margin-bottom: 24px; 
-            box-shadow: 0 8px 32px rgba(245, 158, 11, 0.2);
-            border: 2px solid rgba(245, 158, 11, 0.3); border-left: 6px solid #F59E0B; position: relative;">
+            box-shadow: {card_shadow};
+            border: 2px solid {'rgba(245, 158, 11, 0.3)' if is_dark else 'rgba(245, 158, 11, 0.1)'}; 
+            border-left: 6px solid #F59E0B; position: relative;">
                 <div style="position: absolute; top: -15px; left: 45%; color: rgba(245, 158, 11, 0.4); font-size: 36px;">📌</div>
-                <h3 style="color: #FCD34D; font-size: 20px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-weight: 700;">
+                <h3 style="color: {'#FCD34D' if is_dark else '#D97706'}; font-size: 20px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-weight: 800;">
                     💡 Important Notes
                 </h3>
-                <div style="color: #FDE68A; font-size: 15px; line-height: 1.7;">
+                <div style="color: {card_text}; font-size: 15px; line-height: 1.7; font-weight: 500;">
                     {notes}
                 </div>
             </div>
             ''', unsafe_allow_html=True)
             
             # RESOURCES SECTION - DARK THEME
-            st.markdown('''
-                <h3 style="color: #00d9ff; font-size: 20px; display: flex; align-items: center; gap: 8px; 
-                margin-top: 10px; margin-bottom: 16px; font-weight: 700;">
+            st.markdown(f'''
+                <h3 style="color: {'#38bdf8' if is_dark else '#0369a1'}; font-size: 20px; display: flex; align-items: center; gap: 8px; 
+                margin-top: 10px; margin-bottom: 16px; font-weight: 800;">
                     💾 Resources
                 </h3>
             ''', unsafe_allow_html=True)
@@ -1472,13 +1487,13 @@ elif page == 'Preparation':
                 # Video Tutorials Section - DARK THEME
                 st.markdown('<div style="height: 30px;"></div>', unsafe_allow_html=True)
                 with st.container(border=True):
-                    st.markdown('''
-                        <h3 style="color: #00d9ff; margin-bottom: 10px; font-size: 22px; font-weight: 700;">
+                    st.markdown(f'''
+                        <h3 style="color: {'#38bdf8' if is_dark else '#0369a1'}; margin-bottom: 10px; font-size: 22px; font-weight: 800;">
                             🎥 Video Tutorials
                         </h3>
                     ''', unsafe_allow_html=True)
-                    st.markdown('''
-                        <p style="color: #94a3b8; font-size: 14px; margin-bottom: 20px;">
+                    st.markdown(f'''
+                        <p style="color: {card_muted}; font-size: 14px; margin-bottom: 20px; font-weight: 500;">
                             Watch step-by-step guides in your preferred language
                         </p>
                     ''', unsafe_allow_html=True)
@@ -1499,8 +1514,8 @@ elif page == 'Preparation':
                                 col_idx = i % 3
                                 with vcols[col_idx]:
                                     st.markdown(f"""
-                                    <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%); border-radius:8px; overflow:hidden; border:1px solid rgba(139, 92, 246, 0.3); height:100%;">
-                                        <div style="padding:10px; font-weight:600; font-size:14px; height:60px; overflow:hidden; text-overflow:ellipsis; background: rgba(139, 92, 246, 0.1); border-bottom:1px solid rgba(139, 92, 246, 0.2); color: #e2e8f0;">
+                                    <div style="background: {card_bg}; border-radius:12px; overflow:hidden; border:1px solid {card_border}; height:100%; box-shadow: {card_shadow};">
+                                        <div style="padding:12px; font-weight:700; font-size:14px; height:60px; overflow:hidden; text-overflow:ellipsis; background: {'rgba(139, 92, 246, 0.1)' if is_dark else 'rgba(16, 185, 129, 0.05)'}; border-bottom:1px solid {card_border}; color: {card_text};">
                                             {v.get('title')}
                                         </div>
                                     </div>
@@ -1516,25 +1531,41 @@ elif page == 'Community':
 
     
     # SMALLER, SIMPLER HERO SECTION
-    st.markdown('''
+    st.markdown(f'''
         <style>
-            .comm-hero{background: linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(59,130,246,0.06) 100%), linear-gradient(135deg, rgba(30,41,59,0.28) 0%, rgba(26,31,58,0.36) 100%); border-radius:16px; padding:20px; margin-bottom:20px; border:1px solid rgba(139,92,246,0.18);}
-            .comm-hero .left{display:flex; align-items:center; gap:18px}
-            .comm-hero .icon{font-size:34px}
-            .admin-quick-btn{background: linear-gradient(90deg,#FBBF24,#F59E0B); color:#0b1220; padding:10px 16px; border-radius:12px; font-weight:800; text-decoration:none; box-shadow:0 6px 18px rgba(245,158,11,0.18); border: none;}
-            .admin-quick-btn:hover{transform:translateY(-2px); box-shadow:0 10px 28px rgba(245,158,11,0.22)}
-            @media (max-width:720px){ .comm-hero{padding:16px} .admin-quick-btn{padding:8px 12px; font-size:14px} }
+            .comm-hero {{
+                background: {card_bg};
+                border-radius:20px; 
+                padding:24px; 
+                margin-bottom:24px; 
+                border:1px solid {card_border};
+                box-shadow: {card_shadow};
+            }}
+            .comm-hero .left{{display:flex; align-items:center; gap:18px}}
+            .comm-hero .icon{{font-size:36px}}
+            .admin-quick-btn{{
+                background: {'linear-gradient(90deg,#10B981,#059669)' if is_dark else 'linear-gradient(90deg,#059669,#047857)'}; 
+                color: white !important; 
+                padding:10px 20px; 
+                border-radius:12px; 
+                font-weight:800; 
+                text-decoration:none; 
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+                border: none;
+            }}
+            .admin-quick-btn:hover{{transform:translateY(-2px); box-shadow:0 10px 24px rgba(16,185,129,0.3)}}
+            @media (max-width:720px){{ .comm-hero{{padding:16px}} .admin-quick-btn{{padding:8px 12px; font-size:14px}} }}
         </style>
         <div class="comm-hero" style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
             <div class="left" style="flex:1;">
                 <div class="icon">👥</div>
-                <div style="line-height:1;">
-                    <h2 style="color:#e2e8f0; margin:0; font-size:22px; font-weight:700;">Welcome to Community</h2>
-                    <p style="color:#94a3b8; margin:6px 0 0 0; font-size:14px;">Connect with agricultural experts and get verified answers</p>
+                <div style="line-height:1.2;">
+                    <h2 style="color:{card_text}; margin:0; font-size:24px; font-weight:800;">Welcome to Community</h2>
+                    <p style="color:{card_muted}; margin:8px 0 0 0; font-size:14px; font-weight:500;">Connect with agricultural experts and get verified answers</p>
                 </div>
             </div>
             <div style="flex:0 0 auto;">
-                <a href="?admin=true" class="admin-quick-btn" aria-label="Admin Login">🔐 Admin</a>
+                <a href="?admin=true" class="admin-quick-btn" aria-label="Admin Login">🔐 Admin Login</a>
             </div>
         </div>
         ''', unsafe_allow_html=True)
@@ -1557,11 +1588,11 @@ elif page == 'Community':
             if st.session_state.get('show_register'):
                 # Use Streamlit's bordered container
                 with st.container(border=True):
-                    st.markdown('''
+                    st.markdown(f'''
                         <div style="text-align: center; margin-bottom: 32px;">
                             <div style="font-size: 56px; margin-bottom: 16px;">🌱</div>
                             <h2 style="color: #10B981; margin: 0; font-size: 32px; font-weight: 800;">Create Your Account</h2>
-                            <p style="color: #94a3b8; margin: 8px 0 0 0; font-size: 15px;">Join our farming community today</p>
+                            <p style="color: {card_muted}; margin: 8px 0 0 0; font-size: 15px; font-weight: 500;">Join our farming community today</p>
                         </div>
                     ''', unsafe_allow_html=True)
                     
@@ -1590,11 +1621,9 @@ elif page == 'Community':
                                 st.error('Registration failed (username exists)')
                 
                 # Footer outside container
-                st.markdown("""
-                    <div style="text-align: center; margin-top: 24px;">
-                        <p style="color: #94a3b8; font-size: 14px;">Already have an account?</p>
-                    </div>
-                """, unsafe_allow_html=True)
+                st.markdown(f"""<div style="text-align: center; margin-top: 24px;">
+<p style="color: {card_muted}; font-size: 14px; font-weight: 500;">Already have an account?</p>
+</div>""", unsafe_allow_html=True)
                 
                 if st.button('Login Here', use_container_width=True, key='goto_login'):
                     st.session_state['show_register'] = False
@@ -1609,19 +1638,19 @@ elif page == 'Community':
                 with st.container(border=True):
                     # Different header for admin vs regular login
                     if is_admin_mode:
-                        st.markdown('''
+                        st.markdown(f'''
                             <div style="text-align: center; margin-bottom: 32px;">
                                 <div style="font-size: 56px; margin-bottom: 16px;">🔐</div>
                                 <h2 style="color: #FBBF24; margin: 0; font-size: 32px; font-weight: 800;">ADMIN LOGIN</h2>
-                                <p style="color: #FCD34D; margin: 8px 0 0 0; font-size: 15px; font-weight: 600;">Authorized Access Only</p>
+                                <p style="color: {'#FCD34D' if is_dark else '#D97706'}; margin: 8px 0 0 0; font-size: 15px; font-weight: 700;">Authorized Access Only</p>
                             </div>
                         ''', unsafe_allow_html=True)
                     else:
-                        st.markdown('''
+                        st.markdown(f'''
                             <div style="text-align: center; margin-bottom: 32px;">
                                 <div style="font-size: 56px; margin-bottom: 16px;">👋</div>
-                                <h2 style="color: #60A5FA; margin: 0; font-size: 32px; font-weight: 800;">Welcome Back!</h2>
-                                <p style="color: #94a3b8; margin: 8px 0 0 0; font-size: 15px;">Login to continue to your account</p>
+                                <h2 style="color: {'#60A5FA' if is_dark else '#2563EB'}; margin: 0; font-size: 32px; font-weight: 800;">Welcome Back!</h2>
+                                <p style="color: {card_muted}; margin: 8px 0 0 0; font-size: 15px; font-weight: 500;">Login to continue to your account</p>
                             </div>
                         ''', unsafe_allow_html=True)
                     
@@ -1697,21 +1726,21 @@ elif page == 'Community':
                 role_bg = "linear-gradient(135deg, #10B981, #059669)"
             
             st.markdown(f'''
-            <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(26, 31, 58, 0.5) 100%);
-            border: 2px solid rgba(139, 92, 246, 0.3); border-radius: 20px; padding: 24px; margin-bottom: 24px;
-            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);">
+            <div style="background: {card_bg};
+            border: 2px solid {card_border}; border-radius: 20px; padding: 24px; margin-bottom: 24px;
+            box-shadow: {card_shadow};">
                 <div style="display: flex; align-items: center; gap: 20px;">
                     <div style="width: 70px; height: 70px; background: {role_bg}; 
                     border-radius: 50%; display: flex; align-items: center; justify-content: center; 
                     color: white; font-size: 32px; font-weight: 800;
-                    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);">
+                    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);">
                         {user.get("username")[0].upper()}
                     </div>
                     <div style="flex: 1;">
-                        <h3 style="margin: 0; color: #e2e8f0; font-size: 24px; font-weight: 700;">
+                        <h3 style="margin: 0; color: {card_text}; font-size: 24px; font-weight: 700;">
                             Hello, {user.get("username")}! 👋
                         </h3>
-                        <p style="margin: 4px 0 0 0; color: #94a3b8; font-size: 15px;">
+                        <p style="margin: 4px 0 0 0; color: {card_muted}; font-size: 15px;">
                             Logged in as <span style="color: {role_color}; font-weight: 600;">{role_display}</span>
                         </p>
                     </div>
@@ -1817,17 +1846,17 @@ elif page == 'Community':
                         
                         # Beautiful user card - Use components.html to force rendering
                         html_content = f'''
-                        <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%); 
-                        border: 2px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 24px; margin-bottom: 16px;
-                        box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);">
+                        <div style="background: {card_bg}; 
+                        border: 2px solid {card_border}; border-radius: 16px; padding: 24px; margin-bottom: 16px;
+                        box-shadow: {card_shadow};">
                             <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
                                 <div style="width: 60px; height: 60px; background: linear-gradient(135deg, {role_badge_color}, {role_badge_color}dd); 
                                 border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-                                color: white; font-size: 28px; font-weight: 800; box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);">
+                                color: white; font-size: 28px; font-weight: 800; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);">
                                     {username[0].upper()}
                                 </div>
                                 <div style="flex: 1;">
-                                    <h3 style="margin: 0; color: #e2e8f0; font-size: 22px; font-weight: 700;">{username}</h3>
+                                    <h3 style="margin: 0; color: {card_text}; font-size: 22px; font-weight: 700;">{username}</h3>
                                     <div style="margin-top: 6px;">
                                         <span style="background: {role_badge_color}; color: white; padding: 5px 14px; border-radius: 14px; 
                                         font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
@@ -1838,15 +1867,15 @@ elif page == 'Community':
                             </div>
                             
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; 
-                            padding: 16px; background: rgba(139, 92, 246, 0.15); border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.3);">
+                            padding: 16px; background: {'rgba(255, 255, 255, 0.05)' if is_dark else 'rgba(0, 0, 0, 0.03)'}; border-radius: 12px; border: 1px solid {card_border};">
                                 <div>
-                                    <div style="color: #94a3b8; font-size: 11px; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">📅 Registered</div>
-                                    <div style="color: #e2e8f0; font-size: 15px; font-weight: 600;">{created_display}</div>
+                                    <div style="color: {card_muted}; font-size: 11px; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">📅 Registered</div>
+                                    <div style="color: {card_text}; font-size: 15px; font-weight: 600;">{created_display}</div>
                                 </div>
                                 <div>
-                                    <div style="color: #94a3b8; font-size: 11px; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">🕐 Last Login</div>
-                                    <div style="color: #00d9ff; font-size: 15px; font-weight: 700;">{last_login_display}</div>
-                                    {f'<div style="color: #A78BFA; font-size: 12px; margin-top: 4px; font-style: italic;">{time_ago}</div>' if time_ago else ''}
+                                    <div style="color: {card_muted}; font-size: 11px; font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">🕐 Last Login</div>
+                                    <div style="color: {'#38bdf8' if is_dark else '#059669'}; font-size: 15px; font-weight: 700;">{last_login_display}</div>
+                                    {f'<div style="color: {"#818cf8" if is_dark else "#10b981"}; font-size: 12px; margin-top: 4px; font-style: italic;">{time_ago}</div>' if time_ago else ''}
                                 </div>
                             </div>
                         </div>
@@ -2044,13 +2073,13 @@ elif page == 'Community':
                         for s in sessions:
                             sid, stitle, slink, swhen, sexpert = s
                             st.markdown(f'''
-                            <div class="app-card" style="padding: 20px; border-left: 5px solid #EF4444; background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px;">
+                            <div class="app-card" style="padding: 20px; border-left: 5px solid #EF4444; background: {card_bg}; border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; box-shadow: {card_shadow};">
                                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                                    <h4 style="margin:0; color: #FCA5A5;">{stitle}</h4>
-                                    <span style="background:#FEE2E2; color:#B91C1C; padding:2px 8px; border-radius:10px; font-size:11px; font-weight:700;">LIVE</span>
+                                    <h4 style="margin:0; color: {'#FCA5A5' if is_dark else '#B91C1C'};">{stitle}</h4>
+                                    <span style="background:{'#FEE2E2' if is_dark else '#B91C1C'}; color:{'#B91C1C' if is_dark else '#FFFFFF'}; padding:2px 8px; border-radius:10px; font-size:11px; font-weight:700;">LIVE</span>
                                 </div>
-                                <div style="font-size: 13px; color: #7F1D1D; margin: 5px 0;"> {swhen} with {sexpert}</div>
-                                <a href="{slink}" target="_blank" class="action-btn" style="background:#EF4444; color:#FFFFFF; margin-top:5px;">Join Stream</a>
+                                <div style="font-size: 13px; color: {card_muted}; margin: 5px 0;"> {swhen} with {sexpert}</div>
+                                <a href="{slink}" target="_blank" class="action-btn" style="background:#EF4444 !important; color:#FFFFFF !important; margin-top:5px;">Join Stream</a>
                             </div>
                             ''', unsafe_allow_html=True)
                     
@@ -2066,17 +2095,19 @@ elif page == 'Community':
                     
                     for author, title, body, time in stories:
                         st.markdown(f'''
-                        <div class="app-card" style="padding: 20px; background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px;">
+                        <div class="app-card" style="padding: 20px; background: {card_bg}; border: 1px solid {card_border}; border-radius: 12px; box-shadow: {card_shadow};">
                             <div style="display:flex; gap:12px;">
-                                <div style="width:40px; height:40px; background:#10B981; border-radius:50%; color:white; display:flex; align-items:center; justify-content:center; font-weight:bold;">{author[0]}</div>
+                                <div style="width:40px; height:40px; background: linear-gradient(135deg, #10B981, #059669); border-radius: 50%; color:white; display:flex; align-items:center; justify-content:center; font-weight:bold; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
+                                    {author[0]}
+                                </div>
                                 <div>
-                                    <div style="font-weight:700; color:#e2e8f0;">{author}</div>
-                                    <div style="font-size:12px; color:#94a3b8;">{time}</div>
+                                    <div style="font-weight:700; color:{card_text};">{author}</div>
+                                    <div style="font-size:12px; color:{card_muted};">{time}</div>
                                 </div>
                             </div>
-                            <h4 style="margin: 10px 0 5px 0; color: var(--primary-green);">{title}</h4>
-                            <p style="color: #94a3b8; font-size: 14px; margin:0;">{body}</p>
-                            <div style="margin-top:10px; display:flex; gap:15px; font-size:13px; color:#94a3b8;">
+                            <h4 style="margin: 10px 0 5px 0; color: #10B981;">{title}</h4>
+                            <p style="color: {card_muted}; font-size: 14px; margin:0;">{body}</p>
+                            <div style="margin-top:10px; display:flex; gap:15px; font-size:13px; color:{card_muted};">
                                 <span>❤️ 24 Likes</span>
                                 <span>💬 5 Comments</span>
                             </div>
@@ -2090,10 +2121,10 @@ elif page == 'Community':
                         for p in posts:
                             pid, ptitle, pcontent, puser, pdate = p[0], p[1], p[2], p[3], p[4]
                             st.markdown(f'''
-                            <div style="padding: 15px; background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px; margin-bottom: 10px;">
-                                <div style="font-weight:bold; color:#e2e8f0;">{ptitle}</div>
-                                <div style="color:#94a3b8; font-size:13px;">{pcontent}</div>
-                                <div style="font-size:11px; color:#9CA3AF; margin-top:5px;">Posted by {puser}</div>
+                            <div style="padding: 15px; background: {card_bg}; border: 1px solid {card_border}; border-radius: 12px; margin-bottom: 10px; box-shadow: {card_shadow};">
+                                <div style="font-weight:bold; color:{card_text};">{ptitle}</div>
+                                <div style="color:{card_muted}; font-size:13px;">{pcontent}</div>
+                                <div style="font-size:11px; color:{card_muted}; opacity: 0.8; margin-top:5px;">Posted by {puser}</div>
                             </div>
                             ''', unsafe_allow_html=True)
 
@@ -2175,11 +2206,11 @@ elif page == 'Community':
                         """, unsafe_allow_html=True)
                         
                         # 3. CHEMICAL OPTION (Always Visible now)
-                        st.markdown("""
-                        <div class="app-card" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%); border:1px solid rgba(239, 68, 68, 0.3); padding:20px; margin-top:15px; border-radius:12px;">
-                            <h4 style="margin-top:0; color:#FCA5A5;">🧪 Non-Organic / Chemical Option (Fast Action)</h4>
-                            <p style="font-weight:bold; color:#e2e8f0; margin-bottom:10px;">Copper Fungicide or Mancozeb</p>
-                            <div style="background: rgba(251, 191, 36, 0.2); border-left:4px solid #F59E0B; color:#FCD34D; padding:12px; border-radius:8px; font-size:14px;">
+                        st.markdown(f"""
+                        <div class="app-card" style="background: {card_bg}; border:1px solid {'rgba(239, 68, 68, 0.3)' if is_dark else 'rgba(239, 68, 68, 0.2)'}; padding:20px; margin-top:15px; border-radius:12px; box-shadow: {card_shadow};">
+                            <h4 style="margin-top:0; color:{'#FCA5A5' if is_dark else '#B91C1C'};">🧪 Non-Organic / Chemical Option (Fast Action)</h4>
+                            <p style="font-weight:bold; color:{card_text}; margin-bottom:10px;">Copper Fungicide or Mancozeb</p>
+                            <div style="background: {'rgba(251, 191, 36, 0.2)' if is_dark else 'rgba(251, 191, 36, 0.1)'}; border-left:4px solid #F59E0B; color:{'#FCD34D' if is_dark else '#D97706'}; padding:12px; border-radius:8px; font-size:14px;">
                                 ⚠️ Use protective gear. Do not spray 3 days before harvest.
                             </div>
                         </div>
@@ -2247,12 +2278,12 @@ elif page == 'Community':
                             
                             # Question Card
                             st.markdown(f'''
-                            <div class="app-card" style="margin-bottom: 20px; padding: 20px; background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px;">
+                            <div class="app-card" style="margin-bottom: 20px; padding: 20px; background: {card_bg}; border: 1px solid {card_border}; border-radius: 12px; box-shadow: {card_shadow};">
                                 <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                                    <h4 style="margin:0; color:#e2e8f0;">{qtitle}</h4>
-                                    <span style="font-size:12px; color:#9CA3AF;">{qdate}</span>
+                                    <h4 style="margin:0; color:{card_text};">{qtitle}</h4>
+                                    <span style="font-size:12px; color:{card_muted};">{qdate}</span>
                                 </div>
-                                <p style="color:#94a3b8; font-size:15px; margin-top:8px; line-height:1.5;">{qcontent}</p>
+                                <p style="color:{card_muted}; font-size:15px; margin-top:8px; line-height:1.5;">{qcontent}</p>
                             ''', unsafe_allow_html=True)
                             
                             # Answers Section
@@ -2263,12 +2294,12 @@ elif page == 'Community':
                                     badge = '<span style="background:#10B981; color:white; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:700;">VERIFIED EXPERT</span>' if averified else '<span style="background:rgba(139, 92, 246, 0.3); color:#A78BFA; padding:2px 8px; border-radius:12px; font-size:11px;">COMMUNITY REPLY</span>'
                                     
                                     st.markdown(f'''
-                                    <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(26, 31, 58, 0.5) 100%); padding: 15px; border-radius: 8px; margin-top: 15px; border: 1px solid rgba(139, 92, 246, 0.2);">
+                                    <div style="background: {'rgba(255, 255, 255, 0.05)' if is_dark else 'rgba(0, 0, 0, 0.03)'}; padding: 15px; border-radius: 8px; margin-top: 15px; border: 1px solid {card_border};">
                                         <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                                            <div style="font-size:13px; font-weight:700; color:#e2e8f0;">{aexpert}</div>
+                                            <div style="font-size:13px; font-weight:700; color:{card_text};">{aexpert}</div>
                                             {badge}
                                         </div>
-                                        <div style="color:#94a3b8; font-size:14px; line-height:1.5;">{acontent}</div>
+                                        <div style="color:{card_muted}; font-size:14px; line-height:1.5;">{acontent}</div>
                                     </div>
                                     ''', unsafe_allow_html=True)
                             else:
@@ -2343,16 +2374,16 @@ elif page == 'Community':
                         
                         with st.container():
                             st.markdown(f'''
-                            <div class="app-card" style="padding: 24px; border-left: 4px solid {card_color}; background: linear-gradient(135deg, rgba(30, 41, 59, 0.6) 0%, rgba(26, 31, 58, 0.7) 100%); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px;">
+                            <div class="app-card" style="padding: 24px; border-left: 4px solid {card_color}; background: {card_bg}; border: 1px solid {card_border}; border-radius: 12px; box-shadow: {card_shadow};">
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                    <span style="background: rgba(139, 92, 246, 0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; color: #A78BFA;">{status_text}</span>
-                                    <span style="font-size: 13px; color: #94a3b8;">{qdate}</span>
+                                    <span style="background: rgba(16, 185, 129, 0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; color: #10B981;">{status_text}</span>
+                                    <span style="font-size: 13px; color: {card_muted};">{qdate}</span>
                                 </div>
-                                <h3 style="margin: 0 0 10px 0; color: #e2e8f0; font-size: 18px;">{qtitle}</h3>
-                                <p style="color: #94a3b8; margin-bottom: 15px;">{qcontent}</p>
+                                <h3 style="margin: 0 0 10px 0; color: {card_text}; font-size: 18px;">{qtitle}</h3>
+                                <p style="color: {card_muted}; margin-bottom: 15px;">{qcontent}</p>
                                 <div style="display: flex; align-items: center; gap: 10px; font-size: 13px;">
-                                    <div style="width: 24px; height: 24px; background: rgba(139, 92, 246, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">👤</div>
-                                    <span style="font-weight: 500; color: #e2e8f0;">{quser}</span>
+                                    <div style="width: 24px; height: 24px; background: rgba(16, 185, 129, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">👤</div>
+                                    <span style="font-weight: 500; color: {card_text};">{quser}</span>
                                 </div>
                             </div>
                             ''', unsafe_allow_html=True)
@@ -2367,8 +2398,8 @@ elif page == 'Community':
                                     border_color = "rgba(16, 185, 129, 0.3)" if averified else "rgba(139, 92, 246, 0.3)"
                                     st.markdown(f"""
                                     <div style="background: {bg}; padding: 12px; border-radius: 8px; margin-bottom: 8px; border: 1px solid {border_color}; margin-left: 20px;">
-                                        <div style="font-weight: 600; font-size: 13px; color: #A78BFA; margin-bottom: 4px;">{icon} Expert {aexpert} said:</div>
-                                        <div style="font-size: 14px; color: #e2e8f0;">{acontent}</div>
+                                        <div style="font-weight: 700; font-size: 13px; color: {'#A78BFA' if is_dark else '#6D28D9'}; margin-bottom: 4px;">{icon} Expert {aexpert} said:</div>
+                                        <div style="font-size: 14px; color: {card_text};">{acontent}</div>
                                     </div>
                                     """, unsafe_allow_html=True)
                                     
@@ -2411,8 +2442,8 @@ elif page == 'Community':
                 c1, c2 = st.columns([1, 1.5], gap="medium")
                 with c1:
                     with st.container(border=True):
-                        st.markdown("### 📅 Schedule Event")
-                        st.markdown("<div style='font-size: 14px; color: #6B7280; margin-bottom: 15px;'>Set up a webinar or live Q&A session.</div>", unsafe_allow_html=True)
+                        st.markdown(f"### 📅 Schedule Event")
+                        st.markdown(f"<div style='font-size: 14px; color: {card_muted}; margin-bottom: 15px;'>Set up a webinar or live Q&A session.</div>", unsafe_allow_html=True)
                         
                         s_title = st.text_input('Topic', placeholder='e.g., Organic Pest Control')
                         s_link = st.text_input('Meeting Link', placeholder='https://meet.google.com/...')
