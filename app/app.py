@@ -541,34 +541,35 @@ div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-t
 
 div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) .stButton > button {{
     position: fixed !important;
-    top: 15px !important;
-    right: 3% !important;
-    width: 42px !important;
-    height: 42px !important;
+    top: 12px !important;
+    right: 15px !important;
+    width: 44px !important;
+    height: 44px !important;
     border-radius: 50% !important;
-    background: rgba(100, 100, 100, 0.1) !important;
+    background: {'rgba(255, 215, 0, 0.15)' if is_dark else 'rgba(16, 185, 129, 0.15)'} !important;
     background-image: none !important;
-    backdrop-filter: blur(10px) !important;
-    color: var(--text-primary) !important;
-    border: 1px solid rgba(100, 100, 100, 0.2) !important;
+    backdrop-filter: blur(12px) !important;
+    color: {'#FFD700' if is_dark else '#059669'} !important;
+    border: 1px solid {'rgba(255, 215, 0, 0.4)' if is_dark else 'rgba(16, 185, 129, 0.4)'} !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     font-size: 20px !important;
     padding: 0 !important;
     cursor: pointer !important;
-    transition: all 0.3s ease !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
     transform: none !important;
-    z-index: 9999999 !important;
+    z-index: 99999999 !important;
     pointer-events: auto !important;
 }}
 
 
 div[data-testid="stVerticalBlock"]:has(#theme-button-marker):not(:has(div[data-testid="stVerticalBlock"])) .stButton > button:hover {{
     transform: scale(1.1) rotate(15deg) !important;
-    background: rgba(100, 100, 100, 0.2) !important;
-    border-color: rgba(100, 100, 100, 0.4) !important;
+    background: {'rgba(255, 215, 0, 0.25)' if is_dark else 'rgba(16, 185, 129, 0.25)'} !important;
+    border-color: {'rgba(255, 215, 0, 0.6)' if is_dark else 'rgba(16, 185, 129, 0.6)'} !important;
+    box-shadow: 0 0 20px {'rgba(255, 215, 0, 0.2)' if is_dark else 'rgba(16, 185, 129, 0.2)'} !important;
 }}
 
 /* FORCE SIDEBAR TOGGLE (ARROW) VISIBILITY & POSITION */
@@ -586,7 +587,7 @@ header[data-testid="stHeader"],
 [data-testid="collapsedControl"] {{
     position: fixed !important;
     left: 15px !important;
-    top: 10px !important;
+    top: 12px !important;
     visibility: visible !important;
     display: flex !important;
     align-items: center !important;
